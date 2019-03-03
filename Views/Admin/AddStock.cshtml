@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "AddStock";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    String Message = "";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+    }
+    catch
+    {
+    }
+}
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<div class="alert alert-success alert-dismissable fade in">
+
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>
+        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+    </strong>
+
+</div>
+<table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+    <thead>
+        <tr>
+
+            <th data-field="state" data-checkbox="true">ID</th>
+            <th data-field="Prodid" data-sortable="true">ID</th>
+            <th data-field="ProdName" data-sortable="true">Product</th>
+            <th data-field="ProdPrice" data-sortable="true">Price</th>
+         
+            <th data-field="Image1" data-sortable="true">Image1</th>
+            <th data-field="Qty" data-sortable="true">Qty</th>
+
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+        @{ 
+            foreach (TradeKerala2017.Models.tblStock tbP in ViewBag.ProductList)
+            {
+                <tr>
+                    <td>@tbP.ProductId</td>
+                    <td>@tbP.ProductId</td>
+                    <td>
+                        @tbP.Product
+                        @{ 
+                      
+                            if(tbP.Qty<=0)
+
+                            {
+                                <br/><span style="font-weight:bold;color:red">Out Of Stock</span>
+                            }
+                        }
+
+                    
+                    </td>
+                    <td>@tbP.Price</td>
+                  
+                    <td>
+                    @{                        string Path = "";
+                        try
+                        {
+                        Path = db.tblProdImages.Where(i => i.Prodid == tbP.ProductId).FirstOrDefault().Image;
+                        }
+                        catch
+                        {
+                        Path = "";
+                        }
+
+                        }
+                        <img src="@Path" width="100px" height="100px" class="img-responsive" />
+                    
+                    </td>
+                    <td>@tbP.Qty </td>
+                    <td><button type="button" class="btn btn-primary btn-sm btnStk" data-id="@tbP.ProductId" datname="@tbP.Product" datQty="@tbP.Qty" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="UpdateStock(@tbP.ProductId)">(+) Add Stock</button></td>
+                    <td><input type="button" class="btn btn-primary btn-sm"   onclick="window.location.href='/Admin/ViewProducts?id=@tbP.ProductId'" value="View Product" /></td>
+                </tr>
+            }
+
+        }
+
+   
+
+</table>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="opmodal-dialog">
+@using (Html.BeginForm("UpdateStock", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left", @novalidate = "true" }))
+{
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Stock Entry</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Update Stockdetails</h4>
+
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <input type="hidden" name="HiddenId" value="" id="HiddenId" />
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Product Name 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="txtName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtName" placeholder="" required="" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Current Qty
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="txtQty" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtQty" placeholder="" required="" type="text" disabled>
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                              New Qty <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="name" class="form-control col-md-7 col-xs-12"  name="txtNewQty" placeholder="Enter Quantity.." required="required" type="number">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </div>
+            </div>
+}
+</div>
+
+<script>
+    $(document).ready(function() {
+
+
+
+        $('#hover, #striped, #condensed').click(function () {
+            var classes = 'table';
+
+            if ($('#hover').prop('checked')) {
+                classes += ' table-hover';
+            }
+            if ($('#condensed').prop('checked')) {
+                classes += ' table-condensed';
+            }
+            $('#table-style').bootstrapTable('destroy')
+                .bootstrapTable({
+                    classes: classes,
+                    striped: $('#striped').prop('checked')
+                });
+        });
+    });
+
+
+    function rowStyle(row, index) {
+        var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+        if (index % 2 === 0 && index / 2 < classes.length) {
+            return {
+                classes: classes[index / 2]
+            };
+        }
+        return {};
+    }
+    $(document).on("click", ".btnStk", function () {
+        var myBookId = $(this).data('id');
+        var Name = $(this).attr('datName');
+        var Qty = $(this).attr('datQty');
+
+        $(".modal-body #HiddenId").val(myBookId);
+        $(".modal-body #txtName").val(Name);
+        $(".modal-body #txtQty").val(Qty);
+    });
+
+  
+</script>
+
+
+
+
+

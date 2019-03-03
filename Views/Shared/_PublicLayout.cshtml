@@ -1,0 +1,561 @@
+﻿ 
+@{ 
+    Layout = null;
+
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+           function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <!-- Custom Theme files -->
+    <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- font-awesome icons -->
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="../../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.countdown.css" /> <!-- countdown -->
+    <!-- //js -->
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+    </script>
+    <!-- //end-smooth-scrolling -->
+    @*dropdown--searchpanel-button*@
+    <script>
+        $(document).ready(function (e) {
+            $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#","");
+                var concept = $(this).text();
+                $('.search-panel span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+            });
+        });
+
+
+    </script>
+
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+
+            var urls = "/Public/KeywordList";
+
+            $("#txt_search").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Public/KeywordList",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.label, value: item.label };
+                            }))
+
+                        }
+                    })
+                }
+            });
+
+
+        });
+    </script>
+    @*category vise auto complete*@
+    <script>
+        $(document).ready(function (e) {
+            $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#","");
+                var concept = $(this).text();
+                $('.search-panel span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+
+
+                var urls = "/Public/CatKeywordList";
+
+                $("#txt_search").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Public/CatKeywordList",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: concept, Sufix: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.label, value: item.label };
+                                }))
+
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- for bootstrap working -->
+    <script type="text/javascript" src="../../js/bootstrap-3.1.1.min.js"></script>
+    <!-- //for bootstrap working -->
+    <!-- header modal -->
+    <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+                </div>
+                <div class="modal-body modal-body-sub">
+                    <div class="row">
+                        <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
+                            <div class="sap_tabs">
+                                <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                                    <ul>
+                                        <li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
+                                        <li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+                                    </ul>
+                                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                        <div class="facts">
+                                            <div class="register">
+                                                <form action="#" method="post">
+                                                    <input name="log_Email" placeholder="Email Address" type="text" required="">
+                                                    <input name="log_Password" placeholder="Password" type="password" required="">
+                                                    <div class="sign-up">
+                                                        <input type="submit" value="Sign in" />
+                                                        <p style="font-family:Verdana;color:red;font-size:16px">
+                                                            @ViewBag.Message
+                                                        </p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
+                                        <div class="facts">
+                                            <div class="register">
+                                                <form action="#" method="post">
+                                                    <input placeholder="Name" name="Name" type="text" required="">
+                                                    <input placeholder="Email Address" name="Email" type="email" required="">
+                                                    <input placeholder="Password" name="Password" type="password" id="Password" required="">
+                                                    <input placeholder="Confirm Password" name="confirm_Password" type="password" required="">
+                                                    <div class="sign-up">
+                                                        <input type="submit" value="Create Account" />
+                                                        <p style="font-family:Verdana;color:red;font-size:16px">
+                                                            @ViewBag.mess1
+                                                            <br />
+                                                            @ViewBag.mess2
+                                                        </p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script src="../../js/easyResponsiveTabs.js" type="text/javascript"></script>
+                            <script type="text/javascript">
+								$(document).ready(function () {
+									$('#horizontalTab').easyResponsiveTabs({
+										type: 'default', //Types: default, vertical, accordion
+										width: 'auto', //auto or any width like 600px
+										fit: true   // 100% fit in a container
+									});
+								});
+                            </script>
+                            <div id="OR" class="hidden-xs">OR</div>
+                        </div>
+                        <div class="col-md-4 modal_body_right modal_body_right1">
+                            <div class="row text-center sign-with">
+                                <div class="col-md-12">
+                                    <h3 class="other-nw">Sign in with</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul class="social">
+                                        <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
+                                        <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
+                                        <li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
+                                        <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                $('#myModal88').modal('show');
+            });
+        });
+    </script>
+    <!-- header modal -->
+    <!-- header -->
+
+    <style>
+        .w3l_login a {
+            margin-left: -6px;
+            margin-top: -4px;
+        }
+
+            .w3l_login a span {
+                top: 1.3em !important;
+            }
+    </style>
+    <div class="header" id="home1">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="w3l_logo col-md-12 pull-right" align="right">
+                        <img src="~/images/TLogo.png" class="img-responsive" style="width:354px;" />
+                        @*<h1>  <a href="index.html">Trade Kerala.com<span>The Cultural Store Of Kerala.</span></a></h1>*@
+
+
+
+                    </div>
+
+                </div>
+                @*<div class="search col-sm-1 col-xs-6 pull-right">
+                        <input class="search_box" type="checkbox" id="search_box">
+                        <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
+                        <div class="search_form">
+                            <form action="Index" method="post">
+
+
+
+
+
+                                <input list="browsers" name="browser" id="browser" style="background-color:black;opacity: 0.5; font-size:19px;font-family: 'Raleway', sans-serif;width:354px;height:41px;color:white;">
+                                <datalist id="browsers">
+                                    @{
+                                        List<string> s = new List<string>();
+                                        foreach (TradeKerala2017.Models.tblProduct tb in ViewBag.data)
+                                        {
+                                            if (!s.Contains(tb.CatName))
+                                            {
+                                                <option value="@tb.CatName" name="pname" />
+
+                                                <input type="hidden" name="browsers" value="@tb.CatName" />
+                                            }
+
+                                            if (!s.Contains(tb.ProdName))
+                                            {
+                                            <option value="@tb.ProdName" name="pname" />
+                                            }
+
+                                            s.Add(tb.CatName);
+                                        }
+                                        }
+
+                                </datalist>
+                                <input type="submit" value="Search">
+                            </form>
+                        </div>
+                    </div>*@
+                <div class="col-md-4">
+                    <center>
+                        <div id="btn1" class="w3l_login pull-right" style="border: 1px solid black;border-radius: -118px;margin-top: 23px;padding-top: 0px;height: 40px;margin-left: 30px;width: 41px;">
+                            <a href="#" data-toggle="modal" data-target="#myModal88" style="border:1px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                        </div>
+
+                        <br />
+
+
+                        <form action="#" method="post" class="last pull-right" style="margin-top: unset !important ;">
+                            <input type="hidden" name="cmd" value="_cart" />
+                            <input type="hidden" name="display" value="1" />
+                            <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                        </form>
+
+                    </center>
+                </div>
+            </div>
+            <br />
+            <form action="searchdetails" method="post">
+                <center>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="input-group">
+                                <div class="input-group-btn search-panel">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background-color:lightgray">
+                                        <span id="selected">All</span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" name="ddl_menu">
+                                     @{ 
+
+                                         foreach (TradeKerala2017.Models.tblCategory tc in ViewBag.catlist)
+
+                                         {
+                                                <li><a href="#">@tc.CatName</a></li>
+
+
+                                            }
+                                        }
+                                    </ul>
+                                    <input id="Hidden_name" type="hidden" name="Hidden_name" />
+                                </div>
+                                <input type="hidden" name="search_param" value="all" id="search_param">
+                                <input type="text" class="form-control" name="txt_search" id="txt_search" placeholder="What are you looking for?">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="background-color:orange;height:34px;"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </center>
+            </form>
+</div>
+    </div>
+    <!-- //header -->
+    <!-- navigation -->
+    <div class="navigation">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Public/index" class="act">Home</a></li>
+                        <!-- Mega Menu -->
+
+                        
+                        <li><a href="/Public/About">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>Ethenic Product</h6>
+                                            <li><a href="products.html">Nelavilaku</a></li>
+                                            <li><a href="products.html">Aranmula Kannadi</a></li>
+                                            <li><a href="products.html">Abharana Petti</a></li>
+                                            <li><a href="products.html">Nettipattam</a></li>
+                                            <li><a href="products.html">Cultures</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>Spices</h6>
+                                            <li><a href="products1.html">Pepper</a></li>
+                                            <li><a href="products1.html">Tea</a></li>
+                                            <li><a href="products1.html">Cardamom</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>Vastra</h6>
+                                            <li><a href="products2.html">Kerala Saree</a></li>
+                                            <li><a href="products2.html">Setumund</a></li>
+                                            <li><a href="products2.html">Mens Dothi</a></li>
+                                            <li><a href="products2.html">Pudava(Wedding Sarees)</a></li>
+                                            <li><a href="products2.html">Sarees</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>Vadhya</h6>
+                                            <li><a href="products2.html">Chenda</a></li>
+                                            <li><a href="products2.html">Mrithangam</a></li>
+                                            <li><a href="products2.html">Thakil</a></li>
+                                            <li><a href="products2.html">Edakka</a></li>
+                                            <li><a href="products2.html">Kuzhal</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>Ethenic Foods</h6>
+                                            <li><a href="products2.html">Banana Chips</a></li>
+                                            <li><a href="products2.html">Jack fruit chips</a></li>
+                                            <li><a href="products2.html">Tapioca Chips</a></li>
+
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="w3ls_products_pos">
+                                            <!--<h4>30%<i>Off/-</i></h4>-->
+                                            <img src="../../../../images/menusideimg.png" alt="" class="img-responsive pull-right" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ul>
+                        </li>
+
+                        <li><a href="about.html">Services</a></li>
+                        <li><a href="mail.html">Contact us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    
+    <!-- //banner -->
+    <!-- breadcrumbs -->
+    
+    <!-- //navigation -->
+    <!-- banner -->
+    
+    <!-- //banner -->
+    <!-- banner-bottom -->
+    <div class="banner-bottom" style="padding-top: 0px;">
+        <div class="container">
+            
+            @RenderBody()
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //banner-bottom -->
+    <!-- modal-video -->
+    
+    
+    
+    
+    
+    
+    <hr />
+ 
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="w3_footer_grids">
+                <div class="col-md-3 w3_footer_grid" id="contact">
+                    <h3>Contact</h3>
+                    <p>Please free to contact us. Comment your suggetion to us.</p>
+                    <ul class="address">
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>37/735, Meher Manzil <span>Adiyathu lane, Kottappuram,Thrissur, Kerala.</span></li>
+                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@traderkerala.com">info@traderkerala.com</a></li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+91 8589064666</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Information</h3>
+                    <ul class="info">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="mail.html">Contact Us</a></li>
+                        <li><a href="codes.html">Short Codes</a></li>
+                        <li><a href="faq.html">FAQ's</a></li>
+                        <li><a href="products.html">Special Products</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Category</h3>
+                    <ul class="info">
+                        @{
+
+                            foreach (TradeKerala2017.Models.tblCategory tc in ViewBag.catlist)
+
+                            {
+                                <li><a href="#">@tc.CatName</a></li>
+
+
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Profile</h3>
+                    <ul class="info">
+                        <li><a href="Index">Home</a></li>
+                        <li><a href="products.html">Today's Deals</a></li>
+                    </ul>
+                    <h4>Follow Us</h4>
+                    <div class="agileits_social_button">
+                        <ul>
+                            <li><a href="#" class="facebook"> </a></li>
+                            <li><a href="#" class="twitter"> </a></li>
+                            <li><a href="#" class="google"> </a></li>
+                            <li><a href="#" class="pinterest"> </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <div class="footer-copy1">
+                <div class="footer-copy-pos">
+                    <a href="#home1" class="scroll"><img src="../../images/arrow.png" alt=" " class="img-responsive" /></a>
+                </div>
+            </div>
+            <div class="container">
+                <p>&copy; 2017 Trade Kerala. All rights reserved | Design by <a href="http://www.fabstudioz.com">Fabstudioz</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- cart-js -->
+    <script src="../../js/minicart.js"></script>
+    <script>
+        w3ls.render();
+
+        w3ls.cart.on('w3sb_checkout', function (evt) {
+        	var items, len, i;
+
+        	if (this.subtotal() > 0) {
+        		items = this.items();
+
+        		for (i = 0, len = items.length; i < len; i++) {
+        		}
+        	}
+        });
+    </script>
+    <!-- //cart-js -->
+</body>
+</html>
+

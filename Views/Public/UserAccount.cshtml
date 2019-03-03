@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "UserAccount";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblRegistration reg = ViewBag.RegDetail;
+
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#button1").click(function () {
+            $("#disply").hide();
+            $("#account").show();
+        });
+        $("#button2").click(function () {
+            $("#disply").show();
+            $("#account").hide();
+        });
+    });
+</script>
+
+<style>
+    #account{
+        display:none;
+    }
+</style>
+
+
+
+
+<link href="~/NewLayout/css/UserAccount.css" rel="stylesheet" />
+
+
+
+<body>
+    <div id="disply" class="container">
+        <div class="row main">
+            <div class="alert alert-success alert-dismissable fade in" style="background-color: #04143f;color:white">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+                <strong style="text-align:center">
+                    <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                </strong>
+            </div>
+            <h3 style="display:inline-block">Account Settings</h3>
+            <button type="submit" id="button1">Edit Account</button>
+            <div class="main-login main-center">
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="name" value="@reg.RegName" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Your Mobile</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="Mobile" id="Mobile" value="@reg.RegMobile" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row main">
+            <h3 style="display:inline-block">Security Settings</h3>
+            <div class="main-login main-center">
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-mail-reply" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="Mobile" id="Mobile" value="@reg.RegEmail" readonly="readonly" />
+                            <span class="input-group-addon" style="background-color: #04143f;border: 1px solid #04143f;width:113px"><a href="~/Public/EditMail?regmail=@reg.RegEmail&from=mail" style="color:white;">  Edit Email  </a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Your Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" value="@reg.RegPassword" readonly="readonly" />
+                            <span class="input-group-addon" style="background-color: #04143f;border: 1px solid #04143f;"><a href="~/Public/EditMail?regmail=@reg.RegEmail&from=pass" style="color:white">Edit Password</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="account" class="container">
+        <div class="row main">
+            <h3 style="display:inline-block">Account Settings</h3>
+            <button type="submit" id="button2">Show Details</button>
+            <div  class="main-login main-center">
+                <form class="" method="post" action="UserAccount">
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" maxlength="12"  placeholder="Enter your Name" value="@reg.RegName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Your Mobile</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="Mobile" id="Mobile" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Enter your Mobile" value="@reg.RegMobile"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="~/NewLayout/js/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+</body>
+<script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+</script>

@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "UserAddress";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tb_address tp = ViewBag.editcode;
+    int count = ViewBag.addcount;
+    int addcode = ViewBag.addcode;
+}
+
+
+<style>
+    .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 13.33333px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 40px;
+        width: 40px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+        .option-input:hover {
+            background: #9faab7;
+        }
+
+        .option-input:checked {
+            background: #04143f;
+        }
+
+            .option-input:checked::before {
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                content: '✔';
+                display: inline-block;
+                font-size: 26.66667px;
+                text-align: center;
+                line-height: 40px;
+            }
+
+            .option-input:checked::after {
+                -webkit-animation: click-wave 0.65s;
+                -moz-animation: click-wave 0.65s;
+                animation: click-wave 0.65s;
+                background: #04143f;
+                content: '';
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
+
+        .option-input.radio {
+            border-radius: 50%;
+        }
+
+            .option-input.radio::after {
+                border-radius: 50%;
+            }
+            
+                    .wrapper {
+                    text-align: center;
+                    }
+
+                    .button {
+                    position: absolute;
+                    top: 50%;
+                    }
+                     @@media screen and (min-width: 768px) {
+            #btn1 {
+                width:66% !important;
+            }
+        }
+            col-md-2{
+                border:1px solid #eee;
+            }
+            #bttn1{
+        width: 64px;
+    height: 20px;
+    padding: 6px;
+    padding-top:0px;padding-bottom:0px;
+    font-size:12px;
+    float:right;
+    background: #ffc20e;
+    border-color: #ffc20e;
+    color: #04143f;
+    font-weight: 600;
+    }
+
+#bttn2{
+        width: 64px;
+    height: 20px;
+    padding: 6px;
+    padding-top:0px;padding-bottom:0px;
+    font-size:12px;
+    float:left;
+    }
+</style>
+<link href="~/NewLayout/css/UserAccount.css" rel="stylesheet" />
+<div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+    <h2 class="head_underscore">delivary Addresses</h2>
+</div>
+<div class="container-fluid">
+    @{
+        foreach (TradeKerala2017.Models.tb_address ad in ViewBag.address)
+        {
+            <div class="col-md-2" style="border:1px solid #eee;height: 232px;margin-right:20px;margin-bottom:20px;border-radius:3%;padding-top:10px;padding-bottom:10px;width:232px;">
+                <p style="height:180px;width:200px;"> Name: <b>@ad.fullname</b><br />
+                    Address: <b>@ad.Address</b><br />
+                    Pincode: <b>@ad.pincode</b><br />
+                    City:<b>@ad.city</b><br />
+                    State: <b>@ad.state</b><br />
+                    <br />
+                    Contact Number:<b>@ad.Phone</b>
+                </p>
+                <a href="~/Public/Deleteadd?id=@ad.ID" type="button" class="btn btn-primary btn-lg" id="bttn1">Delete</a>
+                <a href="~/Public/UserAddress?id=@ad.ID" type="button" class="btn btn-primary btn-lg" id="bttn2">Edit</a>
+            </div>
+           
+
+
+        }
+    }
+    
+</div>
+
+    <br /><br />
+    <div class="grid_3 grid_4" style="margin-top:25px">
+    <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+        <h2 class="head_underscore">Add New Address</h2>
+        <small>Enter the name and address you'd like your order to be delivered to. Please indicate also whether your invoice address is the same as the delivery address entered. When finished, click the "Confirm Address" button</small>
+    </div>
+    <div class="container" style="padding-bottom:30px;">
+        <div class="row main col-xs-12">
+            @if (addcode > 0)
+            {
+               
+                <form class="form-horizontal" action="Editadd" method="post">
+                    <input type="hidden" value="@tp.ID" name="Id" />
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">Full name</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="Full_name" maxlength="15" placeholder="Full name" required="" value="@tp.fullname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">Mobile</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="Mobile_Number" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Please enter a valid 10-digit mobile number" value="@tp.Phone" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">Address</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="Address" placeholder="Eg: House Name,locality,District" value="@tp.Address" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">Pincode</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="Pincode" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Please enter a valid 6 digits zip code" value="@tp.pincode" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">City</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="city" placeholder="City/Town" value="@tp.city" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">State</label>
+                        <div class="col-sm-8 col-xs-7">
+                            <input type="text" class="form-control" name="State" placeholder="State" value="@tp.state" required="">
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <button type="submit" class="btn btn-success" id="btn1">
+                            Confirm Address
+                        </button>
+                    </div>
+                </form>
+                    }
+                    else
+                    {
+                        <form class="form-horizontal" action="UserAddress" method="post">
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-3 control-label">Full name</label>
+                <div class="col-sm-8 col-xs-7">
+                    <input type = "text" class="form-control" name="Full_name" maxlength="12"  placeholder="Full name" required="">
+                </div>
+            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Mobile Number</label>
+                                <div class="col-sm-8">
+
+                                    <input type="text" class="form-control" minlength="10" maxlength="10" pattern="[0-9]{10}" name="Mobile_Number" placeholder="Please enter a valid 10-digit mobile number" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pincode</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Pincode" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Please enter a valid 6 digits zip code" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Flat, House no., Building, Company, Apartment: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Address1" placeholder="Flat, House no., Building, Company, Apartment:">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Area, Colony, Street, Sector, Village:  </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Address2" placeholder="Area, Colony, Street, Sector, Village:" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Landmark e.g. near apollo hospital:  </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Address3" placeholder="Landmark e.g. near apollo hospital:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Town/City:   </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="city" required="" placeholder="Town/City:" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">State</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="State" placeholder="State" required="">
+                                </div>
+                            </div>
+            <div class="wrapper">
+                <button type = "submit" class="btn btn-success" id="btn1">
+                    Confirm Address
+                </button>
+            </div>
+        </form>
+        }
+        </div>
+    </div>

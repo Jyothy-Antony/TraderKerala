@@ -1,0 +1,838 @@
+﻿
+@{
+    ViewBag.Title = "products";
+
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    int Countlist = ViewBag.listCount;
+    decimal dec;
+    int totPage = Countlist /20;
+    int bal = Countlist % 20;
+    if (bal > 0)
+    {
+        totPage = totPage + 1;
+    }
+    int n;
+    string url = Request.Url.PathAndQuery.ToString();
+    int CurrntPage = ViewBag.Page;
+    int bl = 1;
+    int q;
+}
+<style>
+    ul li{
+        cursor:pointer;
+    }
+    .pagination-wrap{ 
+ margin:auto;
+ text-align:center;
+}
+.pagination-v1 > li > a, 
+.pagination-v1 > li > span {
+  background-color: #fff;
+  border: 1px solid #04143f;
+  border-radius: 4px;
+  color: #04143f;
+  float: left;
+  font-size: 14px;
+  line-height: 1.42857;
+  margin-right: 5px;
+  padding: 8px 15px;
+  position: relative;
+  text-decoration: none;
+}
+.pagination-v1 > li > a.active,
+.pagination-v1 > li > a:hover,
+.pagination-v1 > li > span:hover,
+.pagination-v1 > li > a:focus,
+.pagination-v1 > li > span:focus {
+  background-color: #04143f !important;
+  border-color: #04143f;
+  color: #fff;
+}
+</style>
+<style>
+   
+    
+   .bttns {
+       border-radius:5px; padding:9px 20px; border:1px solid #FFF; min-width:180px;background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+ color:black; text-align: center; text-decoration: none;
+
+   }
+</style>
+<link href="~/NewLayout/css/products.css" rel="stylesheet" />
+<style>
+        .viewgrid {font-size:15px; color:#000; padding:0 5px; float:right; margin:2px; }
+       .colmd3
+        {
+            width:22%
+        }
+	.selctbtn{ min-width:80%; margin:20px auto 0px auto; min-width:150px; color:#fff; background-color:#FFF; border: 1px solid #CCC; }
+	.clurbox{ max-height:25px; max-width:25px; min-height:25px; min-width:25px;  margin:4px; border: 1px solid #888;cursor:pointer;
+	 text-align:justify; float: left; left:0;}
+	/*.clurbox_outer{ border:1px solid #CCC;  float:none;}*/
+	    .pdtbdr{ border:1px solid #DDD; margin-top:15px; margin-left:15px; padding: 20px;}
+        .accordion{background-color:#eee}
+        .panel{background-color:#eee}
+	</style>
+<style>
+        .list-group-item
+    {
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+    }
+    .badge{   
+         background: #04143f;
+    height: 32px;
+    width: 30px;
+    line-height: 30px;
+    font-size: 23px;
+    border: 2px solid #FFF;
+    box-shadow: 0 0 0 1px #04143f;
+    position:initial;
+    padding:0px;
+    }
+    .si{
+        font-size:20px;
+    }
+    .list-group-item1 {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+        margin-bottom: -1px;
+        background-color: #fff;
+    }
+    .list-group-item1 a{
+        padding-left:10px;
+        color:black;
+        font-weight:700;
+    }
+    .list-group-item2 {
+        position: relative;
+        display: block;
+        padding: 5px 15px;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+         margin-bottom: 5px;
+        border-radius: 4px;
+    }
+      .categories a{
+        padding-left:7px;
+    }
+</style>
+
+<style>
+     @@media screen and (max-width: 768px) {.colmd3 {width: 100%!important; margin-left:0px !important;} }
+
+	 
+    @@media screen and (max-width: 1200px) {#lefsidemen {display: none; }.colmd3 {width: 30%;} #prod{width:100%!important}}
+    @@media screen and (min-width: 1200px) {#filter {display: none; }}
+    
+     @@media screen and (max-width: 914px) {.colmd3 {width: 47%;}}
+      @@media screen and (max-width: 410px) {.pagination-v1 > li > a, .pagination-v1 > li > span{padding: 4px 8px;}}
+    
+</style>
+<script>
+    function removeQueryStringParameter(url, parameter) {
+        var urlparts = url.split('?');
+
+        if (urlparts.length >= 2) {
+            var urlBase = urlparts.shift(); //get first part, and remove from array
+            var queryString = urlparts.join("?"); //join it back up
+
+            var prefix = encodeURIComponent(parameter) + '=';
+            var pars = queryString.split(/[&;]/g);
+            for (var i = pars.length; i-- > 0;)               //reverse iteration as may be destructive
+                if (pars[i].lastIndexOf(prefix, 0) !== -1)   //idiom for string.startsWith
+                    pars.splice(i, 1);
+            url = urlBase + '?' + pars.join('&');
+        }
+        return url;
+    }
+
+function UpdateQueryString(key, value, url) {
+    if (!url) url = window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+        hash;
+
+    if (re.test(url)) {
+        if (typeof value !== 'undefined' && value !== null)
+            return url.replace(re, '$1' + key + "=" + value + '$2$3');
+        else {
+            hash = url.split('#');
+            url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null)
+                url += '#' + hash[1];
+            return url;
+        }
+    }
+    else {
+        if (typeof value !== 'undefined' && value !== null) {
+            var separator = url.indexOf('?') !== -1 ? '&' : '?';
+            hash = url.split('#');
+            url = hash[0] + separator + key + '=' + value;
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null)
+                url += '#' + hash[1];
+            return url;
+        }
+        else
+            return url;
+    }
+}
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+function FilterPrice(Min, Max)
+{
+    debugger;
+    var Querystring ="";
+    var range=Min + "," + Max;
+    if (getParameterByName("range") == "")
+    {
+        Querystring += "&range=" + range;
+        window.location.href += Querystring;
+    }
+    else {
+        
+        window.location.href = UpdateQueryString("range", range, window.location.href);
+    }
+}
+
+function Filtercolor(Col)
+    {
+        debugger;
+        var Querystring ="";
+        var Colour = Col;
+   
+        if (getParameterByName("Colour") == "")
+        {
+            Querystring += "&Colour=" + Colour;
+            window.location.href += Querystring;
+        }
+        else {
+        
+            window.location.href = UpdateQueryString("Colour", Colour, window.location.href);
+        }
+}
+
+function FilterWeight(wt)
+{
+    debugger;
+    var Querystring ="";
+    var Weight = wt;
+   
+    if (getParameterByName("Weight") == "")
+    {
+        Querystring += "&Weight=" + Weight;
+        window.location.href += Querystring;
+    }
+    else {
+        
+        window.location.href = UpdateQueryString("Weight", Weight, window.location.href);
+    }
+}
+
+function FilterSize(sz)
+{
+    debugger;
+    var Querystring ="";
+    var Size = sz;
+   
+    if (getParameterByName("Size") == "")
+    {
+        Querystring += "&Size=" + Size;
+        window.location.href += Querystring;
+    }
+    else {
+        
+        window.location.href = UpdateQueryString("Size", Size, window.location.href);
+    }
+}
+
+
+
+
+function FilterBrand(br){
+    debugger;
+    var Querystring = "";
+    var Brand = br;
+
+    if (getParameterByName("Brand") == "") {
+        Querystring += "&Brand=" + Brand;
+        window.location.href += Querystring;
+    }
+    else {
+
+        window.location.href = UpdateQueryString("Brand", Brand, window.location.href);
+    }
+}
+function Filterpage(n)
+{
+    debugger;
+    var Querystring ="";
+    var PageNo = n;
+   
+    if (getParameterByName("PageNo") == "")
+    {
+        Querystring += "&PageNo=" + PageNo;
+        window.location.href += Querystring;
+    }
+    else {
+        
+        window.location.href = UpdateQueryString("PageNo", PageNo, window.location.href);
+    }
+}
+
+
+
+
+
+</script>
+<br />
+@if (Countlist == 0)
+{
+
+    <div class="container-fluid" style="font-family:Lato sans-serif !important;">
+
+        <h2> Your search did not match any products.</h2>
+        <h3>
+            <ul>
+                Try something like
+
+
+                <li>Using more general terms</li>
+                <li>Checking your spelling </li>
+            </ul>
+        </h3>
+
+                </div >
+}
+else
+{
+    <div class="container-fluid" style="margin-bottom:20px;">
+
+        @*<div class="row">
+
+            <div class="col-md-8 "></div>
+
+            <div class="col-md-2 pull-right" id="lefsidemen">
+                <div class="input-group-btn sort-panel">
+
+                    <button type="button" class="sortby btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span id="selected">Sort by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a>price - low to high</a></li>
+                        <li><a>price - high to low</a></li>
+                        <li><a>best selling</a></li>
+                        <li><a>new arrivals</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <hr style="margin-bottom:00px">*@
+
+        <div class="row">
+
+
+            <div class="col-md-2 col-sm-3 col-xs-3 lef_side_bar_Search marg3" id="lefsidemen" style="width:20%;padding-top:20px;background-color: #eee;min-height:initial;margin-top:0px;">
+
+
+                @*<button class="accordion"> Categories </button>
+                    <div class="panel">
+                        <ul class="categories">
+                            @{
+                                foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                                {
+                                    <li><a href="#">@ct.CatName</a></li>
+                                } }
+
+                        </ul>
+                    </div>*@
+                <button class="accordion">Price</button>
+
+                <div class="panel">
+                    <ul class="categories">
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(0, 100)">Under ₹100 </a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(100, 500)">₹100 - ₹500</a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(500, 1000)">₹500 - ₹1,000</a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(1000, 5000)">₹1,000 - ₹5,000 </a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(5000, 10000)">₹5,000 - ₹10,000 </a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(10000, 20000)">₹10,000 - ₹20,000 </a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(20000, 1000000)">Over ₹20,000 </a></li>
+                        <li><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(-1,-1)">Any Amount</a></li>
+                    </ul>
+                    <form action="" method="post">
+                        <input type="text" name="Pmin" placeholder="₹ min" class="minmax">
+                        <input type="text" name="Pmax" placeholder="₹ max" class="minmax">
+                        <input type="submit" value="Go" style="padding:4px; border-radius:4px; border:1px solid #999;">
+                    </form>
+
+
+
+                </div>
+
+
+
+
+                <button class="accordion"> Colour </button>
+                <div class="panel clurbox_outer">
+                    @{
+                        List<string> ColorList = new List<string>();
+                        foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                        {
+
+                            if (!ColorList.Contains(tp.Color))
+                            {
+                                <a onclick="Filtercolor('@tp.Color.Replace("#", "")')" class="clurbox" style="background:@tp.Color;"></a>
+                            }
+                            ColorList.Add(tp.Color);
+
+                        } }
+                </div>
+
+
+                <button class="accordion"> Brand</button>
+                <div class="panel clurbox_outer">
+                    @{
+                        List<string> BrandList = new List<string>();
+                        foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                        {
+                            if (tp.Brand != "" && tp.Brand != null)
+                            {
+
+                                if (!BrandList.Contains(tp.Brand))
+                                {
+                                    <label style="display:block;font-weight:100"><input type="radio" onclick="FilterBrand('@tp.Brand')" name="radgroup" style="height:15px;width:15px;margin-right:7px">@tp.Brand</label>
+
+                                }
+                                BrandList.Add(tp.Brand);
+                            }
+                        }
+                    }
+                </div>
+
+
+
+                <button class="accordion">Weight</button>
+                <div class="panel clurbox_outer">
+
+                    @{
+                        List<string> WeightList = new List<string>();
+                        foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                        {
+                            if (tp.Weight != "" && tp.Weight != "0" && tp.Weight != null)
+                            {
+                                if (!WeightList.Contains(tp.Weight))
+                                {
+
+                                <a onclick="FilterWeight('@tp.Weight')" class="clurbox" style="max-height:32px;
+                                                                max-width:52px;
+                                                                min-height:32px;
+                                                                min-width:52px;
+                                                                background-color:#f3f3f3;
+                                                                color:black;
+                                                                padding:4px;
+                                                                font-size:10px;
+                                                                ">@tp.Weight</a>
+
+                                    }
+                                }
+                                WeightList.Add(tp.Weight);
+
+                            } }
+                </div>
+
+
+
+
+                <button class="accordion">Size</button>
+                <div class="panel clurbox_outer">
+                    @{
+                        List<string> SizeList = new List<string>();
+                        foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                        {
+                            if (tp.Size != "" && tp.Size !="0" && tp.Size !=null )
+                            {
+                                if (!SizeList.Contains(tp.Size))
+                                {
+
+                                <a onclick="FilterSize('@tp.Size')" class="clurbox" style="max-height:32px;
+                                                                max-width:52px;
+                                                                min-height:32px;
+                                                                min-width:52px;
+                                                                background-color:#f3f3f3;
+                                                                color:black;
+                                                                padding:4px;
+                                                                font-size:10px;">@tp.Size</a>
+
+                                    }
+                                }
+                                SizeList.Add(tp.Size);
+
+                            } }
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+
+
+            <div id="filter">
+                <div class="list-group product-bread-a" id="fil">
+                    <a class="list-group-item product-bread-a" style="background:#dededd"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i> &nbsp;<b>Filter Products</b><img src="~/NewLayout/images/arrow-down-on-black-circular-background.png" style="float:right;height:28px;" /> </a>
+                </div>
+                <ul class="list-group product-category-all" id="filItem">
+                    @*<li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide"></i></span>
+                        <span class="fa fa-sort si"></span>  &nbsp;<label>Sorting</label>
+                        <ul id="sub1" style="margin-top:6px;">
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a>price - low to high</a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a>price - high to low</a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a>best selling</a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a>new arrivals</a></li>
+                        </ul>
+                    </li>*@
+
+                    <li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide3"></i></span>
+                        <span class="fa fa-line-chart si"></span>  &nbsp; <label>Price Range</label>
+                        <ul id="sub4" style="margin-top:6px;">
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(0, 100)">Under ₹100 </a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(100, 500)">₹100 - ₹500</a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(500, 1000)">₹500 - ₹1,000</a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(1000, 5000)">₹1,000 - ₹5,000 </a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(5000, 10000)">₹5,000 - ₹10,000 </a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(10000, 20000)">₹10,000 - ₹20,000 </a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(20000, 1000000)">Over ₹20,000 </a></li>
+                            <li class="list-group-item1"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><a onclick="FilterPrice(0, 1000000)">Any Amount </a></li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide4"></i></span>
+                        <span class="fa fa-paint-brush"></span>  &nbsp; <label>Color Variation</label>
+
+                        <div class="panel clurbox_outer" id="sub5">
+                            @{
+                                List<string> ColorList1 = new List<string>();
+                                foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                                {
+                                    if (!ColorList1.Contains(tp.Color))
+                                    {
+                                        <a onclick="Filtercolor('@tp.Color.Replace("#", "")')" class="clurbox" style="background:@tp.Color;"></a>
+                                    }
+                                    ColorList1.Add(tp.Color);
+                                }
+                            }
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide5"></i></span>
+                        <span class="fa fa-fast-forward"></span>  &nbsp; <label>Top Brand</label>
+
+                        <div class="panel clurbox_outer" id="sub6">
+                            @{
+                                List<string> BrandList1 = new List<string>();
+                                foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                                {
+                                    if (tp.Brand != "" && tp.Brand != null)
+                                    {
+
+                                        if (!BrandList1.Contains(tp.Brand))
+                                        {
+                                            <label class="list-group-item2"><span> <input type="radio" onclick="FilterBrand('@tp.Brand')" name="radgroup" style="height:15px;width:15px; margin-right:10PX;"></span>@tp.Brand</label>
+
+                                            }
+                                        }
+                                        BrandList1.Add(tp.Brand);
+                                    
+                                } }
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide6"></i></span>
+                        <span class="fa fa-level-up"></span>  &nbsp; <label>Size</label>
+                        <div class="panel" id="sub7">
+                            @{
+                                List<string> sizeList1 = new List<string>();
+                                foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                                {
+                                    if (tp.Size != "" && tp.Size != "0" && tp.Size != null)
+                                    {
+                                        if (!sizeList1.Contains(tp.Size))
+                                        {
+
+                                            <a onclick="FilterSize('@tp.Size')" class="clurbox" style="max-height:30px;
+                                                                max-width:52px;
+                                                                min-height:30px;
+                                                                min-width:52px;
+                                                                background-color:#f3f3f3;
+                                                                color:black;
+                                                                padding:4px;
+                                                                font-size:10px;">@tp.Size</a>
+                                            }
+                                        }
+                                        sizeList1.Add(tp.Size);
+
+                                    }
+                                }
+
+                        </div>
+
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge"><i class="fa fa-plus icon-data" id="hide7"></i></span>
+                        <span class="fa fa-krw"></span>  &nbsp; <label>Weight</label>
+                        <div class="panel" id="sub8">
+
+                            @{
+                                List<string> WeightList1 = new List<string>();
+                                foreach (TradeKerala2017.Controllers.sp_search_products tm in ViewBag.list)
+                                {
+                                    if (tm.Weight != "" && tm.Weight != "0" && tm.Weight != null)
+                                    {
+                                        if (!WeightList1.Contains(tm.Weight))
+                                        {
+
+                                            <a onclick="FilterWeight('@tm.Weight')" class="clurbox" style="max-height:30px;
+                                                                max-width:52px;
+                                                                min-height:30px;
+                                                                min-width:52px;
+                                                                background-color:#f3f3f3;
+                                                                color:black;
+                                                                padding:4px;
+                                                                font-size:10px;
+                                                                ">@tm.Weight</a>
+
+
+                                            }
+                                        }
+                                        WeightList1.Add(tm.Weight);
+
+                                    }
+                                }
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-10 col-sm-9 col-xs-9" align="center" style="border-left:1px solid #CCC;width:80%;" id="prod">
+                @{
+                    foreach (TradeKerala2017.Controllers.sp_search_products tp in ViewBag.list)
+                    {
+
+                        <div class="col-md-3 colmd3 col-sm-6 marg3 pdtbdr" align="center" style="height:425px;">
+                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tp.pid).Take(1).ToList())
+                            {
+                                <a href="/Public/NewProductDetails?id=@tp.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                            }
+                            <p class="product_name" style="height:42px;width:200px"><a href="/Public/NewProductDetails?id=@tp.pid" target="_blank">@tp.ProdName</a></p>
+
+                            <p class="max_price" style="margin-bottom:0px">
+                                M.R.P:
+                                @{
+                                    dec = Convert.ToDecimal(@tp.ProdOldPrice);
+                                    dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                }
+                                &#8377; @dec
+
+
+                            </p>
+                            <p class="actual_price">
+                                New Price: 	<strong>
+                                    @{
+                                        dec = Convert.ToDecimal(@tp.ProdNewPrice);
+                                        dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                    }
+                                    &#8377; @dec
+
+                                </strong>
+                            </p>
+                            <p style="padding-bottom:15px;height:40px;">
+                                Sold By:
+                                @foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == tp.Vendor))
+                                {
+                                    @vd.Vendor_Name;
+                                }
+                            </p>
+                            <form action="cart" method="post">
+                                <input type="hidden" name="pro_id" value="@tp.pid">
+                                <input type="hidden" name="cat_id" value="@tp.Catid">
+                                <input type="hidden" name="pro_name" value="@tp.ProdName">
+                                <input type="hidden" name="pro_price" value="@tp.ProdNewPrice">
+                                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tp.pid).ToList())
+                                {
+                                    <input type="hidden" name="pro_image" value="@tm.id">
+                                }
+                                <input type="hidden" name="qty" value="1">
+                                <input type="hidden" name="subtotal" value="@tp.ProdNewPrice">
+                                <input type="hidden" name="total" value="@tp.ProdNewPrice">
+                                <input type="hidden" name="Type" value="Normal">
+                                <input type="hidden" name="From" value="search">
+                                <input type="hidden" name="key" value="@ViewBag.keyword">
+                                <input type="hidden" name="cat" value="@ViewBag.catword">
+                                <button type="submit" class="bttns" style="background-color:#f0c14b">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"> </i>  Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                                        }
+                }
+            </div>
+
+
+
+        </div>
+        <div class="pagination-wrap">
+            <ul class="pagination pagination-v1">
+                @{
+                    q = CurrntPage - 1;
+                    if (q > 0)
+                    {
+                        <li><a onclick="Filterpage('@q')">Previous</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="blokd">Previous</a></li>
+                    }
+                    for (n = CurrntPage; n < totPage + 1; n++)
+                    {
+                        if (bl < 6)
+                        {
+                            <li><a onclick="Filterpage('@n')">@n</a></li>
+                            bl = bl + 1;
+                        }
+                    }
+
+                    int m = CurrntPage + 1;
+                    if (m < totPage + 1)
+                    {
+                        <li><a onclick="Filterpage('@m')">Next</a></li>
+                    }
+                    else
+                    {
+                        <li class="blokd"><a class="disabled">Next</a></li>
+                    }
+                }
+            </ul>
+        </div>
+
+
+    </div>
+                    }
+<script type="text/javascript">
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "70%";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.body.style.backgroundColor = "rgba(0,0,0,0)";
+    }
+</script>
+<script src="scripts/main.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        function fixDiv() {
+            var $cache = $('#menu_fixtop');
+            if ($(window).scrollTop() > 100)
+                $cache.css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '5',
+                    'width': '100%',
+                    'background-color': ' rgb(4, 20, 63)',
+                    'padding-top': '5px'
+                });
+            else
+                $cache.css({
+                    'position': 'relative',
+                    'top': 'auto'
+                });
+        }
+        $(window).scroll(fixDiv);
+        fixDiv();
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.panel').css('max-height', '1200px');
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#filItem").hide();
+        $("#sub1").hide();
+        $("#sub2").hide();
+        $("#sub3").hide();
+        $("#sub4").hide();
+        $("#sub5").hide();
+        $("#sub6").hide();
+        $("#sub7").hide();
+        $("#sub8").hide();
+
+        $("#fil").click(function () {
+            $("#filItem").toggle();
+        });
+
+
+        $("#hide").click(function(){
+        $("#sub1").toggle();
+    });
+        $("#hide1").click(function () {
+            $("#sub2").toggle();
+        });
+        $("#hide2").click(function () {
+            $("#sub3").toggle();
+        });
+        $("#hide3").click(function () {
+            $("#sub4").toggle();
+        });
+        $("#hide4").click(function () {
+            $("#sub5").toggle();
+        });
+        $("#hide5").click(function () {
+            $("#sub6").toggle();
+        });
+        $("#hide6").click(function () {
+            $("#sub7").toggle();
+        });
+        $("#hide7").click(function () {
+            $("#sub8").toggle();
+        });
+
+});
+</script>
+
+
+

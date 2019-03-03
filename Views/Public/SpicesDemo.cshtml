@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "SpicesDemo";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+}
+
+<style>
+    
+    .gal {
+	
+	
+	-webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;}	
+	.gal img{padding: 7px 0;}
+
+        .gal1 {
+            -webkit-column-count: 3; /* Chrome, Safari, Opera */
+            -moz-column-count: 3; /* Firefox */
+             column-count: 3;}	
+	.gal1 img{padding: 7px 0;}
+
+
+@@media (max-width: 500px) {
+		
+		.gal {
+	
+	
+	-webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+	  
+	
+	}
+        .mar{
+            margin:17px !important;
+        }
+		
+	}
+</style>
+
+<div class="container">
+   <hr style="border-top:2px dotted #ea2929"/>
+     <h3 style="text-align:center">Make Your Food With Love</h3>
+    <hr  style="border-top:2px dotted #ea2929"/>
+
+
+</div>
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <hr>
+            <div class="gal">
+                <img src="/NewLayout/images/category/11.jpg" style="margin-bottom:25px;">
+                <img src="~/NewLayout/images/category/spices s.jpg" style="width:1150px;height:333px;margin-bottom:25px;">
+
+            </div>
+            <div>
+                <hr style="border-top:2px dotted #ea2929" />
+                <h3 style="text-align:center">Featured Products</h3>
+                <hr style="border-top:2px dotted #ea2929" />
+                <img style="margin:25px !important;border-radius: 4% 0px 4% 0px;" src="/NewLayout/images/category/chilli powder.jpg">
+                <img style="margin:25px !important;border-radius: 0px 4% 0px 4%;" src="/NewLayout/images/category/CINNAMON.jpg">
+                <img style="margin:25px !important;border-radius: 4% 0px 4% 0px;" src="/NewLayout/images/category/CURRY POWDERS.jpg">
+                <img style="margin:25px !important;border-radius: 0px 4% 0px 4%;" src="/NewLayout/images/category/turmeric powder.jpg">
+            </div>
+        <div>
+            <hr style="border-top:2px dotted #ea2929" />
+            <h3 style="text-align:center">Featured Categories</h3>
+            <hr style="border-top:2px dotted #ea2929" />
+            <img src="~/NewLayout/images/category/seeds s.jpg" style="margin-bottom:25px;">
+            <img src="~/NewLayout/images/category/leavess.jpg" style="margin-bottom:25px;">
+        </div>
+         </div>
+    </div>
+</div>
+

@@ -1,0 +1,260 @@
+﻿
+@{
+    ViewBag.Title = "PlaceOrder";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tb_address ad = ViewBag.address;
+    decimal tax = 0;
+    decimal total = 0;
+    decimal ship = 0;
+    decimal gift = 0;
+    decimal gtotal = 0;
+    decimal dec;
+}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border:1px solid rgb(188, 232, 241);
+        text-align: center;
+        padding: 8px;
+    }
+    th,td {
+                            background-color: #fff;
+                        }
+    
+    th{
+        padding-top:15px;
+    }
+
+    @@media screen and (max-width:768px ) {
+        #scnd {
+            float:left !important;
+        }
+        tr, td, th {
+        padding:5px !important;
+        }
+        tr{
+            height:25px !important;
+        }
+        #tbl{
+            margin:0px !important;
+        }
+ #tbl1{
+            padding:0px !important;
+        }
+        #flo {
+            float:none !important;
+        }
+    }
+</style>
+
+
+
+<div class="grid_3 grid_5" style="margin:25px; height:auto">
+    <h3>Review Your Order</h3>
+    <small>By placing your Order, Your are Agree to terms and conditions of traderkerala</small>
+ 
+    <div class="container" style="width:100%;border:1px solid rgb(188, 232, 241); margin-bottom:20px;margin-top:20px;">
+        <div class="row col-md-6 col-sm-6 col-xs-12" style="float:left; padding:10px;">
+            <h3>Shipping Address</h3>
+            <small style="font-size:100%">
+                Deliver to:@ad.fullname<br />
+                @ad.Address &nbsp; @ad.pincode &nbsp;
+                <br /> @ad.state
+                <br /> @ad.city
+                <br />@ad.Phone
+            </small>
+            <br />
+            <br />
+        </div>
+        <div class="row col-md-6 col-sm-6 col-xs-12" id="scnd" style="float:right;padding:10px;">
+            <h3 style="margin-bottom:10px;">Billing  Information</h3>
+            <p>Shopping details are shown below;for further clarification  </p>
+            <p>please contact our customer care details</p>
+            <h3>Billing  Address</h3>
+            <small style="font-size:100%">
+                Billings to:@ad.fullname<br />
+                @ad.Address &nbsp; @ad.pincode &nbsp;
+                <br /> @ad.state
+                <br /> @ad.city
+                <br />@ad.Phone
+            </small>
+        </div>
+
+    </div>
+    <form action="Gateway" method="get" id="tbl1" >
+        <div class="container" id="tbl" >
+            <div class="row">
+                <table id="cart" class="table table-hover table-condensed"  style="width:100%;">
+                    <tbody>
+                        <tr style="height:50px">
+                            <th style="width:25%;padding-top:15px; ">Product</th>
+                            <th style="width:25%;padding-top:15px;">Details</th>
+                            <th style="width:20%;padding-top:15px;">Quantity</th>
+                            <th style="width:20%;padding-top:15px;">Price</th>
+                            @*<th style="width:10%;padding-top:15px;">Tax</th>
+                            <th style="width:10%;padding-top:15px;">Shipping charges</th>
+                            <th style="width:10%;padding-top:15px;">Other charges</th>*@
+                        </tr>
+                        @{
+
+                            foreach (TradeKerala2017.Models.tbl_cart ct in ViewBag.cartlist)
+                            {
+                                <tr style="height:70px">
+                                    <td style="padding-left:60px;">
+                                        <div>
+                                            <input type="hidden" value="@ct.pro_image" />
+                                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == ct.prod_id).Take(1).ToList())
+                                            {
+                                                <div class="col-sm-2 hidden-xs"><img src="@tm.Image" alt="..." style="width:80px;height:60px" /></div>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-sm-10">
+                                            <h4 class="nomargin" style="margin-top:10px;">@ct.pro_name</h4>
+                                            @foreach (TradeKerala2017.Models.tblCategory cr in db.tblCategories.Where(i => i.Catid == ct.cat_id).ToList())
+                                            {
+                                                <p>
+                                                    <small>  @cr.CatName</small>
+                                                    <br />
+
+                                                </p>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td style="padding-top:25px;">  @ct.pro_qty</td>
+                                    <td style="padding-top:25px;">
+                                        @{
+                                            dec = Convert.ToDecimal(@ct.sub_total);
+                                            dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                        }
+                                        &#8377;@dec
+                                    </td>
+                                    @*<td style="padding-top:25px;"> &#8377 @ct.Tax </td>
+                                    <td style="padding-top:25px;"> &#8377 @ct.shipping </td>
+                                    <td style="padding-top:25px;"> &#8377 @ct.Gift_wrap </td>*@
+                                </tr>
+
+
+                            } }
+                        <tr style="height:40px;">
+                            <td colspan="3" style="padding-top:10px;" ><b>Subtotal of charges for the items purchased</b></td>
+
+                            @{
+                                string uname = "";
+                                foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cartlist)
+                                {
+
+                                    total = total + Convert.ToDecimal(@tt.sub_total);
+                                    uname = @tt.user_id;
+                                }
+                                <td class=""><h4 style="color:red;padding-top:5px;"><b>
+                                    @{
+                                        dec = Convert.ToDecimal(@total);
+                                        dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                    }
+                                    &#8377;@dec</b></h4></td>
+
+                            }
+                        </tr>
+
+                        <tr style="height:40px;">
+                            <td colspan="3" style="padding-top:10px;"><b>total of taxes for the items purchased</b></td>
+
+                            @{
+                                foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cartlist)
+                                {
+
+                                    tax = tax + Convert.ToDecimal(@tt.Tax);
+                                }
+                                <td>
+                                    <h4 style="color:red;padding-top:5px;">
+                                        <b>   @{
+                                                dec = Convert.ToDecimal(@tax);
+                                                dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                            }
+                                            &#8377;@dec
+                                        </b>
+                                    </h4>
+                                </td>
+
+
+
+                            }
+                        </tr>
+
+
+
+                            <tr style="height:40px;">
+                            <td colspan="3" style="padding-top:10px;"><b>total of ship charges for the items purchased</b></td>
+                                                    
+                            @{
+                                  foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cartlist)
+                                  {
+
+                                      ship = ship + Convert.ToDecimal(@tt.shipping);
+                                  }
+                            <td ><h4 style="color:red;padding-top:5px;"><b>@{
+                                                dec = Convert.ToDecimal(@ship);
+                                                dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                            }
+                                            &#8377;@dec</b></h4></td>
+                            }
+                            </tr>
+
+                            <tr style="height:40px;">
+                            <td colspan="3" style="padding-top:10px;"><b>Total of the gift wrap for the items purchased</b></td>
+                            @{ 
+                                foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cartlist)
+                                {
+
+                                    gift = gift + Convert.ToDecimal(@tt.Gift_wrap);
+                                }
+                            <td ><h4 style="color:red;padding-top:5px;"><b>@{
+                                dec = Convert.ToDecimal(@gift);
+                                dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                            }
+                            &#8377;@dec
+
+                                </b></h4></td>
+                            }
+                            </tr>
+
+                            <tr style="height:70px;">
+                            @{
+                                gtotal = total + tax + ship + gift;
+                                
+                                    dec = Convert.ToDecimal(@gtotal);
+                                    dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                               
+
+                                <input type="hidden" name="Gtotal" value="@dec" />
+                                <td colspan="7" style="padding-top:25px;"><b>Grand Total for Items Purchased <span style="color:red;font-size:20px;"> &#8377 @dec</span> </b> </td>
+                            }
+                           </tr>
+                        
+                    </tbody>
+                </table>
+               
+                 <p>By placing your Order, Your are Agree to terms and conditions of traderkerala</p>
+            </div>
+
+            <div class="row"id="flo" style="float:right">
+                <div class="form-group">
+                    <button type="submit" id="btn" class="btn btn-warning btn-block" style="width:326px;">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    </div>
+<script src="~/js/jquery.min.js"></script>

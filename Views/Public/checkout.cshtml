@@ -1,0 +1,347 @@
+﻿
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    //TradeKerala2017.Models.tb_address ad = ViewBag.address;
+    int count = ViewBag.addcount;
+    decimal dec;
+}
+<script>
+
+    function checkname() {
+        debugger;
+            var name = document.getElementById("Pincode").value;
+                $.ajax({
+                    type: "Post",
+                    url: "/Public/pincheck",
+                    data: {"pincode": name,},
+                    success: function (response) {
+                        $("#div1").html(response);
+                    }
+                });
+        }
+</script>
+<style>
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #04143f;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #04143f;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+.form-control1{
+        font: menu;
+}
+    @@media screen and (max-width: 768px) {
+        .topmarg {
+            margin-bottom: 20px;
+        }
+        body{
+            font-size:80% !important;
+        }
+        #head1{ font-size:14px !important;}
+    }
+         @@media screen and (max-width:430px) {
+        td, th{
+            padding: 10px !important;
+        }
+            #btn {
+                margin-left:10% !important;
+            }
+    }
+          @@media screen and (max-width:400px) {
+            #btn {
+                margin-left:4% !important;
+            }
+    }
+            @@media screen and (max-width:350px) {
+            #btn {
+                margin-left:0% !important;
+            }
+    }
+</style>
+<link href="~/css/style.css" rel="stylesheet" />
+<div class="grid_3 grid_5" style="margin:25px;">
+    <h3 class="w3ls-hdg">Select a delivery address</h3>
+    <small>Enter the name and address you'd like your order to be delivered to. Please indicate also whether your invoice address is the same as the delivery address entered. When finished, click the "Confirm Address" button</small>
+    <div class="bs-example bs-example-tabs w3" role="tabpanel" data-example-id="togglable-tabs" style="margin-top:25px;">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Current Address</a></li>
+            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Items In Cart</a></li>
+
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                <h4 style="font-size:15px;" id="head1"> Select Your address from the following sections or create new delivary address</h4>
+                @if (count > 0)
+                {
+                    <form action="Address" method="post">
+                        @{foreach (TradeKerala2017.Models.tb_address ad in ViewBag.address)
+                            {
+                                    
+                        <div class="tab-pane active" id="horizontal-form" style="min-height:200px;font-size:13px; ">
+                            <div class="form-group">
+                                @*<label class="col-sm-2 control-label" style="width:75px;height:100px;">
+                                    <input type="radio" class="option-input radio" name="example" style="z-index:0" />
+
+                                </label>*@
+                                </div>
+                                    <div class="form-group">
+
+                                        <label class="col-sm-4 col-xs-6 control-label">Name</label>
+                                        <div class="col-sm-8 col-xs-6">
+                                            @ad.fullname
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-6  control-label">Mobile Number</label>
+                                        <div class="col-sm-8 col-xs-6">
+                                            @ad.Phone
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group" >
+                                        <label class="col-sm-4 col-xs-6 control-label">Address</label>
+                                        <div class="col-sm-8 col-xs-6">
+                                            @ad.Address <br />@ad.city<br /> @ad.pincode <br /> @ad.state
+                                            <br /><br />
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="@ad.fullname" name="Full_name" />
+                                    <input type="hidden" value="@ad.Phone" name="Mobile_Number" />
+                                    <input type="hidden" value="@ad.Address" name="Address" />
+                                    <input type="hidden" value="@ad.pincode" name="Pincode" />
+                                    <input type="hidden" value="@ad.state" name="State" />
+                                    <div class="form-group">
+                                        <div >
+                                            <a href="Deleteaddress?id=@ad.ID" class="btn btn-primary col-md-2 col-sm-4 col-xs-4" style="margin-right:10%;">Delete</a>
+                                            <a href="ConfirmAddress?id=@ad.ID" class="btn btn-success  col-md-2 col-sm-4 col-xs-4">Confirm</a>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            }
+                        }
+                    </form>
+
+
+                   
+                    
+                            }
+                            else
+                            {
+                    <div>
+                        <p>
+                            Currently No Address are Available
+                        </p>
+                    </div>
+
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane fade w3" id="profile" aria-labelledby="profile-tab">
+                <div class="table-container">
+                    <style>
+                        table {
+                            font-family: arial, sans-serif;
+                            border-collapse: collapse;
+                            width: 100%;
+                        }
+
+                        td, th {
+                            border: 1px solid #dddddd;
+                            text-align: center;
+                            padding: 8px !important;
+
+                        }
+
+                        tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                       
+
+                        <table class="table table-filter">
+                            <tbody>
+                                <tr>
+                                    <th style="border: 1px solid #dddddd;">Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>SubTotal</th>
+                                </tr>
+
+                                @{
+                                    foreach (TradeKerala2017.Models.tbl_cart ct in ViewBag.cartlist)
+                                    {
+                                        <tr>
+                                            <td>@ct.pro_name</td>
+                                            <td>@ct.pro_qty</td>
+
+                                            <td>@{
+                                                dec = Convert.ToDecimal(@ct.pro_price);
+                                                dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                            }
+                                            &#8377;@dec
+                                            
+                                            
+                                            </td>
+
+
+                                            <td>@{
+                                                dec = Convert.ToDecimal(@ct.sub_total);
+                                                dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                            }
+                                            &#8377;@dec
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                        </table>
+
+                        @{
+                            decimal total = 0;
+                            string uname = "";
+                            foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cartlist)
+                            {
+
+                                total = total + Convert.ToDecimal(@tt.sub_total);
+                                uname = @tt.user_id;
+                            }
+                            <h4 style="margin-left:75%"><strong>Total
+                                @{
+                                    dec = Convert.ToDecimal(@total);
+                                    dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                }
+                                &#8377;@dec </strong></h4>
+                            <small>Total Product is exclusive of tax, shipping and other Prices
+                          </small>
+                        }
+</div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="grid_3 grid_4" style="margin-top:25px">
+        <h3 class="w3ls-hdg">Place Your Order</h3>
+        <div class="tab-content">
+            <div class="tab-pane active" id="horizontal-form">
+                <form class="form-horizontal" action="Address" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Full name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="Full_name" placeholder="Full name" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Mobile Number</label>
+                        <div class="col-sm-8">
+                           
+                            <input type="text" class="form-control1" minlength="10" maxlength="10" pattern="[0-9]{10}" name="Mobile_Number" placeholder="Please enter a valid 10-digit mobile number" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Pincode</label>
+                        <div class="col-sm-8" >
+                            <input type="text" class="form-control1" name="Pincode" id="Pincode" onchange="checkname()" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Please enter a valid 6 digits zip code" required="">
+                          <div id="div1" style="font-size:12px;color:red;"></div>  
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Flat, House no., Building, Company, Apartment: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="Address1" placeholder="Flat, House no., Building, Company, Apartment:">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Area, Colony, Street, Sector, Village:  </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="Address2" placeholder="Area, Colony, Street, Sector, Village:" required="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Landmark e.g. near apollo hospital:  </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="Address3" placeholder="Landmark e.g. near apollo hospital:" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Town/City:   </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="city"  required="" placeholder="Town/City:">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">State</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control1" name="State" placeholder="State" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block" id="btn" style="width:326px;float:left;margin-left:18%">
+                            Confirm Address
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

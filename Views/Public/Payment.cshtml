@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+}
+<style>
+  div.bx{
+    width:100%;
+    height:auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color:lightgray;
+    padding:50px;
+   
+    }
+  label{
+       font-weight:200;
+        line-height:2.5em;
+  }
+  #creditform
+  {
+      display:none;
+  }
+  #paymnt{
+      margin-top:25px;
+      margin-left:100px;
+      margin-right:100px;
+      margin-bottom:25px;
+  }
+</style>
+<div class="grid_3 grid_5" id="paymnt" >
+    <h3>Select a payment method</h3>
+    <div class="bx">
+            <label><input type="radio" id="credit" name="delivary" value="Credit card"> Credit card</label>
+            <div class="container" id="creditform" style="background-color:#f1f1f1; width:90%">
+                <p>We’ll save this card for your convenience, you can remove it by visiting Your Account section.</p>
+                <form class="form-inline" action="">
+                    <div class="form-group">
+                        <label>Name On Card</label><br />
+                        <input type="email" class="form-control" placeholder="Name On Card" name="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Card number</label><br />
+                        <input type="password" class="form-control" placeholder="Card number" name="number">
+                    </div>
+                    &nbsp; &nbsp;
+                    <div class="form-group">
+                        <label>Expiry Date</label><br />
+                        <select name="DOBMonth" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+
+                        <select name="DOBYear" class="form-control">
+                            <option> - Year - </option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                            <option value="2031">2031</option>
+                            <option value="2032">2032</option>
+                            <option value="2033">2033</option>
+                            <option value="2034">2034</option>
+                            <option value="2035">2035</option>
+                            <option value="2036">2036</option>
+                            <option value="2037">2037</option>
+                            <option value="2038">2038</option>
+                            <option value="2039">2039</option>
+
+                        </select>
+                    </div>
+                    <br />
+                    <br />
+                    <button type="submit" class="btn btn-default">Add your cart</button>
+                    <br />
+                    <p>EMI available across HDFC Bank, Citibank, ICICI Bank, SBI Card, Kotak Mahindra Bank, Standard Chartered Bank, Axis Bank, and HSBC credit cards</p>
+                </form>
+            </div>
+            <br />
+            <label><input type="radio" name="delivary" value="Debit card"> Debit card</label>
+            <div class="form-group">
+                <select name="bank" class="btn btn-default dropdown-toggle">
+                    <option value="Choose a Bank">Choose a Bank</option>
+                    <option value="All Visa/MasterCard Debit Card">All Visa/MasterCard Debit Card</option>
+                    <option value="All Rupay Debit Cards">All Rupay Debit Cards</option>
+                    <option value="All SBI Maestro Debit Cards">All SBI Maestro Debit Cards</option>
+                </select>
+            </div>
+            <label><input type="radio" name="delivary" value="Net Banking"> Net Banking</label>
+            <div class="form-group">
+                <select name="bank" class="btn btn-default dropdown-toggle">
+                    <option value="Choose a Bank">Choose a Bank</option>
+                    <option value="All Visa/MasterCard Debit Card">All Visa/MasterCard Debit Card</option>
+                    <option value="All Rupay Debit Cards">All Rupay Debit Cards</option>
+                    <option value="All SBI Maestro Debit Cards">All SBI Maestro Debit Cards</option>
+                </select>
+            </div>
+            <label><input type="radio" name="delivary" value="EMI">EMI</label><br />
+            <label><input type="radio" name="delivary" value="COD"> Cash on Delivery (COD). We also accept Credit/ Debit cards on delivery, subject to availability of the payment device. Please check with the delivery agent.</label><br />
+            <br />
+            <div class="form-group">
+                <a href="PlaceOrder" class="btn btn-warning btn-block" style="width:326px;float:right;">
+                    Continue
+                </a>
+            </div>
+</div>
+
+    </div>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+            $('document').ready(
+                function () {
+
+                    $('#credit').click(
+                        function(){
+                            $('#creditform').show();
+                        }
+                    );
+                }
+            );
+</script>
+
+
+  

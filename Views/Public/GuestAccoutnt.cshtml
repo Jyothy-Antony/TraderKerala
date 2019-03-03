@@ -1,0 +1,140 @@
+﻿
+
+@{
+    Layout = null;
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+    }
+    catch
+    {
+    }
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Trader Kerala</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <link href="~/NewLayout/css/style.css" rel="stylesheet" />
+    <link href="~/NewLayout/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/NewLayout/css/bootstrap.min.css">
+    <script src="~/NewLayout/js/jquery.min.js"></script>
+    <script src="~/NewLayout/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/NewLayout/css/animate.min.css">
+
+
+    <link href="~/NewLayout/css/instyle.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="~/NewLayout/css/main.css" />
+    <style>
+        @@media screen and (min-width: 500px) {
+            .logi {
+                width: 70%;
+            }
+        }
+
+        @@media screen and (min-width: 700px) {
+            .logi {
+                width: 50%;
+            }
+        }
+
+        @@media screen and (min-width: 1000px) {
+            .logi {
+                width: 40%;
+            }
+        }
+
+        @@media screen and (min-width: 1200px) {
+            .logi {
+                width: 35%;
+            }
+        }
+
+        @@media screen and (min-width: 1400px) {
+            .logi {
+                width: 30%;
+            }
+        }
+    </style>
+
+
+
+
+
+</head>
+<body>
+    <div class="container" align="center">
+
+        <a href="~/Public/NewIndex"> <img src="~/NewLayout/images/Logo.png" alt="" class="img-responsive logi" > </a>
+        <div class="x_content" style="width:90%; margin-left:21px;">
+            <label>@ViewBag.Message</label>
+            <div class="alert alert-success alert-dismissable fade in" style="background-color: #04143f;color:white">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+                <strong style="text-align:center">
+                    <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                </strong>
+            </div>
+        </div>
+        <div class="log_box" style="margin-bottom:20px;">
+            <h2 class="">Guest SignIn</h2>
+
+            <form action="GuestAccoutnt" method="post">
+                <label>Name</label>
+                <input type="text" value="" class="form-control review_box" placeholder="Name" name="name" required="">
+                <label>Email </label>
+                <input type="email" value="" class="form-control review_box" placeholder="Email" name="log_Email" required="">
+                <label>Mobile Number</label>
+                <input type="text" value="" class="form-control review_box" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Mobile Number" name="Mobile" required="">
+
+
+                <label style="color:red;text-align:center">@ViewBag.Message</label>
+                <br />
+                <input type="hidden" value="@ViewBag.from" name="from" />
+                <input type="hidden" value="@ViewBag.uname" name="uname" />
+                <button type="submit" class="form-control btn btn-warning">
+                    SignIn
+                </button>
+            </form>
+        </div>
+
+
+        <hr />
+        <a href="~/Public/Registration" class="create_ac"> <i class="fa fa-user-plus" aria-hidden="true"></i> Create Account</a>
+
+        <p> © 2017 Trader Kerala. All rights reserved | Design by - <a href="http://www.fabstudioz.com/" target="_blank">Fabstudioz</a></p>
+    </div>
+    <script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+    </script>
+</body>
+</html>
+

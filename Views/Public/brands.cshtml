@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "brands";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+}
+<br />
+
+<div class="container">
+    <h3 class="head_underscore">Brands In Traderkerala.com</h3>
+        <div class="row">
+            @{ 
+                foreach (TradeKerala2017.Models.tb_TopBrand bd in db.tb_TopBrand.ToList())
+                {
+            <div class="col-md-3 col-sm-4 col-xs-6"><a href="~/Public/products?keyword=&Catword=&Brand=@bd.Brand_Name" target="_blank"><img id="img1" class="img-responsive"  src="@bd.Image" /></a></div>
+                    } }
+        </div>
+    </div>
+<style>
+    #img1 {
+    -webkit-box-shadow: 0px 2px 6px 2px hsla(0, 0%, 73%, 0.7490196078431373);
+    -moz-box-shadow: 0px 2px 6px 2px hsla(0, 0%, 73%, 0.7490196078431373);
+    box-shadow:0px 2px 6px 2px hsla(0, 0%, 73%, 0.7490196078431373);
+    margin-bottom:20px;
+    width:263px;
+    height:290px;
+
+}
+
+</style>

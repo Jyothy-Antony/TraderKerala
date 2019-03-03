@@ -1,0 +1,16 @@
+#topbar .topbar_lang .fr_FR { background: url("../images/fr.png") 0 0 no-repeat transparent; }
+#header .inner .my_options span.service { background-position: right, top; }
+#confirm .additional_footer .actions,
+#confirm .additional_footer .actions #basketButton { width:300px; }
+#content #login .inner_container .action input.button-middle { width: 90px; }
+.modal .ajax_login_form fieldset .existing_customer .last #checkout_button { width:120px; margin-left: 341px; }
+#listing-3col .artbox .inner a.compare_add_article { width:81px; }
+#listing-3col .artbox .inner a.more { width:120px;  left:96px; }
+#content .inner .teaser .center a.button-right { background: url('../images/button_right-large-20-add.png'); }
+body .price-separation-popup { width:250px; }
+body .price-separation-popup .price-separation-inner-popup table { display: inline-block; }
+#content .inner #basket .shipping { width:478px; padding-right: 20px; }
+#content .inner #basket .shipping form > div { width:100%; }
+#content .inner #basket .shipping form div p { width: 161px; }
+.basket_dispatch_description { clear: both; }
+#content .inner #detail .abocommerce-data-wrapper .article_details_price2 { margin-bottom: 10px; }

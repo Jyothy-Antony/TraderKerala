@@ -1,0 +1,667 @@
+﻿
+@{
+    ViewBag.Title = "Add Brand";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+    String Message = "";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblProduct tblProd = ViewBag.ProductDetails;
+    String CategoryName = db.tblCategories.Where(i => i.Catid == tblProd.Catid).FirstOrDefault().CatName;
+
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+
+    }
+    catch
+    {
+    }
+    }
+<style>
+    #Sub1, #Sub2, #Sub3,#Sub4 {
+        display: none;
+    }
+
+</style>
+<!-- page content -->
+
+
+<link href="~/css/jquery.filer-dragdropbox-theme.css" rel="stylesheet" />
+<link href="~/css/jquery.filer.css" rel="stylesheet" />
+<link href="../../css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+<link href="~/css/bootstrap-select.css" rel="stylesheet" />
+<link href="~/css/switchery.min.css" rel="stylesheet" />
+<link href="~/css/custom.min.css" rel="stylesheet" />
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>View Products <small>Details of Products</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <label>@ViewBag.Message</label>
+                <div class="alert alert-success alert-dismissable fade in">
+
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+
+                </div>
+                
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left input_mask", @novalidate = "true", @onsubmit = "return SubmitForm()" }))
+                {
+                    <input id="HiddenID" name="HiddenID" type="hidden" value="@tblProd.pid" />
+                    <span class="section">Add Product Details</span>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Product Name<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <input id="txtProduct" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtProduct" placeholder="both name(s) e.g Vaporesso VECO Verdampfer" required="required" type="text" value="@tblProd.ProdName" disabled>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Category <span class="required">*</span>
+                        </label>
+                        @{ 
+                            int? Proid = tblProd.Catid;
+                            string CatName = db.tblCategories.Where(i => i.Catid == Proid).FirstOrDefault().CatName;
+                        }
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <input id="txtProduct" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtProduct" placeholder="both name(s) e.g Vaporesso VECO Verdampfer" required="required" type="text" value="@CatName" disabled>
+
+                        </div>
+                    </div>
+
+                   
+
+                    
+
+                                    <!--Upload Images-->
+
+                                    <span class="section">Upload Images</span>
+
+                                    <div class="row">
+                                        @{
+
+                                            try
+                                            {
+
+                                                foreach (TradeKerala2017.Models.tblProdImage pr in db.tblProdImages.Where(u => u.Prodid == tblProd.pid).ToList())
+                                                {
+
+                                                    <div class="thumbnail col-md-3 col-sm-3 col-xs-6">
+                                                        <a class="close" >×</a>
+                                                        <img src="@pr.Image" class="img-responsive" />
+                                                    </div>
+                                                }
+                                            }
+                                            catch
+                                            {
+
+                                            }
+
+                                        }
+                                        
+                                    </div>
+
+
+                                    <span class="section">Title Description</span>
+                                    <!--Description 1-->
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Description<span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <textarea id="txtDesc1" class="form-control" name="txtDesc1" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                                                      data-parsley-validation-threshold="10" disabled>@(String.IsNullOrEmpty(tblProd.ProdTitle)?"": tblProd.ProdTitle)</textarea>
+
+                                        </div>
+
+
+                                    </div>
+                                    <!--End---->
+
+                                    <span class="section">Detail Description</span>
+                                    <!--Description 1-->
+                                    <div class="item form-group">
+
+                                        <div class="x_content">
+                                            <div id="alerts"></div>
+                                            <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor1">
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+                                                    <ul class="dropdown-menu"></ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a data-edit="fontSize 5">
+                                                                <p style="font-size:17px">Huge</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-edit="fontSize 3">
+                                                                <p style="font-size:14px">Normal</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-edit="fontSize 1">
+                                                                <p style="font-size:11px">Small</p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+                                                    <div class="dropdown-menu input-append">
+                                                        <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                                        <button class="btn" type="button">Add</button>
+                                                    </div>
+                                                    <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                                </div>
+                                            </div>
+                                            <div id="editor1" class="editor-wrapper">@Html.Raw((String.IsNullOrEmpty(tblProd.ProdDesc)?"Nil":tblProd.ProdDesc))</div>
+                                            <textarea name="txtDetailDesc" id="descr" style="display:none;"></textarea>
+                                            <br />
+                                        </div>
+                                    </div>
+                                    <!--End---->
+
+
+                                
+
+                                    <span class="section">Product Specification</span>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Manifactures <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="DDBrand" id="DDBrand" tabindex="-1" disabled >
+
+                                                @{
+                                                    foreach (TradeKerala2017.Models.tblBrand tbB in db.tblBrands.ToList())
+                                                    {
+                                                        try {
+                                                        int brid = Convert.ToInt32(tblProd.Brand);
+                                                        if (tbB.Brandid == brid)
+                                                        {
+                                                            <option data-thumbnail="@tbB.BrandLogo" selected value="@tbB.Brandid">@tbB.BrandName</option>
+                                                        }
+                                                        else
+                                                        {
+                                                        <option data-thumbnail="@tbB.BrandLogo" value="@tbB.Brandid">@tbB.BrandName</option>
+                                                            }
+                                                        }
+                                                        catch
+                                                        {
+                                                <option data-thumbnail="@tbB.BrandLogo" value="@tbB.Brandid">@tbB.BrandName</option>}
+                                                    }
+
+                                                }
+
+                                            </select>
+
+                                           
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Product Quantity<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <input id="txtQty" class="form-control col-md-7 col-xs-12"  name="txtQty" placeholder="e.g 1" required="required" disabled type="number" value="@tblProd.Qty">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Product Price<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <input id="txtPrice" class="form-control col-md-7 col-xs-12" pattern="\d+(\.\d{2})?"  data-validate-length-range="6" disabled name="txtPrice" placeholder="e.g 100.00" required="required" type="text" value="@tblProd.ProdNewPrice">
+
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Best sell product<span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @{
+                                                if (tblProd.Bestsell == true)
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkBest" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkBest" value="" />
+
+                                                }
+
+                                            }
+                                            
+
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Is Offer<span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @{
+                                                if (tblProd.Isoffer == true)
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkOffer" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkOffer" value="" />
+
+                                                }
+
+                                            }
+                                           
+
+
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/Admin/AddStock'">Back</button>
+                                           
+
+                                           
+                                        </div>
+                                    </div>
+
+
+                                                    }
+
+                
+
+
+
+                
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="~/js/jquery-1.11.1.min.js"></script>
+<script src="../../js/jquery.autocomplete.min.js"></script>
+
+<script src="~/js/switchery.min.js"></script>
+
+<script>
+
+       $(function () {
+
+
+           $(".alert").hide();
+           var msg = $("#Hidmsg").val();
+           if (msg != "") {
+               $(".alert").fadeIn(2000);
+           }
+           else {
+               $(".alert").fadeOut(500);
+           }
+
+           /*Section Color*/
+           //$(".SectionColor").hide();
+
+           $('#ChkColor').change(function () {
+               if ($(this).is(":checked")) {
+                   $(".SectionColor").slideDown();
+               }
+               else {
+                   $(".SectionColor").slideUp();
+               }
+
+           });
+
+
+
+           /*End*/
+
+           /*Section Watt*/
+           //$(".SectionWatt").hide();
+
+           $('#ChkWatt').change(function () {
+               if ($(this).is(":checked")) {
+                   $(".SectionWatt").slideDown();
+               }
+               else {
+                   $(".SectionWatt").slideUp();
+               }
+
+           });
+
+
+           /*End*/
+           /*Section Size*/
+           //$(".SectionSize").hide();
+
+           $('#ChkSize').change(function () {
+               if ($(this).is(":checked")) {
+                   $(".SectionSize").slideDown();
+               }
+               else {
+                   $(".SectionSize").slideUp();
+               }
+
+           });
+
+
+           /*End*/
+
+           /*AutoComplete*/
+           var Products = "";
+
+
+
+           // initialize autocomplete with custom appendTo
+
+
+           $('#autocomplete-custom-append').autocomplete({
+              source: '@Url.Action("GetProducts", "admin")',
+                minLength: 1
+           });
+
+           /*End*/
+
+
+
+           $(".select2_single").select2({
+               placeholder: "Select",
+               allowClear: true
+           });
+
+
+           $("#Subcat1").change(function () {
+               if ($(this).val() == 0) {
+                   $("#Subcat2").empty();
+                   $("#Subcat3").empty();
+                   $("#Subcat4").empty();
+                   $("#Sub2").hide();
+                   $("#Sub3").hide();
+                   $("#Sub4").hide();
+               }
+
+           });
+           $("#Subcat2").change(function () {
+               if ($(this).val() == 0) {
+
+                   $("#Subcat3").empty();
+                   $("#Sub3").hide();
+                   $("#Subcat4").empty();
+                   $("#Sub4").hide();
+               }
+
+           });
+
+           $("#Subcat3").change(function () {
+
+               if ($(this).val() == 0) {
+
+                   $("#Subcat4").empty();
+                   $("#Sub4").hide();
+               }
+
+           });
+
+
+
+           $('#hover, #striped, #condensed').click(function () {
+               var classes = 'table';
+
+               if ($('#hover').prop('checked')) {
+                   classes += ' table-hover';
+               }
+               if ($('#condensed').prop('checked')) {
+                   classes += ' table-condensed';
+               }
+               $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+           });
+       });
+
+
+       function rowStyle(row, index) {
+           var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+           if (index % 2 === 0 && index / 2 < classes.length) {
+               return {
+                   classes: classes[index / 2]
+               };
+           }
+           return {};
+       }
+
+       function SubmitForm() {
+           var clr = confirm("Are you sure you want to submit the article?");
+           if (clr == true) {
+               var hta = document.getElementById("descr");
+               var content_html = document.getElementById("editor1").innerHTML;
+               hta.value = content_html;
+               return true;
+           }
+           else {
+               return false;
+           }
+       }
+
+       function LoadSubCat(Parentname, ChildName, DivSub) {
+
+           var ParentId = $("#" + Parentname).val();
+           var Parent = $("#" + Parentname + " option:selected").text();
+
+           if (ParentId != 0 || ParentId != null || ParentId != "") {
+
+               //var HiddenVal = $("#HiddenParentId").val() + ParentId + "~";
+               $("#HiddenParentId").val(ParentId);
+               $("#HiddenCatName").val(Parent);
+               console.log("HiddenValue- " + $("#HiddenParentId").val() + "Text" + $("#HiddenCatName").val());
+               var options = {};
+
+               options.url = "/Admin/GetSubcategory";
+               options.type = "POST";
+               options.data = JSON.stringify({ ParentId: ParentId });
+               options.dataType = "json";
+               options.contentType = "application/json";
+               options.success = function (data) {
+
+                   if (data.length > 0) {
+                       $("#" + ChildName).empty();
+
+                       $("#" + ChildName).append("<option value='0'>Select</option>");
+                       for (var i = 0; i < data.length; i++) {
+                           var opt = data[i].split('-');
+
+                           $("#" + ChildName).append("<option value=" + opt[0] + ">" + opt[1] + "</option>");
+
+                       }
+                       $("#" + DivSub).show();
+
+
+                   }
+                   else {
+                       //$("#" + DivSub).hide();
+                   }
+
+               };
+               options.error = function () { };
+               $.ajax(options);
+           }
+           else {
+               $("#" + ChildName).empty();
+               $("#" + DivSub).hide();
+           }
+       }
+</script>
+
+<!--Text Area-->
+<!-- bootstrap-wysiwyg -->
+<script>
+       $(document).ready(function () {
+           function initToolbarBootstrapBindings() {
+               var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                   'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                   'Times New Roman', 'Verdana'
+               ],
+                   fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+               $.each(fonts, function (idx, fontName) {
+                   fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+               });
+               $('a[title]').tooltip({
+                   container: 'body'
+               });
+               $('.dropdown-menu input').click(function () {
+                   return false;
+               })
+                   .change(function () {
+                       $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+                   })
+                   .keydown('esc', function () {
+                       this.value = '';
+                       $(this).change();
+                   });
+
+               $('[data-role=magic-overlay]').each(function () {
+                   var overlay = $(this),
+                       target = $(overlay.data('target'));
+                   overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+               });
+
+               if ("onwebkitspeechchange" in document.createElement("input")) {
+                   var editorOffset = $('#editor').offset();
+                   $('.voiceBtn').css('position', 'absolute').offset({
+                       top: editorOffset.top,
+                       left: editorOffset.left + $('#editor').innerWidth() - 35
+
+                   });
+               } else {
+                   $('.voiceBtn').hide();
+               }
+
+               if ("onwebkitspeechchange" in document.createElement("input")) {
+                   var editorOffset1 = $('#editor1').offset();
+                   $('.voiceBtn').css('position', 'absolute').offset({
+                       top: editorOffset1.top,
+                       left: editorOffset1.left + $('#editor1').innerWidth() - 35
+
+                   });
+               } else {
+                   $('.voiceBtn').hide();
+               }
+
+           }
+
+           function showErrorAlert(reason, detail) {
+               var msg = '';
+               if (reason === 'unsupported-file-type') {
+                   msg = "Unsupported format " + detail;
+               } else {
+                   console.log("error uploading file", reason, detail);
+               }
+               $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                   '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+           }
+
+           initToolbarBootstrapBindings();
+
+           $('#editor').wysiwyg({
+               fileUploadError: showErrorAlert
+           });
+           $('#editor1').wysiwyg({
+               fileUploadError: showErrorAlert
+           });
+
+           window.prettyPrint;
+           prettyPrint();
+       });
+</script>
+<!-- /bootstrap-wysiwyg -->
+<!--End-->
+<!-- /page content -->
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="../../js/bootstrap-table.js" type="text/javascript"></script>
+
+
+

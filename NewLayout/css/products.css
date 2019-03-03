@@ -1,0 +1,56 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+.lef_side_cbar{ padding-left:20px; border-right:1px solid #CCC; min-width:150px;}
+.lef_side_bar_Search{padding-left:20px; min-width:150px; }
+.categories{ text-decoration:none; list-style:none; padding:4px 0px;}
+.categories a { text-decoration:none; color:#000;}
+.categories li{ padding:8px 0;}
+
+.minmax{ padding:4px; max-width:50px; margin-bottom:10px; margin-right:3px; border:1px solid #999; background-color:#fff; border-radius:4px;}
+
+
+
+button.accordion {
+    background-color: #FFF;
+    color: #04143f;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+	font-size:15px;
+    font-weight:700;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active, button.accordion:hover {
+    background-color: #FFF;
+	color:#04143f;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    padding-bottom:10px;
+    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.pdt_cart{ padding:10px 15px; background-color:#FFF; text-decoration:none; border:1px solid #ccc;  }
+.pdt_cart:hover{ padding:10px 15px; background-color:#C06; text-decoration:none; border:1px solid #C06; color:#fff;}
+
+.max_price{ color:#999; font-size:13px; text-decoration: line-through;}
+
+.actual_price{ color:black; font-size:15px;margin:0px }
+.discount{ color:red; font-size:15px;margin:0px }
+.product_name{ color:#06C;font-size: 14.9px;}
+.product_name a{ color:#06F;}
+.product_name a:hover{ color:#F63; }
+
+
+.sortby{ border-radius: 2px!important; left:auto;  z-index:1; 
+margin:0 0 0 0;}

@@ -1,0 +1,3 @@
+﻿Generated model file: DbTradeKerala.edmx.
+Loading metadata from the database took 00:00:00.6093139.
+Generating the model took 00:00:01.4283123.

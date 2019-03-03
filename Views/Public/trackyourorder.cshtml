@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "trackyourorder";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    int count = ViewBag.ordercount;
+    String Message = "";
+
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+<style>
+    #prdctImg {
+        padding: 10px;
+    width: 120px;
+    height: 140px;
+    }
+</style>
+
+
+
+
+<style>
+    @@media screen and (max-width:650px ) {
+
+
+        #recent {
+            width: 40px !important;
+            height: 50px !important;
+        }
+
+        #headsize {
+            font-size: 12px !important;
+        }
+
+        #para {
+            font-size: 10px;
+        }
+
+        .side_bttns {
+            min-width: unset !important;
+            padding: 5px 10px;
+        }
+
+        #pull {
+            text-align: center !important;
+        }
+
+        #para {
+            font-size: 12px;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        h2 {
+            font-size: 12px !important;
+        }
+
+        .head {
+            font-size: 18px !important;
+        }
+    }
+    /*-- //Ratings --*/
+</style>
+
+<img src="~/images/shipping.jpg" style="width:100%;" />
+
+
+
+<div class="container">
+    <div class="row " id="slider-text">
+        <h2 id="slider-text" class="head_underscore head" style="padding-top:0px;margin-top:0px">Track Your Order</h2>
+        <div>
+            <div class="x_content">
+                <label>@ViewBag.Message</label>
+                <div class="alert alert-success alert-dismissable fade in" style="background-color: #04143f;color:white">
+
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+                    <strong style="text-align:center">
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+                </div>
+            </div>
+            @if (count > 0)
+            {
+                <div class="row" style="width:90%;margin-left:5%">
+                    <table id="cart" class="table table-hover table-condensed">
+                        <tbody>
+                            @{
+                                foreach (TradeKerala2017.Models.tblOrders ct in ViewBag.orderlist)
+                                {
+                                    <tr style="width:10%">
+                                        <td >
+                                            <div class="row well" style="margin-bottom:0px;">
+                                                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == ct.ProId).Take(1).ToList())
+                                                {
+                                                    <input type="hidden" value="@tm.id">
+                                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                                        <a href="/Public/NewProductDetails?id=@ct.ProId" target="_blank"><img src="@tm.Image" alt="..." class="img-responsive" id="prdctImg"></a>
+
+
+                                                    </div>
+                                                }
+
+                                                <div class="col-sm-4 col-md-6 col-xs-6 " style="text-align:center">
+                                                    <a href="~/Public/NewProductDetails?id=@ct.ProId" target="_blank">
+                                                        <h4 class="nomargin" style="margin-bottom:0px">@ct.ProdName</h4>
+                                                    </a>
+
+
+                                                    <p id="para">
+                                                        @*@foreach (TradeKerala2017.Models.tblCategory tm in db.tblCategories.Where(i => i.Catid == c).ToList())
+                                                        {
+                                                            @tm.CatName;
+                                                        }*@ &nbsp; Sold By: @ct.Vendor;
+                                                        <br>
+                                                        Having Price Of: <b>&#8377 @ct.Price</b>
+                                                    </p>
+
+                                                </div>
+                                                <div class="col-md-3 col-sm-4  col-xs-6  pull-right" id="pull">
+                                                    <form action="#" method="post">
+                                                        <button type="submit" class="side_bttns" style="background-color:#f0c14b">
+                                                            <i class="fa fa-shopping-cart" aria-hidden="true"> </i>  Add to Cart
+                                                        </button>
+                                                    </form>
+                                                    <form action="#" method="post">
+                                                        <button class="side_bttns" style="background-color:#ed9220">
+                                                            <i class="fa fa-shopping-bag" aria-hidden="true"> </i>  Delete Item
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <p>By placing your Order, Your are Agree to terms and conditions of traderkerala</p>
+                </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        <h3 style="font-family:Lato sans-serif !important;">
+                                            Currently Wislist is Empty
+                                        </h3>
+                                    </div>
+
+                                }
+
+        </div>
+    </div>
+</div>
+<script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+</script>

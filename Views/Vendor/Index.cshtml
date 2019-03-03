@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Vendor.cshtml";
+    TradeKerala2017.Models.tbl_Vendor tb = new TradeKerala2017.Models.tbl_Vendor();
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    String Message = "";
+    try
+    {
+        tb = ViewBag.Profile;
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+
+    }
+
+
+
+}
+
+  <!-- page content -->
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="alert alert-success alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>
+                            <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                        </strong>
+                    </div>
+                    <div class="x_title">
+                        <h2>User Report <small>Activity report</small></h2>
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+
+                            <div class="profile_img">
+
+                                <!-- end of image cropping -->
+                                <div id="crop-avatar">
+                                    <!-- Current avatar -->
+                                    <div class="avatar-view" title="Change the avatar">
+                                        <img src="~/images/user (2).png" alt="Avatar" style="width:150px;"/>
+                                    </div>
+
+                                    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                                </div>
+                                <!-- end of image cropping -->
+
+                            </div>
+                            <h3>@tb.Vendor_Name</h3>
+
+                            <ul class="list-unstyled user_data">
+                                <li>
+                                    <i class="fa fa-map-marker user-profile-icon"></i> @tb.Address 
+                                </li>
+                                @{
+                                    if (@tb.Pincode != null && tb.Pincode != "")
+                                    {
+
+                                        <li>
+                                            <i class="fa fa-map-marker user-profile-icon"></i> PinCode: @tb.Pincode
+                                        </li>
+
+
+                                    }
+
+                                }
+                                
+@{
+    if (@tb.state != null && tb.state != "")
+    {
+                                <li>
+                                    <i class="fa fa-map-marker user-profile-icon"></i> @tb.state ,India
+                                </li>
+    } }
+
+                                <li class="m-top-xs">
+                                    <i class="fa fa-mobile-phone user-profile-icon"></i> @tb.Mobile
+                                </li>
+                                <li class="m-top-xs">
+                                    <i class="fa fa-mail-forward user-profile-icon"></i> @tb.Email
+                                </li>
+                            </ul>
+
+                            <a href="~/Vendor/EditVendor" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                            <br />
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <table class="data table table-striped no-margin" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (TradeKerala2017.Models.tblProduct pd in ViewBag.Product)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @{
+                                                        foreach (TradeKerala2017.Models.tblProdImage im in db.tblProdImages.Where(i => i.Prodid == pd.pid).ToList().Take(1))
+                                                        {
+                                                            <img src="@im.Image" style="width:100px;height:80px">
+                                                        }
+                                                    }
+                                                </td>
+                                                <td>@pd.ProdName</td>
+                                                <td>@Html.Raw(pd.ProdDesc)</td>
+                                                <td>@pd.CatName</td>
+                                                             </tr>
+                                                        }
+
+                                    }
+                                    
+                                       
+                                       
+                                       
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- footer content -->
+
+<!-- /page content -->
+
+

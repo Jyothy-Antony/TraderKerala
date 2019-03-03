@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="216262411b444ddfb4c2c4f7b7b5d2ab" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_RelatedProducts" Width="1.5" PointX="0.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_specialoffer" Width="1.5" PointX="5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_trendingProducts" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_wishlist" Width="1.5" PointX="0.625" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblBrand" Width="1.5" PointX="7" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblCart" Width="1.5" PointX="9" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblCategory" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblfavorite" Width="1.5" PointX="9" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblProdImage" Width="1.5" PointX="4.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblSale" Width="1.5" PointX="4.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblStock" Width="1.5" PointX="12.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_ProductOffer" Width="1.5" PointX="12.875" PointY="4.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_TodaysDeal" Width="1.5" PointX="15" PointY="7.25" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tb_TopCategory" Width="1.5" PointX="2.75" PointY="7.25" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.Vw_TodaysDeals" Width="1.5" PointX="5" PointY="7.375" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.Vw_DealsOffer" Width="1.5" PointX="7" PointY="9.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tb_TopBrand" Width="1.5" PointX="9" PointY="9.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblNewsletter" Width="1.5" PointX="11" PointY="5.875" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Banner" Width="1.5" PointX="9" PointY="11.875" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblLogin" Width="1.5" PointX="2.75" PointY="9.625" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_PreBooking" Width="1.5" PointX="9" PointY="14" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_JobSeeker" Width="1.5" PointX="5" PointY="11" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Job" Width="1.5" PointX="7" PointY="13.5" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_SellerImage" Width="1.5" PointX="0.75" PointY="14" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblRecentView" Width="1.5" PointX="10.875" PointY="10.625" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Notfication" Width="1.5" PointX="13.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Organic" Width="1.5" PointX="11.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Logistics" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Pincode" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_HidedProducts" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_HiddenImage" Width="1.5" PointX="15.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblProduct" Width="1.5" PointX="2.75" PointY="0.5" />
+        <AssociationConnector Association="DbTradekeralaModel.FK_tblProduct_tblCategory" />
+        <AssociationConnector Association="DbTradekeralaModel.FK_tblProdImage_tblProduct" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_Vendor" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblRegistration" Width="1.5" PointX="15.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblreviews" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_cart" Width="1.5" PointX="17.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tb_address" Width="1.5" PointX="5.375" PointY="17.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tblOrders" Width="1.5" PointX="15.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DbTradekeralaModel.tbl_BulkOrder" Width="1.5" PointX="7.375" PointY="17.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

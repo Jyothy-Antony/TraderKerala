@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbTradekeralaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblBrand">
+    <Key>
+      <PropertyRef Name="Brandid" />
+    </Key>
+    <Property Name="Brandid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="BrandLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="BrandDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblfavorite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Prodid" Type="Int32" />
+    <Property Name="userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="DbTradekeralaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBrands" EntityType="Self.tblBrand" />
+    <EntitySet Name="tblfavorites" EntityType="Self.tblfavorite" />
+    <EntitySet Name="tblCarts" EntityType="DbTradekeralaModel.tblCart" />
+    <EntitySet Name="tblLogins" EntityType="DbTradekeralaModel.tblLogin" />
+    <EntitySet Name="tblNewsletters" EntityType="DbTradekeralaModel.tblNewsletter" />
+    <EntitySet Name="tblOrders" EntityType="DbTradekeralaModel.tblOrder" />
+    <EntitySet Name="tblProdImages" EntityType="DbTradekeralaModel.tblProdImage" />
+    <EntitySet Name="tblRegistrations" EntityType="DbTradekeralaModel.tblRegistration" />
+    <EntitySet Name="tblStocks" EntityType="DbTradekeralaModel.tblStock" />
+    <EntitySet Name="tblSales" EntityType="DbTradekeralaModel.tblSale" />
+    <FunctionImport Name="Sp_GetOffers" ReturnType="Collection(DbTradekeralaModel.Sp_GetOffers_Result)" />
+    <EntitySet Name="tblProducts" EntityType="DbTradekeralaModel.tblProduct" />
+    <AssociationSet Name="FK_tblProdImage_tblProduct" Association="DbTradekeralaModel.FK_tblProdImage_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblProdImage" EntitySet="tblProdImages" />
+    </AssociationSet>
+    <EntitySet Name="tblCategories" EntityType="DbTradekeralaModel.tblCategory" />
+    <AssociationSet Name="FK_tblProduct_tblCategory" Association="DbTradekeralaModel.FK_tblProduct_tblCategory">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <FunctionImport Name="sp_category" ReturnType="Collection(String)" />
+    <FunctionImport Name="sp_newproducts" ReturnType="Collection(DbTradekeralaModel.sp_newproducts_Result)" />
+    <FunctionImport Name="sp_search" ReturnType="Collection(DbTradekeralaModel.sp_search_Result)">
+      <Parameter Name="Property_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tbl_specialoffer" EntityType="DbTradekeralaModel.tbl_specialoffer" />
+    <EntitySet Name="tblreviews" EntityType="DbTradekeralaModel.tblreview" />
+  </EntityContainer>
+  <EntityType Name="tblCart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProdId" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastlogin" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblNewsletter">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Orderno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Userid" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ProId" Type="Int32" />
+    <Property Name="ProdName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Address" Type="Int32" />
+    <Property Name="DeliveryMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="OrderDate" Type="DateTime" Precision="0" />
+    <Property Name="OrderTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblProdImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Prodid" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="position" Type="Int32" />
+    <NavigationProperty Name="tblProduct" Relationship="DbTradekeralaModel.FK_tblProdImage_tblProduct" FromRole="tblProdImage" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblRegistration">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblStock">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Brand" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Discount" Type="Double" />
+    <Property Name="Totalamount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblSale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProdId" Type="Int32" />
+    <Property Name="Oldprice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Newprice" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <ComplexType Name="Sp_GetOffers_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="ProdId" Nullable="true" />
+    <Property Type="String" Name="ProdName" Nullable="true" />
+    <Property Type="Decimal" Name="Oldprice" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Newprice" Nullable="true" Precision="19" />
+  </ComplexType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProdName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Catid" Type="Int32" />
+    <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProdNewPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ProdOldPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ProdTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ProdDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Bestsell" Type="Boolean" />
+    <Property Name="Isoffer" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsRelatedTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblProdImages" Relationship="DbTradekeralaModel.FK_tblProdImage_tblProduct" FromRole="tblProduct" ToRole="tblProdImage" />
+    <NavigationProperty Name="tblCategory" Relationship="DbTradekeralaModel.FK_tblProduct_tblCategory" FromRole="tblProduct" ToRole="tblCategory" />
+  </EntityType>
+  <Association Name="FK_tblProdImage_tblProduct">
+    <End Type="DbTradekeralaModel.tblProduct" Role="tblProduct" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DbTradekeralaModel.tblProdImage" Role="tblProdImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="tblProdImage">
+        <PropertyRef Name="Prodid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="Catid" />
+    </Key>
+    <Property Name="Catid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Addeddate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProducts" Relationship="DbTradekeralaModel.FK_tblProduct_tblCategory" FromRole="tblCategory" ToRole="tblProduct" />
+  </EntityType>
+  <Association Name="FK_tblProduct_tblCategory">
+    <End Type="DbTradekeralaModel.tblCategory" Role="tblCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DbTradekeralaModel.tblProduct" Role="tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="Catid" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="Catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_newproducts_Result">
+    <Property Type="Int32" Name="pid" Nullable="false" />
+    <Property Type="String" Name="ProdName" Nullable="true" />
+    <Property Type="Int32" Name="Catid" Nullable="true" />
+    <Property Type="String" Name="CatName" Nullable="true" />
+    <Property Type="Decimal" Name="ProdNewPrice" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="ProdOldPrice" Nullable="true" Precision="19" />
+    <Property Type="String" Name="ProdTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ProdDesc" Nullable="true" />
+    <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Qty" Nullable="true" />
+    <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Weight" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="Boolean" Name="Bestsell" Nullable="true" />
+    <Property Type="Boolean" Name="Isoffer" Nullable="true" />
+    <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="IsRelatedTo" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_search_Result">
+    <Property Type="Int32" Name="pid" Nullable="false" />
+    <Property Type="String" Name="ProdName" Nullable="true" />
+    <Property Type="Int32" Name="Catid" Nullable="true" />
+    <Property Type="String" Name="CatName" Nullable="true" />
+    <Property Type="Decimal" Name="ProdNewPrice" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="ProdOldPrice" Nullable="true" Precision="19" />
+    <Property Type="String" Name="ProdTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ProdDesc" Nullable="true" />
+    <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Qty" Nullable="true" />
+    <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Weight" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="Boolean" Name="Bestsell" Nullable="true" />
+    <Property Type="Boolean" Name="Isoffer" Nullable="true" />
+    <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="IsRelatedTo" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="tbl_specialoffer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="offer_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="offer_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblreview">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prodid" Type="Int32" />
+    <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reviews" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

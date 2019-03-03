@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Career";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    int cr = ViewBag.careerCount;
+}
+
+<style>
+    .icon-size-4 {
+        color: #d43242;
+    }
+
+    .apply {
+        border: 1px #04143f solid;
+        background: #04143f;
+        color: #fff;
+        text-decoration: none !important;
+        transition: all 0.3s ease;
+        padding: 5px 25px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        float:right;
+    }
+
+    .apply:hover{
+         border: 1px #04143f solid;
+        background: #04143f;
+        color: #fff;
+        text-decoration: none !important;
+        transition: all 0.3s ease;
+        padding: 5px 25px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        float:right;
+    }
+
+    .headc {
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: 2px;
+        margin: 10px auto;
+        text-transform: capitalize;
+        text-align: left;
+    }
+</style>
+<img src="~/images/CAREER-BANNER.jpg" style="width:100%;" />
+<div class="container">
+    <div class="row text-center space-4 space-top-2">
+        <div class="col-md-4">
+            <div class="panel-body">
+                <i class="icon icon-size-4 fa fa-edit"></i>
+                <div class="h4 space-top-4 space-2">
+                    <b>Create</b>
+                </div>
+                <p>
+                    We build the best experience for our community - as a team.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel-body">
+                <i class="icon icon-size-4 fa fa-question-circle-o"></i>
+                <div class="h4 space-top-4 space-2">
+                    <b>Learn</b>
+                </div>
+                <p>
+                    We look inside and outside for inspiration and learning.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel-body">
+                <i class="icon icon-size-4 fa fa-music"></i>
+                <div class="h4 space-top-4 space-2">
+                    <b>Play</b>
+                </div>
+                <p>
+                    Life is what happens when you're busy working. We make sure to enjoy it.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="slider-text" style="padding-top:0px;">
+        <h2 class="headc">current Vacancies</h2>
+    </div>
+
+    @{
+        if (cr > 0)
+        { string[] career = ViewBag.career.Split('~');
+            int Lengths = career.Length;
+            for (int i = 0; i < Lengths; i++)
+            {
+                int rid = Convert.ToInt32(career[i]);
+                foreach (TradeKerala2017.Models.tbl_Job tm in db.tbl_Job.Where(J => J.Job_Id == rid).Take(1).ToList())
+                {
+                    <div class="row well" style="background-color:#f3f3f3;margin-bottom:0px;border-bottom:0px;border-radius:4px 4px 0px 0px !important;">
+                        <div class="col-sm-9">
+                            <div>
+                                <h2 class="headc">@tm.Job_Name</h2>
+                                <div>
+                                    <span>Keyskills: </span>
+                                    <span>@tm.key_skills</span>
+                                </div>
+                                <div>
+                                    <span>Description:</span>
+                                    <span>@tm.Job_Description</span>
+                                </div>
+                                <div>
+                                    <span class="fa fa-map-marker" style="font-size:20px;padding-right:20px;margin-bottom:10px;"></span>
+                                    <span>@tm.location</span>
+                                </div>
+                                <div>
+                                    <span class="fa fa-briefcase" style="font-size:20px;padding-right:10px;"></span>
+                                    <span>@tm.Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 clearfix">
+                            <a class="btn apply" role="button" href="~/Public/Jobseeker?id=@tm.Job_Id">Apply</a>
+                        </div>
+                    </div>
+                    <div class="row well" style="padding:7px;">
+                        <div style="margin-left:20px; display:inline-block">
+                            <span class="fa fa-calendar" style="font-size:20px;padding-right:10px;margin-bottom:10px;"></span>
+                            <span>Posted Date: </span>
+                            <span>@tm.Posted_date</span>
+                        </div>
+                        <div style="float:right">
+                            <span class="fa fa-calendar" style="font-size:20px;padding-right:10px;margin-bottom:10px;"></span>
+                            <span>Last Date: </span>
+                            <span>@tm.End_Date.ToString()</span>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <p class="well col-lg-10 col-md-10" style="margin-left:10%">
+                Currently No vacancies are available.<br />
+                However, we are always keen to meet energetic and talented professionals who would like to join our team.
+                If you wish to be considered for any future positions, please click here to<a href="~/Public/Jobseeker"> Submit Your Resume </a> 
+            </p>
+        }
+    }
+</div>

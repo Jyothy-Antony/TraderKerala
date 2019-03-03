@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Orderview";
+    Layout = "~/Views/Shared/_Vendor.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+
+
+<link href="~/css/jquery.filer-dragdropbox-theme.css" rel="stylesheet" />
+<link href="~/css/jquery.filer.css" rel="stylesheet" />
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="~/js/jquery.filer.js"></script>
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>User Details<small>Detailed Information of User</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+                </div>
+                <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-sortable="true">Product</th>
+                            <th data-sortable="true">Quantity</th>
+                            <th data-sortable="true">Price</th>
+                            <th data-sortable="true">Total</th>
+                            <th data-sortable="true">Shipping</th>
+                            <th data-sortable="true">Address</th>
+                            <th data-sortable="true">Delivery</th>
+                            <th data-sortable="true">Gift</th>
+                            <th data-sortable="true">status</th>
+                            <th data-sortable="true">Date</th>
+                            <th data-sortable="true">Time</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @{
+
+                        foreach (TradeKerala2017.Models.tblOrders tc in ViewBag.order)
+                        {
+                            <tr>
+                                <td>
+                                    @tc.ProdName
+                                </td>
+                                <td>
+                                   @tc.Qty
+                                </td>
+                                <td>
+                                 @tc.Price
+                                </td>
+                                <td>
+                                   @tc.Total
+                                </td>
+                                <td>
+                                    @tc.Shipping
+                                </td>
+                                <td>
+                                    @{
+                                        foreach (TradeKerala2017.Models.tb_address tb in db.tb_address.Where(i => i.ID == tc.Address).ToList())
+                                        {
+                                            @tb.Address <br />
+                                            @tb.pincode <br />
+                                            @tb.state
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                   @tc.DeliveryMethod
+                                </td>
+                                <td>
+                                    @tc.Gift
+                                </td>
+                                <td>
+                                   @tc.status
+                                </td>
+                                <td>
+                                    @tc.OrderTime
+                                </td>
+                                <td>
+                                  @tc.OrderDate
+                                </td>
+                                <td><a class="btn btn-primary btn-sm" href="updatestatus?id=@tc.Orderno"><i class="fa fa-pencil" aria-hidden="true" title="Edit Details"></i>Update</a></td>
+                                <td><a class="btn btn-primary btn-sm" href="Printorder?id=@tc.Orderno"><i class="fa fa-print" aria-hidden="true" title="Edit Details"></i>Print</a></td>
+
+                            </tr>
+                                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+       $(function () {
+
+
+           $(".alert").hide();
+           var msg = $("#Hidmsg").val();
+           if (msg != "") {
+               $(".alert").fadeIn(2000);
+           }
+           else {
+               $(".alert").fadeOut(500);
+           }
+
+
+
+
+           $(".select2_single").select2({
+               placeholder: "Select a state",
+               allowClear: true
+           });
+
+           $(".select2_single").change(function () {
+               debugger;
+               var Name = $(".select2_single option:selected").text();
+
+               $("#HiddenCatName").val(Name);
+
+           });
+
+
+           $('#hover, #striped, #condensed').click(function () {
+               var classes = 'table';
+
+               if ($('#hover').prop('checked')) {
+                   classes += ' table-hover';
+               }
+               if ($('#condensed').prop('checked')) {
+                   classes += ' table-condensed';
+               }
+               $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+           });
+       });
+
+       function rowStyle(row, index) {
+           var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+           if (index % 2 === 0 && index / 2 < classes.length) {
+               return {
+                   classes: classes[index / 2]
+               };
+           }
+           return {};
+       }
+</script>
+<!-- /page content -->
+

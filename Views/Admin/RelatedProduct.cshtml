@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewBag.Title = "RelatedProduct";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+
+}
+
+<!-- page content -->
+
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+@*<script>
+    /*Check box change*/
+    function AddRelated(id) {
+        var data = $("#HiddenId").val();
+        debugger;
+        if (data != "") {
+            if ($("#ch-" + id).prop("checked") == true) {
+                data = data + "," + id;
+            }
+            else {
+                data = data.replace("," + id, "");
+                data = data.replace(id + ",", "");
+            }
+            $("#HiddenId").val(data);
+        }
+        else {
+            data = id;
+            $("#HiddenId").val(data);
+        }
+    }
+
+</script>*@
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Add Related Product <small>Details of Related Product </small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                @using (Html.BeginForm("RelatedProduct", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left", @novalidate = "true" }))
+                {
+                    <input type="hidden" id="HiddenId" name="HiddenId"  value=""/>
+                    <span class="section">Add Related Product</span>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                          Select Product Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="select2_single form-control col-md-7 col-xs-12" name="product" tabindex="-1">
+                                <option>Choose Products</option>
+                                @{
+                                    foreach (TradeKerala2017.Models.tblProduct tbB in db.tblProduct.ToList())
+                                    {
+                                        <option value="@tbB.pid">@tbB.ProdName</option>
+                                    }
+                                    
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Select Related Product <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="width:745px">
+                            @{
+                                foreach (TradeKerala2017.Models.tblProduct tbB in db.tblProducts.ToList())
+                                {
+                                    <label style="margin-right:10%;min-width:21%"><input type="checkbox" value="@tbB.pid" name="ch-@tbB.pid" id="ch-@tbB.pid" onclick="AddRelated('@tbB.pid')" />@tbB.ProdName</label>
+
+                                }
+
+                            }
+                        </div>
+                    </div>*@
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                            Select Related Product<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="Related" tabindex="-1">
+                                                <option>Choose Related Products</option>
+                                                @{
+                                                    foreach (TradeKerala2017.Models.tblProduct tbB in db.tblProduct.ToList())
+                                                    {
+                                                        <option value="@tbB.pid">@tbB.ProdName</option>
+                                                    }
+
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+                            <button id="send" type="submit" class="btn btn-success">Submit</button><br />
+
+                            <label>@ViewBag.Message</label>
+                        </div>
+                    </div>
+                }
+
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+                </div>
+                <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true">ID</th>
+                            <th data-field="Catid" data-sortable="true">ID</th>
+                            <th data-field="prodct_Name" data-sortable="true">prodct Name</th>
+                            <th data-field="Related_Product" data-sortable="true">Related Product</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @{
+                        foreach (TradeKerala2017.Models.tbl_RelatedProducts tbl in ViewBag.RelatedDetails)
+                        {
+                            <tr>
+                                <td>@tbl.Id</td>
+                                <td>@tbl.Id</td>
+                                <td>@tbl.prodct_Name</td>
+                                <td>@tbl.Related_Product</td>
+                                <td><a class="btn btn-primary btn-sm" href="DeleteRelation?id=@tbl.Id&name=@tbl.prodct_Name&rname=@tbl.Related_Product"><i class="fa fa-trash-o" aria-hidden="true" title="Delete Details" onclick="return confirm('Do You Want To Delete?')"> Delete</i></a></td>
+                            </tr>
+
+
+                        }
+                    }
+
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+       $(function () {
+
+
+           $(".alert").hide();
+           var msg = $("#Hidmsg").val();
+           if (msg != "") {
+               $(".alert").fadeIn(2000);
+           }
+           else {
+               $(".alert").fadeOut(500);
+           }
+
+
+
+
+           $(".select2_single").select2({
+               placeholder: "Select a state",
+               allowClear: true
+           });
+
+           $(".select2_single").change(function () {
+               debugger;
+               var Name = $(".select2_single option:selected").text();
+               $("#HidStoreId").val(Name);
+
+           });
+
+
+           $('#hover, #striped, #condensed').click(function () {
+               var classes = 'table';
+
+               if ($('#hover').prop('checked')) {
+                   classes += ' table-hover';
+               }
+               if ($('#condensed').prop('checked')) {
+                   classes += ' table-condensed';
+               }
+               $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+           });
+       });
+
+       function rowStyle(row, index) {
+           var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+           if (index % 2 === 0 && index / 2 < classes.length) {
+               return {
+                   classes: classes[index / 2]
+               };
+           }
+           return {};
+       }
+</script>
+
+
+

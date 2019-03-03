@@ -1,0 +1,21 @@
+[
+	{
+		"title" : "",
+		"class": "internet",
+		"copy" : "Creating your own advertising channel within few steps.",
+		"image" : "../assets/internet.png"
+	},
+	{
+		"title": "",
+		"class": "bank",
+		"copy" : "Dont only inform, engage with your customers.",
+		"image" : "../assets/pad.png"
+	},
+	{
+		"title" : "",
+		"class": "mask",
+		"copy" : "Create a larger than life perception for your brand.",
+		"image" : "../assets/mask.png"
+	}
+
+]

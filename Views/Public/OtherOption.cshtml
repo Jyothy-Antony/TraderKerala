@@ -1,0 +1,352 @@
+﻿
+@{
+    ViewBag.Title = "OtherOption";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblProduct op= ViewBag.pdctDetailFirst;
+    int recmmndCount = ViewBag.recmCount;
+    decimal odec;
+
+}
+<script>
+    $(document).ready(function(){
+
+        $('#itemslider1').carousel({ interval: 3000 });
+
+        $('#itemslider1 .item').each(function(){
+            var itemToClone = $(this);
+
+            for (var i=1;i<6;i++) {
+                itemToClone = itemToClone.next();
+
+                if (!itemToClone.length) {
+                    itemToClone = $(this).siblings(':first');
+                }
+
+                itemToClone.children(':first-child').clone()
+                .addClass("cloneditem-"+(i))
+                .appendTo($(this));
+            }
+        });
+    });
+
+
+
+</script>
+
+<br />
+<div class="container-fluid">
+@foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == op.pid).ToList())
+{
+    <div class="col-md-1 paddnt"><img src="@tm.Image" class="img-responsive"></div>
+
+}
+<link href="~/NewLayout/css/main.css" rel="stylesheet" />
+   
+       <div class="col-md-11 ">
+        <p style="color:#888;">New offers for</p> <h4>@op.ProdName</h4>
+        <p>@op.ProdInfo</p>
+        <p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </p>
+    </div>
+
+
+    <div class="col-md-12 marg3" id="tablheadr">
+        <h5 style="background-color:#04143f;color:#ffffff; font-size:18px; padding:10px ;"> Other buying options :</h5>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4" align="left"><b> Price + Delivery</b> </div>
+        <div class="col-md-4" align="left"><b> Seller Information</b></div>
+        <div class="col-md-4" align="center"> <b>Buying Options</b> </div>
+    </div>
+
+
+    @{ 
+          foreach (TradeKerala2017.Models.tblProduct pd in ViewBag.pdctDetails)
+          {
+
+
+    <div class="col-md-12">
+        <hr>
+        <div class="col-md-4" align="left">
+            <p style="color:#900; font-size:25px;"> ₹@pd.ProdNewPrice </p>
+            TraderKerala TM
+
+
+            @*<p style="color:#43556c;">Cash on Delivery eligible </p>*@
+            <p style="color:#306fa0;">FREE Delivery on orders over ₹ 999.00 <p>
+
+        </div>
+
+
+        <div class="col-md-4" align="left">
+            <p style="font-size:18px; color:#c45500;">@foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == @pd.Vendor))
+            {
+                @vd.Vendor_Name;
+            }
+            </p>
+            <p>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </p>
+            <p> <a href="~/Public/PaymentandShipping" >Shipping & Payment Policy</a></p>
+        </div>
+
+        <div class="col-md-4" align="center">
+            <form action="cart" method="post">
+                <input type="hidden" name="pro_id" value="@pd.pid">
+                <input type="hidden" name="cat_id" value="@pd.Catid">
+                <input type="hidden" name="pro_name" value="@pd.ProdName">
+                <input type="hidden" name="pro_price" value="@pd.ProdNewPrice">
+                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == pd.pid).ToList())
+                {
+                    <input type="hidden" name="pro_image" value="@tm.id">
+                }
+                <input type="hidden" name="qty" value="1">
+                <input type="hidden" name="subtotal" value="@pd.ProdNewPrice">
+                <input type="hidden" name="type" value="Normal">
+                <input type="hidden" name="total" value="@pd.ProdNewPrice">
+                <button type="submit" class="side_bttns" style="background:linear-gradient(to bottom,#f7dfa5,#f0c14b)">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"> </i>  Add to Cart
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+          }
+
+    }
+
+</div>
+<br />
+
+
+<!-- Item slider-->
+
+
+
+@if (recmmndCount > 3)
+{
+
+    <div class="container">
+        <div class="row" id="slider-text">
+
+            <h2 class="head_underscore">Related items </h2>
+
+        </div>
+    </div>
+
+    <!-- Item slider-->
+    <div class="container-fluid ">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom:15px;">
+                <div class="carousel carousel-showmanymoveone slide" id="itemslider1">
+                    <div class="carousel-inner">
+                        @{
+                            List<string> recmmndList = new List<string>();
+                            foreach (TradeKerala2017.Models.tblProduct tb1 in ViewBag.recmmndActive)
+                            {
+                                <div class="item active">
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                        {
+                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;margin-right:15px;margin-left:15px"></a>
+                                        }
+                                        <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px; height:40px;">@tb1.ProdName</h4></a>
+                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                        {
+                                            <h5 class="text-center">
+                                                <b>
+                                                    @{
+                                                        odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                        odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                    }
+                                                    &#8377; @odec
+                                                </b>
+                                            </h5>
+                                                        }
+                                    </div>
+                                </div>
+                                                            recmmndList.Add(tb1.ProdName);
+                                                        }
+
+                                                        foreach (TradeKerala2017.Models.tblProduct tb1 in ViewBag.recmmnd)
+                                                        {
+                                                            if (!recmmndList.Contains(tb1.ProdName))
+                                                            {
+                                                                <div class="item">
+                                                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                                        { <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;margin-right:15px;margin-left:15px"></a>
+                                                                        }
+                                                                        <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px; height:40px;">@tb1.ProdName</h4></a>
+                                                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                                        {
+                                                                            <h5 class="text-center">
+                                                                                <b>
+                                                                                    @{
+                                                                                        odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                        odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                                                    }
+                                                                                    &#8377; @odec
+                                                                                </b>
+                                                                            </h5>
+                                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                                            }
+                                                                                            recmmndList.Add(tb1.ProdName);
+                                                                                        }
+                        }
+
+                    </div>
+
+                    <div id="slider-control">
+                        <a class="left carousel-control" href="#itemslider1" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                        <a class="right carousel-control" href="#itemslider1" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                                                                                        }
+
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function (e) {
+            $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#", "");
+                var concept = $(this).text();
+                $('.search-panel span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function (e) {
+            $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#", "");
+                var concept = $(this).text();
+                $('.search-panel span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+
+
+                var urls = "/Public/CatKeywordList";
+
+                $("#txt_search").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Public/CatKeywordList",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: concept, Sufix: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.label, value: item.label };
+                                }))
+
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "70%";
+            // document.getElementById("flipkart-navbar").style.width = "50%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+    </script>
+
+
+
+
+
+    <script src="scripts/main.js"></script>
+
+
+
+
+
+
+    <!--scroller-->
+    <!--scroller-->
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            function fixDiv() {
+                var $cache = $('#menu_fixtop');
+                if ($(window).scrollTop() > 100)
+                    $cache.css({
+                        'position': 'fixed',
+                        'top': '0px',
+                        'z-index': '1',
+                        'width': '100%',
+                        'background-color': '#8BC34A',
+                        'padding-top': '5px'
+                    });
+                else
+                    $cache.css({
+                        'position': 'relative',
+                        'top': 'auto'
+                    });
+            }
+            $(window).scroll(fixDiv);
+            fixDiv();
+        });
+    </script>
+    <style>
+         @@media screen and (max-width: 960px) {
+        #tablheadr{ display: none;}
+        }
+        .checked {
+            color: orange;
+        }
+    </style>
+

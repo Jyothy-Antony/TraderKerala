@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "EditVendor";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tbl_Vendor tblC = new TradeKerala2017.Models.tbl_Vendor();
+    try
+    {
+        tblC = ViewBag.Viewseller;
+    }
+    catch
+    {
+
+    }
+}
+
+<!-- page content -->
+<style>
+    .form-control[readonly] {
+        background-color: #fff;
+        opacity: 1;
+    }
+    .thumbnail{
+        margin-right:15px;
+    }
+</style>
+
+
+<link href="../../css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Seller's View <small>Details of seller</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+                @using (Html.BeginForm("EditVendor", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left", @novalidate = "true" }))
+                {
+                
+                    <span class="section">Seller's View</span>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Seller's/Company's Name <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12" readonly="readonly"  type="text" value="@tblC.Vendor_Name">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Address <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <input id="name" class="form-control col-md-7 col-xs-12"  type="text" value="@tblC.Address @tblC.Pincode  @tblC.state " readonly="readonly" style="min-height:100px;max-width:497px;">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Mobile Number <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12" readonly="readonly" type="text" value="@tblC.Mobile">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            LandLine Number <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12" readonly="readonly" type="text" value="@tblC.LandLine">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Email Address<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="Email" class="form-control col-md-7 col-xs-12"  readonly="readonly" type="email" value="@tblC.Email">
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Product Info <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <input id="name" class="form-control col-md-7 col-xs-12" type="text" value="@tblC.Pro_Info" readonly="readonly" style="min-height:100px;max-width:497px;">
+                        </div>
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Image 1<span></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            @{try
+                                { foreach (TradeKerala2017.Models.tbl_SellerImage pr in db.tbl_SellerImage.Where(u => u.Vendor_id == tblC.Vendor_id).ToList())
+                                    {
+                                        <div class="thumbnail col-md-3 col-sm-3 col-xs-6">
+                                            <img src="@pr.Image" class="img-responsive" />
+                                        </div>
+                                    }
+                                }
+                                catch
+                                {
+                                }
+                            }
+                        </div>
+
+                    </div>
+                                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+       $(function () {
+
+
+           $(".alert").hide();
+           var msg = $("#Hidmsg").val();
+           if (msg != "") {
+               $(".alert").fadeIn(2000);
+           }
+           else {
+               $(".alert").fadeOut(500);
+           }
+
+
+
+
+           $(".select2_single").select2({
+               placeholder: "Select a state",
+               allowClear: true
+           });
+
+           $(".select2_single").change(function () {
+               debugger;
+               var Name = $(".select2_single option:selected").text();
+               $("#HidStoreId").val(Name);
+
+           });
+
+
+           $('#hover, #striped, #condensed').click(function () {
+               var classes = 'table';
+
+               if ($('#hover').prop('checked')) {
+                   classes += ' table-hover';
+               }
+               if ($('#condensed').prop('checked')) {
+                   classes += ' table-condensed';
+               }
+               $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+           });
+       });
+
+       function rowStyle(row, index) {
+           var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+           if (index % 2 === 0 && index / 2 < classes.length) {
+               return {
+                   classes: classes[index / 2]
+               };
+           }
+           return {};
+       }
+</script>
+<!-- /page content -->
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="../../js/bootstrap-table.js" type="text/javascript"></script>
+

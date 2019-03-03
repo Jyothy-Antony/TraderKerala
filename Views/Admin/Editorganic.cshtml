@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Editorganic";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    TradeKerala2017.Models.tbl_Organic tbl = new TradeKerala2017.Models.tbl_Organic();
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    try
+    {
+        tbl = ViewBag.Editorganic;
+    }
+    catch
+    {
+    }
+}
+
+
+<link href="~/css/jquery.filer-dragdropbox-theme.css" rel="stylesheet" />
+<link href="~/css/jquery.filer.css" rel="stylesheet" />
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="~/js/jquery.filer.js"></script>
+
+<div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Add Organic Certificate  <small>Details of Organic Certificate</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+                @using (Html.BeginForm("Editorganic", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left", @novalidate = "true" }))
+                {
+
+                    <input type="hidden" value="@tbl.Organic_Id"name="HiddenId" />
+                    <span class="section">Add Organic Certificate</span>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Organic Certificate Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtname" placeholder="organic certificate" required="required" type="text" value="@tbl.Organic_name">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Description<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <textarea id="txtDesc1" class="form-control" name="txtDesc1" style="min-width:497px; min-height:200px">@tbl.Description</textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                            Certificate Image<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="file1" type="file">
+                            <img src="@tbl.Image" class="img-image" style="height:100px; width:100px" />
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+                            <button id="send" type="submit" class="btn btn-success">Submit</button><br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

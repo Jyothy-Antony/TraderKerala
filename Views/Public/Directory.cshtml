@@ -1,0 +1,325 @@
+﻿
+@{
+    ViewBag.Title = "Directory";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    List<string> trendList = new List<string>();
+    List<string> restrendList = new List<string>();
+}
+
+
+<style>
+    #siteDirectory{
+        min-width: 960px;
+    margin: 15px;
+    }
+   
+    #shopAllLinks{
+     width: 100%;
+    }
+    #shopAllLinks td {
+            vertical-align: top;
+            padding: 0;
+            margin: 0;
+        }
+        #siteDirectory h2, #siteDirectory h2 a {
+    font-family: Tahoma,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #E47911;
+    text-decoration: none;
+}
+#siteDirectory1 h2 {
+    padding: 0;
+    margin: 17px 0 5px 5px;
+}
+       #siteDirectory1 h2, #siteDirectory1 h2 a {
+    font-family: Tahoma,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #E47911;
+    text-decoration: none;
+}
+#siteDirectory1 h2 {
+    padding: 0;
+    margin: 17px 0 5px 5px;
+}
+#shopAllLinks ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 5px 10px 15px;
+}
+#shopAllLinks ul li {
+    padding: 2px 0;
+    margin: 0;
+    font-size: 13px;
+    list-style-type: none;
+}
+#shopAllLinks .nav_cat_links a {
+    border-bottom: 1px solid #004B91;
+    text-decoration: none;
+}
+#shopAllLinks .nav_cat_links span, #shopAllLinks .nav_cat_links a {
+    color: #004B91;
+}
+div{
+text-align:left;
+}
+.popover-grouping {
+font-size: 11px;
+font-family: Tahoma, sans-serif;
+margin-bottom: 0.7em;
+}
+.popover-grouping a, .popover-grouping a:active {
+text-decoration: none;
+line-height: 15px;
+margin-left: .3em;
+font-family: Tahoma, sans-serif;
+}
+.popover-grouping a:hover {
+color:#CC6600;
+text-decoration: underline;
+background-color:#F5F5E6;
+font-family: Tahoma, sans-serif;}
+.popover-row {
+margin-bottom: 0.2em;
+font-size: 11px;
+font-family: Tahoma, sans-serif;
+}
+.popover-row a, .popover-row a:active,.popover-row a:hover {
+color:black;
+text-decoration: none;
+line-height: 0.82em;
+margin-left: .3em;
+font-family: Tahoma, sans-serif;
+}
+.popover-category-name{
+color: #CC6600;
+font-weight: bold;
+font-family: Tahoma, sans-serif;}
+
+    @@media screen and (min-width: 1124px) {
+        td {
+            width: 25%;
+        }
+    }
+    
+      @@media screen and (min-width: 1124px) {
+            #siteDirectory1 {
+                display: none;
+            }
+
+        }
+     @@media screen and (max-width: 1124px) {
+            #siteDirectory {
+                display: none;
+            }
+
+        }
+</style>
+
+<div id="siteDirectory">
+    <table id="shopAllLinks">
+        <tbody>
+            <tr>
+                <td >
+                    @{
+
+                        int co = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+                            if (co < 3)
+                            {
+                                <div class="popover-grouping">
+                                    <h2 class="popover-category-name">@ct.CatName</h2>
+                                    <ul class="nav_cat_links">
+                                        @{
+                                            trendList.Add(ct.CatName);
+                                            foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                            {
+                                                <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                                    co = co + 1;
+                                                }
+                                            }
+                    }
+                </td>
+                <td >
+                    @{
+
+                        int cd = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+
+                            if (!trendList.Contains(ct.CatName))
+                            {
+                                if (cd < 2)
+                                {
+                                <div class="popover-grouping">
+                                    <h2 class="popover-category-name">@ct.CatName</h2>
+                                    <ul class="nav_cat_links">
+                                        @{ 
+                                            trendList.Add(ct.CatName);
+                                            foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                            {
+                                                <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                                            cd = cd + 1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                </td>
+
+               
+              
+                <td >
+                    @{
+
+                        int ce = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+
+                            if (!trendList.Contains(ct.CatName))
+                            {
+                                if (ce < 4)
+                                {
+                                    <div class="popover-grouping">
+                                        <h2 class="popover-category-name">@ct.CatName</h2>
+                                        <ul class="nav_cat_links">
+                                            @{ trendList.Add(ct.CatName);
+                                                foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                                {
+                                                    <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                                            ce = ce + 1;
+                                                        }
+                                                    }
+                                                }
+                    }
+                </td>
+                <td >
+                    @{
+
+                        int cf = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+
+                            if (!trendList.Contains(ct.CatName))
+                            {
+                                if (cf < 7)
+                                {
+                                    <div class="popover-grouping">
+                                        <h2 class="popover-category-name">@ct.CatName</h2>
+                                        <ul class="nav_cat_links">
+                                            @{ 
+                                                trendList.Add(ct.CatName);
+                                                foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                                {
+                                                    <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+                                                   
+                                                }
+                                            }
+                                            
+                                        </ul>
+                                    </div>
+                                                            cf = cf + 1;
+                                                        }
+                                                    }
+                                                }
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+
+<div id="siteDirectory1">
+    <table id="shopAllLinks">
+        <tbody>
+            <tr>
+                <td>
+                    @{
+
+                        int cq = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+                            if (cq < 4)
+                            {
+                                <div class="popover-grouping">
+                                    <h2 class="popover-category-name">@ct.CatName</h2>
+                                    <ul class="nav_cat_links">
+                                        @{
+                                            restrendList.Add(ct.CatName);
+                                            foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                            {
+                                                <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                                    cq = cq + 1;
+                                                }
+                                            }
+                    }
+                </td>
+                <td>
+                    @{
+
+                        int cz = 0;
+                        foreach (TradeKerala2017.Models.tblCategory ct in ViewBag.catlist)
+                        {
+
+                            if (!restrendList.Contains(ct.CatName))
+                            {
+                                if (cz < 15)
+                                {
+                                    <div class="popover-grouping">
+                                        <h2 class="popover-category-name">@ct.CatName</h2>
+                                        <ul class="nav_cat_links">
+                                            @{
+                                                restrendList.Add(ct.CatName);
+                                                foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == ct.Catid).ToList())
+                                                {
+                                                    <li><a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" target="_blank"> @td.CatName</a></li>
+
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                                            cz = cz + 1;
+                                                        }
+                                                    }
+                                                }
+                    }
+                </td>
+
+
+
+               
+              
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</div>

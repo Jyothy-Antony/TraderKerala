@@ -1,0 +1,1368 @@
+﻿@{
+    ViewBag.Title = "NewProductDetails";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblProduct tp = ViewBag.list;
+    TradeKerala2017.Models.tblProdImage Im = ViewBag.ImageFirst;
+    int other = ViewBag.other;
+    string from = ViewBag.from;
+    int Offerid = ViewBag.OfferID;
+    int relatedCount = ViewBag.relCount;
+    int recmmndCount = ViewBag.recmCount;
+    int recent = ViewBag.recentCount;
+    int recentlog = ViewBag.recentlog;
+    int RvCount = ViewBag.reviewCount;
+    string str = ViewBag.ParCategories;
+    string[] Size = new string[] { "Meter", "MM", "CM", "ft", "In", " ", "Mt" };
+    string sizet;
+    decimal odec;
+    decimal cdec;
+    string[] Weight = new string[] { "Ltr", "ml", "KG", "GM", " " };
+    string weightt;
+    decimal count = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid).Count());
+    String Message = "";
+    decimal star=0;
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+
+}
+
+<script src="~/js/main.js"></script>
+
+<style>
+    .max_price {
+        color: #999;
+        font-size: 13px;
+        text-decoration: line-through;
+    }
+
+    .linkcolour {
+        color: #a3a3a3;
+        font-weight: 500;
+    }
+
+        .linkcolour:hover {
+            color: orange;
+            font-weight: 500;
+        }
+        .progress{
+            margin-bottom:0px;
+            background-color:#fff;
+            width:100%;
+        }
+        .progress-bar{
+           background-color:#04143f!important;
+        }
+        .description
+        {
+            margin:1em 0;
+        }
+
+    @@media screen and (max-width:650px ) {
+    .side_bar{
+        border-left:0px!important;
+    }
+    #link{
+        font-size:75%;
+    }
+    .description p{line-height:1.4em}
+    }
+     @@media screen and (max-width: 1200px) {
+            #hiddenfield {
+                display: none !important;
+            }
+        }
+
+</style>
+<!-- xzoom plugin here -->
+
+<script type="text/javascript" src="~/NewLayout/js/xzoom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/NewLayout/css/xzoom.css" media="all" />
+<!-- hammer plugin here -->
+<script type="text/javascript" src="~/NewLayout/js/jquery.hammer.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="all" href="~/NewLayout/css/magnific-popup.css" />
+<script type="text/javascript" src="~/NewLayout/js/magnific-popup.js"></script>
+<script src="~/NewLayout/js/star.js"></script>
+<link href="~/NewLayout/css/Fullfill.css" rel="stylesheet" />
+<style>
+   
+     
+    
+     .rating:not(:checked) > input {
+        position:absolute;
+        top:-9999px;
+        clip:rect(0,0,0,0);
+    }
+
+    .rating:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        
+        color:#e4af1a;
+    }
+    @@media screen and (min-width: 769px) {
+        rating:not(:checked) > label {
+            font-size:250% !important;
+        }
+    }
+
+    @@media screen and (max-width: 768px) {
+        rating:not(:checked) > label {
+            font-size:175% !important;
+        }
+        .fontsize{
+            font-size:20px !important;
+        }
+    }
+
+    .rating:not(:checked) > label:before {
+        content: '★ ';
+    }
+
+    .rating > input:checked ~ label {
+        color: #04143f;
+        
+    }
+
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+        color: #04143f;
+        
+    }
+
+    .rating > input:checked + label:hover,
+    .rating > input:checked + label:hover ~ label,
+    .rating > input:checked ~ label:hover,
+    .rating > input:checked ~ label:hover ~ label,
+    .rating > label:hover ~ input:checked ~ label {
+        color: #04143f;
+        
+    }
+
+
+</style>
+
+
+
+<style>
+    /*-- Ratings --*/
+    .rating-left {
+        float: left;
+    }
+
+        .rating-left img {
+            margin: .3em 0.1em 0;
+        }
+
+    .rating1 {
+        direction: ltr;
+        margin-bottom: 2em;
+    }
+
+    .starRating:not(old) {
+        display: inline-block;
+        height: 18px;
+        width: 100px;
+        overflow: hidden;
+    }
+
+        .starRating:not(old) > input {
+            margin-right: -26%;
+            opacity: 0;
+        }
+
+        .starRating:not(old) > label {
+            float: right;
+            background: url('../../images/star.png');
+            background-size: contain;
+            margin-right: 2px;
+        }
+
+            .starRating:not(old) > label:before {
+                content: '';
+                display: block;
+                width: 18px;
+                height: 18px;
+                background: url(../images/star-.png);
+                background-size: contain;
+                opacity: 0;
+                transition: opacity 0.2s linear;
+            }
+
+            .starRating:not(old) > label:hover:before,
+            .starRating:not(old) > label:hover ~ label:before,
+            .starRating:not(:hover) > :checked ~ label:before {
+                opacity: 1;
+            }
+    
+</style>
+<style>
+    @@media screen and (max-width: 800px) {
+        .column {
+            margin-left: 20px !important;
+            margin-right: 20px !important;
+        }
+    }
+    .viewgrid {
+        font-size: 15px;
+        color: #000;
+        padding: 0 5px;
+        float: right;
+        margin: 2px;
+    }
+
+    .colmd3 {
+        width: 22%;
+    }
+
+    .selctbtn {
+        min-width: 80%;
+        margin: 20px auto 0px auto;
+        min-width: 150px;
+        color: #000;
+        background-color: #FFF;
+        border: 1px solid #CCC;
+    }
+
+    .clurbox {
+        max-height: 25px;
+        max-width: 25px;
+        min-height: 25px;
+        min-width: 25px;
+        margin: 4px;
+        border: 1px solid #888;
+        text-align: justify;
+        float: left;
+        left: 0;
+    }
+    /*.clurbox_outer{ border:1px solid #CCC;  float:none;}*/
+    .pdtbdr {
+        border: 1px solid #DDD;
+        margin-top: 15px;
+        margin-left: 15px;
+        padding: 20px;
+    }
+
+    .accordion {
+        background-color: #eee;
+    }
+</style>
+<script type='text/javascript'>
+    debugger;
+    $(document).ready(function() {
+        $("#star").click(function(){
+            var concept = $("#count-existing").text()
+            $("#StarValue").val(concept);
+
+        });
+
+    });
+</script>
+
+<!--zoom-->
+
+<script>
+    $(document).ready(function(){
+
+        $('#itemslider').carousel({ interval: 3000 });
+
+        $('#itemslider .item').each(function(){
+            var itemToClone = $(this);
+
+            for (var i=1;i<6;i++) {
+                itemToClone = itemToClone.next();
+
+                if (!itemToClone.length) {
+                    itemToClone = $(this).siblings(':first');
+                }
+
+                itemToClone.children(':first-child').clone()
+                .addClass("cloneditem-"+(i))
+                .appendTo($(this));
+            }
+        });
+    });
+
+
+
+</script>
+<script>
+    $(document).ready(function(){
+
+        $('#itemslider1').carousel({ interval: 3000 });
+
+        $('#itemslider1 .item').each(function(){
+            var itemToClone = $(this);
+
+            for (var i=1;i<6;i++) {
+                itemToClone = itemToClone.next();
+
+                if (!itemToClone.length) {
+                    itemToClone = $(this).siblings(':first');
+                }
+
+                itemToClone.children(':first-child').clone()
+                .addClass("cloneditem-"+(i))
+                .appendTo($(this));
+            }
+        });
+    });
+</script>
+
+
+
+<div class="x_content">
+    <label>@ViewBag.Message</label>
+    <div class="alert alert-success alert-dismissable fade in" style="color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6">
+
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+        <strong style="text-align:center">
+            <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+        </strong>
+    </div>
+</div>
+<div class="row" style="margin-left:15px" id="link">
+    @{
+        string la = " >> ";
+        string[] linkview = @ViewBag.prolink.Split('~');
+
+        <a href="~/Public/NewIndex" class="linkcolour">   Home  </a>
+        @la
+        int f;
+        for (f = 0; f < linkview.Length; f++)
+        {
+            <a href="~/Public/products?keyword=&Catword=@linkview[f]" class="linkcolour">@linkview[f]</a>
+            @la
+        }
+
+    }
+    <a href="~/Public/NewProductDetails?id=@tp.pid" class="linkcolour"> @tp.ProdName</a>
+</div>
+
+<div class="container marg5 paddnt" style="margin-top:15px">
+
+
+    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 paddnt">
+
+        <!-- magnific start -->
+        @if (str.Contains("Books") != true)
+        {
+            <section id="magnific">
+                <div class="row">
+                    <div class="large-5 column" >
+                        <div class="xzoom-container">
+                            <img class="xzoom5" id="xzoom-magnific" src="@Im.Image" width="400" height="400" xoriginal="@Im.Image" />
+                            <div class="xzoom-thumbs">
+                                @{
+                                    foreach (TradeKerala2017.Models.tblProdImage tm1 in ViewBag.image)
+                                    {
+
+                                        <a href="@tm1.Image"><img class="xzoom-gallery5" width="80" height="90" src="@tm1.Image" title="The description goes here"></a>
+                                    } }
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="large-7 column" >@{
+                        if (tp.ProdInfo != "")
+                        {
+                            <p><b>Product Information</b></p>
+                            <p>@tp.ProdInfo</p> }
+                    }</div>
+                </div>
+            </section>
+                                    }
+
+                                    else
+                                    {
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="large-5 column">
+                                                    <div class="xzoom-container">
+                                                        <img class="xzoom5" src="@Im.Image" width="300" height="400" />
+                                                        <div class="xzoom-thumbs">
+                                                            @{
+                                                                foreach (TradeKerala2017.Models.tblProdImage tm1 in ViewBag.image)
+                                                                {
+                                                                    <a href="@tm1.Image"><img style="border:1px solid #cecece;margin-left:5px;margin-bottom: 10px;" width="80" height="90" src="@tm1.Image" title="The description goes here"></a>
+                                                                } }
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="large-7 column"></div>
+                                            </div>
+                                        </section>
+
+                                                                }
+        <!-- magnific end -->
+
+
+
+    </div>
+    <div class="col-md-6 ">
+        <div>
+            <h3>@tp.ProdName</h3>
+            
+            
+                @{
+                    if (count > 0)
+                    {
+                        decimal tc = Convert.ToDecimal(count * 5);
+                        foreach (TradeKerala2017.Models.tblreviews re in db.tblreviews.Where(i => i.prodid == tp.pid))
+                        {
+                            star = Convert.ToDecimal(star + re.starValue);
+                        }
+                        decimal st = Convert.ToDecimal(star / tc * 100);
+                        st = decimal.Round(st, 0, MidpointRounding.AwayFromZero);
+                        st = Convert.ToDecimal(st / 2);
+                        int sl= Convert.ToInt32(st / 10);
+                        <div class="starrr" data-rating='@sl'>
+                        </div>
+                        <p>@sl out of 5 stars    @count customer reviews  </p>
+                    }
+                    else
+                    {
+                        <div class="starrr" data-rating='5'>
+                        </div>
+                    }
+
+                }
+            <div class="description" style="text-align:justify;margin-left: 7px;">
+                <h4>Description</h4>
+                <p style="text-align:justify;">
+                    @Html.Raw(tp.ProdDesc)
+                </p>
+            </div>
+
+
+            
+            @if (from == "Deal")
+                    {
+                        foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                        {
+                    <p style="font-size:20px;">
+                        <b>
+                            &#8377;  @vd.NewPrice
+                        </b>
+                    </p>
+                        }
+                    }
+            else if (from == "Today")
+            {
+                foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                {
+                    <p style="font-size:20px;">
+                        <b>
+                            &#8377;  @vd.NewPrice
+                        </b>
+                    </p>
+                }
+            }
+            else
+            {
+
+                <p class="max_price" style="font-size:20px;">
+                    <b>
+
+                        @{
+                            odec = Convert.ToDecimal(tp.ProdOldPrice);
+                            odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                        }
+                        &#8377; @odec
+                    </b>
+                </p>
+
+                <p style="font-size:20px;">
+                    <b>
+                        @{
+                            cdec = Convert.ToDecimal(tp.ProdNewPrice);
+                            cdec = decimal.Round(cdec, 2, MidpointRounding.AwayFromZero);
+                        }
+                        &#8377; @cdec
+                    </b>
+                </p>
+
+                            }
+            @*<div class="a-row" style="margin-bottom:10px;">
+                    <span class="a-size-mini a-color-base dotdBadge">Traderkerala.com</span>
+                    <span class="a-size-mini a-color-base badgeSkew"></span>
+                </div>*@
+            <div style="width:100px">
+                <img src="~/NewLayout/images/Logo (2).png" class="img-responsive" />
+            </div>
+            @*<p>Sale:	   545.00  FREE Delivery on orders over ₹599.00.Details</p>
+                <p>You Save:	   2,855.00 (84%)</p>
+                <p>Inclusive of all taxes</p>*@
+            @*<p>
+                    Vendor Details: @foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == @tp.Vendor))
+                    {
+                        @vd.Vendor_Name;
+                    }
+                </p>*@
+            @if (@tp.Qty > 0)
+            {
+                <p style="color:green"><b>In stock.</b> </p>
+            }
+            else
+            {
+                <p style="color:red"> Out Of Stock.</p>
+            }
+            <p>
+                Delivery to pincode 680545 - Thrissur within 2 - 4 business days.
+
+            </p>
+
+        </div>
+        <div>
+            <p>
+                Powered By:Traderkerala.com
+            </p>
+            @*@{
+                if (tp.ProdInfo != "")
+                {
+                    <p><b>Product Information</b></p>
+                    <p>@tp.ProdInfo</p> }
+            }*@
+            <div>
+                @if (tp.Color != "#000000")
+                {
+                    <label> Colour Available:</label>
+                    <div class="panel clurbox_outer" style="border:0px;">
+                        <div class="clurbox" style="background:@tp.Color;">
+                        </div>
+                    </div>
+                }
+            </div>
+            @{
+                if (tp.Size != null)
+                {
+                    sizet = tp.Size;
+                    for (int q = 0; q < Size.Length; q++)
+                    {
+                        if (sizet.Contains(Size[q]))
+                        {
+                            sizet = sizet.Replace(Size[q], "");
+                        }
+                    }
+                    if (sizet != "0")
+                    {
+                        <p>Size:@tp.Size</p>
+                    }
+                }
+            }
+
+
+            @{
+                if (tp.Weight != null)
+                {
+                    weightt = tp.Weight;
+                    for (int q = 0; q < Weight.Length; q++)
+                    {
+                        if (weightt.Contains(Weight[q]))
+                        {
+                            weightt = weightt.Replace(Weight[q], "");
+                        }
+                    }
+                    if (weightt != "0")
+                    {
+                        <p>Weight : @tp.Weight</p>
+                    }
+                }
+            }
+
+            @{
+
+                if (tp.Organic != null)
+                {
+                    <p><b>Product Having Organic Certificte of </b></p>
+                    string[] Related = tp.Organic.Split(',');
+                    int Lengths = Related.Length;
+                    for (int i = 0; i < Lengths; i++)
+                    {
+                        int rid = Convert.ToInt32(Related[i]);
+                        foreach (TradeKerala2017.Models.tbl_Organic og in db.tbl_Organic.Where(p => p.Organic_Id == rid).ToList())
+                        {
+                            <img style="width:50px; height:50px; margin-left:5px;margin-bottom:10px;" src="@og.Image" title="@og.Description">
+                        }
+                    }
+                }
+                <br>
+            }
+            <input type="checkbox" value="giftwrap" style="width:22px;height:22px" /> Gift Wrap Available
+        </div>
+
+    </div>
+
+
+    <script>
+
+        $(document).ready(function () {
+            if(@tp.Qty<1){
+                $("#Addcart").hide();
+                $("#BuyNow").hide();
+                $("#notify").show();
+
+            }
+            else{
+                $("#Addcart").show();
+                $("#BuyNow").show();
+                $("#notify").hide();
+
+            }
+        });
+    </script>
+  
+
+    <div class="col-md-2 col-xs-12 col-sm-12 side_bar pull-right">
+        <div class="well" style="width:226px;">
+            <form action="cart" id="Addcart" method="post">
+                <h5><b>Quantity:</b></h5>
+                <input type="number" min="1" value="1" max="10" minlength="1" name="qty" style="width:179px;height:35px;padding-left:75px;margin-bottom:5px;margin-top:5px;" />
+
+
+                <input type="hidden" name="pro_id" value="@tp.pid">
+                <input type="hidden" name="cat_id" value="@tp.Catid">
+                <input type="hidden" name="pro_name" value="@tp.ProdName">
+                @if (from == "Deal")
+                {
+                    foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                    }
+                }
+                else if (from == "Today")
+                {
+                    foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                    }
+                }
+                else
+                {
+
+                    <input type="hidden" name="pro_price" value="@tp.ProdNewPrice">
+
+                }
+                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tp.pid).ToList())
+                {
+                    <input type="hidden" name="pro_image" value="@tm.id">
+                }
+                @if (from == "Deal")
+                {
+                    foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="subtotal" value="@vd.NewPrice">
+                    }
+                }
+                else if (from == "Today")
+                {
+                    foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="subtotal" value="@vd.NewPrice">
+                    }
+                }
+                else
+                {
+
+                    <input type="hidden" name="subtotal" value="@tp.ProdNewPrice">
+
+                }
+
+
+
+                @if (from == "Deal")
+                {
+                    <input type="hidden" name="type" value="Offer">
+                }
+                else if (from == "Today")
+                {
+                    <input type="hidden" name="type" value="Today">
+                }
+                else
+                {
+                    <input type="hidden" name="type" value="Normal">
+
+                }
+
+                <input type="hidden" name="From" value="SingleView">
+                <input type="hidden" name="total" value="@tp.ProdNewPrice">
+                <button type="submit" class="side_bttns" style="background:linear-gradient(to bottom,#f7dfa5,#f0c14b)">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"> </i>  Add to Cart
+                </button>
+            </form>
+            <form action="BuyNow" id="BuyNow" method="post">
+                <input type="hidden" name="pro_id" value="@tp.pid">
+                <input type="hidden" name="cat_id" value="@tp.Catid">
+                <input type="hidden" name="pro_name" value="@tp.ProdName">
+                @if (from == "Deal")
+                {
+                    foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                    }
+                }
+                else if (from == "Today")
+                {
+                    foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                    }
+                }
+                else
+                {
+
+                    <input type="hidden" name="pro_price" value="@tp.ProdNewPrice">
+
+                }
+                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tp.pid).ToList())
+                {
+                    <input type="hidden" name="pro_image" value="@tm.id">
+                }
+                <input type="hidden" name="qty" value="1">
+                @if (from == "Deal")
+                {
+                    foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="subtotal" value="@vd.NewPrice">
+                    }
+                }
+                else if (from == "Today")
+                {
+                    foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                    {
+                        <input type="hidden" name="subtotal" value="@vd.NewPrice">
+                    }
+                }
+                else
+                {
+
+                    <input type="hidden" name="subtotal" value="@tp.ProdNewPrice">
+
+                }
+
+                @if (from == "Deal")
+                {
+                    <input type="hidden" name="type" value="Offer">
+                }
+                else if (from == "Today")
+                {
+                    <input type="hidden" name="type" value="Today">
+                }
+                else
+                {
+                    <input type="hidden" name="type" value="Normal">
+
+                }
+
+                <input type="hidden" name="total" value="@tp.ProdNewPrice">
+                <button class="side_bttns" style="background:linear-gradient(to bottom,#f6c88f,#ed9220)">
+                    <i class="fa fa-play" aria-hidden="true"> </i>  Buy Now
+                </button>
+            </form>
+
+
+            @if (from == "Deal" || from == "Today")
+            { }
+            else
+            {
+
+                <form action="Wishlist" method="post">
+                    <input type="hidden" name="pro_id" value="@tp.pid">
+                    <input type="hidden" name="cat_id" value="@tp.Catid">
+                    <input type="hidden" name="pro_name" value="@tp.ProdName">
+                    @if (from == "Deal")
+                    {
+                        foreach (TradeKerala2017.Models.tbl_ProductOffer vd in db.tbl_ProductOffer.Where(i => i.Id == Offerid))
+                        {
+                            <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                        }
+                    }
+                    else if (from == "Today")
+                    {
+                        foreach (TradeKerala2017.Models.tbl_TodaysDeal vd in db.tbl_TodaysDeal.Where(i => i.Id == Offerid))
+                        {
+                            <input type="hidden" name="pro_price" value="@vd.NewPrice">
+                        }
+                    }
+                    else
+                    {
+
+                        <input type="hidden" name="pro_price" value="@tp.ProdNewPrice">
+
+                    }
+                    @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tp.pid).ToList())
+                    {
+                        <input type="hidden" name="pro_image" value="@tm.id">
+                    }
+                    <input type="hidden" name="qty" value="@tp.Qty">
+                    @foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == @tp.Vendor))
+                    {
+                        <input type="hidden" name="vendor" value="@vd.Vendor_Name;" />
+                    }
+                    <button class="side_bttns" style="background-color:#20daed">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wish List
+                    </button>
+                </form>
+
+            }
+            @if (other > 1)
+            {
+
+                <a href="~/Public/OtherOption?Pname=@tp.ProdName" class="btn btn-warning" style="width:180PX; border:0px;padding-left:20px;padding-bottom:9px;margin-bottom:5px;padding-top:9px;margin-top:5px;padding-right:20px;">
+
+                    Buying Options
+                </a>
+            }
+            <div id="notify">
+                <a href="~/Public/notifyme?id=@tp.pid" class="btn btn-primary" style="width:180PX; border:0px;padding-left:20px;padding-bottom:9px;margin-bottom:5px;padding-top:9px;margin-top:5px;padding-right:20px;">
+                    <i class="fa fa-mail-reply" aria-hidden="true"></i> Notify Me
+                </a>
+            </div>
+
+           
+            <hr style="margin:0px;"/>
+        </div>
+        @*<div>
+                <a href="~/Public/SellerReg"><img src="~/NewLayout/images/WORK012.png" /></a>
+            </div>*@
+    </div>
+</div>
+@if (relatedCount > 3)
+{
+
+    <div class="container">
+        <div class="row" id="slider-text">
+
+            <h2 class="head_underscore">Related to Viewed Items</h2>
+
+        </div>
+    </div>
+
+    <!-- Item slider-->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom:15px;">
+                <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+                    <div class="carousel-inner">
+                        @{
+                            List<string> relatedList = new List<string>();
+                            foreach (TradeKerala2017.Models.Relatedpro_Result tb1 in ViewBag.relatedActive)
+                            {
+                                <div class="item active">
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                        {
+                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                        }
+                                        <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px;">@tb1.ProdName</h4></a>
+                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                        {
+                                            <h5 class="text-center">
+                                                @{
+                                                    odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                    odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                }
+                                                &#8377; @odec
+                                            </h5>
+                                                    }
+                                    </div>
+                                </div>
+                                                        relatedList.Add(tb1.ProdName);
+                                                    }
+
+                                                    foreach (TradeKerala2017.Models.Relatedpro_Result tb1 in ViewBag.related)
+                                                    {
+                                                        if (!relatedList.Contains(tb1.ProdName))
+                                                        {
+                                                            <div class="item">
+                                                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                    @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                                    { <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                                    }
+                                                                    <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px;">@tb1.ProdName</h4></a>
+                                                                    @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                                    {
+                                                                        <h5 class="text-center">
+                                                                            <b>
+                                                                                @{
+                                                                                    odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                    odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                                                }
+                                                                                &#8377; @odec
+                                                                            </b>
+                                                                        </h5>
+                                                                                    }
+                                                                </div>
+                                                            </div>
+                                                                                        }
+                                                                                        relatedList.Add(tb1.ProdName);
+                                                                                    }
+                        }
+
+                    </div>
+
+                    <div id="slider-control">
+                        <a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                        <a class="right carousel-control" href="#itemslider" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                                                                                    }
+
+
+@if (recmmndCount > 3)
+{
+
+    <div class="container">
+        <div class="row" id="slider-text">
+            <h2 class="head_underscore">Recommended Items </h2>
+        </div>
+    </div>
+
+    <!-- Item slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom:15px;">
+                <div class="carousel carousel-showmanymoveone slide" id="itemslider1">
+                    <div class="carousel-inner">
+                        @{
+                            List<string> recmmndList = new List<string>();
+                            foreach (TradeKerala2017.Models.tblProduct tb1 in ViewBag.recmmndActive)
+                            {
+                                <div class="item active">
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                        {
+                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                        }
+                                        <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px;">@tb1.ProdName</h4></a>
+                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                        {
+                                            <h5 class="text-center">
+                                                <b>
+                                                    @{
+                                                        odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                        odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                    }
+                                                    &#8377; @odec
+                                                </b>
+                                            </h5>
+                                                        }
+                                    </div>
+                                </div>
+                                                            recmmndList.Add(tb1.ProdName);
+                                                        }
+
+                                                        foreach (TradeKerala2017.Models.tblProduct tb1 in ViewBag.recmmnd)
+                                                        {
+                                                            if (!recmmndList.Contains(tb1.ProdName))
+                                                            {
+                                                                <div class="item">
+                                                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                                        { <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                                        }
+                                                                        <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" style="width:200px;">@tb1.ProdName</h4></a>
+                                                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                                        {
+                                                                            <h5 class="text-center">
+                                                                                <b>
+                                                                                    @{
+                                                                                        odec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                        odec = decimal.Round(odec, 2, MidpointRounding.AwayFromZero);
+                                                                                    }
+                                                                                    &#8377; @odec
+                                                                                </b>
+                                                                            </h5>
+                                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                                            }
+                                                                                            recmmndList.Add(tb1.ProdName);
+                                                                                        }
+                        }
+
+                    </div>
+
+                    <div id="slider-control">
+                        <a class="left carousel-control" href="#itemslider1" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                        <a class="right carousel-control" href="#itemslider1" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                                                                                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="re_view marg5" style="margin:50px;border-radius:4px;">
+    <div class="container">
+        <div class="col-md-12  marg3" style="margin-bottom:30px">
+            <div class="col-md-3 col-xs-12 ">
+                <h2 class="qck_content">
+                    Review
+                </h2>
+                <br />
+                <p class="qck_content">Please mention your reviews or comments</p>
+            </div>
+            <div class="col-md-9">
+
+
+
+                <form action="NewProductDetails" method="post">
+
+                    <div class="col-md-6"><input type="text" class="form-control review_box" placeholder="Name" name="Name" required></div>
+
+
+
+                    <div id="star" class="row lead col-md-6" style="margin-left:0px;">
+                        <div class="rating" style="float:left;">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 star</label>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6"><textarea class="form-control review_box2" placeholder="Add your Review" name="Review" style="max-width:372px;max-height:63px;"></textarea> </div>
+                    <div class="col-md-4"><input type="text" class="form-control review_box2" placeholder="Telephone" name="Telephone"></div>
+
+                    <input type="hidden" name="id" value="@tp.pid" />
+                    <input type="hidden" name="Offerid" value="@Offerid" />
+
+                    <div class="col-md-2"><input type="submit" value="Submit" class="form-control bttn2"></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@{
+
+    if (RvCount > 0)
+    {
+
+<div class="tab-2 resp-tab-content additional_info_grid resp-tab-content-active " aria-labelledby="tab_item-1" style="display:inline-table;margin-left:10px;margin-right:10px;margin-bottom:50px;border-radius:4px;">
+    <h2 class="fontsize">Customer Reviews</h2>
+    <div class="additional_info_sub_grids col-md-6" style="display:inline-block">
+        @{
+            foreach (TradeKerala2017.Models.tblreviews rv in db.tblreviews.Where(i => i.prodid == tp.pid).OrderBy(i => i.date).ToList().Take(10))
+            {
+                string x = @rv.date.ToString();
+
+                <div class="col-xs-10  col-md-10 additional_info_sub_grid_right" style="margin-bottom:10px;">
+
+                    <div class="additional_info_sub_grid_rightl">
+                        
+                        <a>@rv.name</a>
+                        <div class="additional_info_sub_grid_rightr" style="float:none !important;">
+                            <div class="rating" style="margin-bottom:0px">
+                                <div class="row lead col-md-6" style="margin-bottom:0px;">
+                                    <div class="starrr" data-rating='@rv.starValue'>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                        <p>
+                            @rv.reviews
+                        </p><p>Was this review  helpfull to you <a><span><i class="fa fa-thumbs-up" style="font-size:23px;margin-right: 25px;margin-left:10px;"></i></span></a> <a><span><i class="fa fa-thumbs-down" style="font-size:23px;margin-right: 25px;margin-left:10px;"></i></span></a> </p>
+                    </div>
+
+
+                    <div class="clearfix"> </div>
+                </div>
+            }
+        }
+        <div class="clearfix"> </div>
+    </div>
+    <div class="additional_info_sub_grids col-md-6">
+        <div class="x_panel">
+            <div class="x_content" style="margin-bottom:20px;">
+                <h4>Star Value Review</h4>
+                <div class="widget_summary">
+@{
+    decimal fivecount = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 5).Count());
+    decimal pvalue = Convert.ToDecimal(fivecount / count * 100);
+    int per = Convert.ToInt16(pvalue);
+                    <div class="w_right w_20" style="width:200px;display:inline-block">
+                        <span>5 star</span>
+                    </div>
+                    <div class="w_right w_20" style="width:200px;float:right">
+                        <span style="float:right"> @per%</span>
+                    </div>
+                    <div class="w_center w_55">
+                        <div class="progress">
+
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @pvalue%;">
+                            </div>
+                        </div>
+                    </div>
+    }
+                    <div class="clearfix"></div>
+                </div>
+                <div class="widget_summary">
+@{
+    decimal fivecount1 = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 4).Count());
+    decimal pvalue1 = Convert.ToDecimal(fivecount1 / count * 100);
+    int per1 = Convert.ToInt16(pvalue1);
+                    <div class="w_right w_20" style="width:200px;display:inline-block">
+                        <span>4 star</span>
+                    </div>
+                    <div class="w_right w_20" style="width:200px;float:right">
+                        <span style="float:right"> @per1%</span>
+                    </div>
+                    <div class="w_center w_55">
+                        <div class="progress">
+
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @pvalue1%;">
+                                </div>
+                        </div>
+                    </div>
+                                }
+                    <div class="clearfix"></div>
+                </div>
+                <div class="widget_summary">
+@{
+    decimal fivecount2 = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 3).Count());
+    decimal pvalue2 = Convert.ToDecimal(fivecount2 / count * 100);
+    int per2 = Convert.ToInt16(pvalue2);
+                    <div class="w_right w_20" style="width:200px;display:inline-block">
+                        <span>3 star</span>
+                    </div>
+                    <div class="w_right w_20" style="width:200px;float:right">
+                        <span style="float:right"> @per2%</span>
+                    </div>
+                    <div class="w_center w_55">
+                        <div class="progress">
+
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @pvalue2%;">
+                                </div>
+                        </div>
+                    </div>
+    }
+                    <div class="clearfix"></div>
+                </div>
+                <div class="widget_summary">
+@{
+    decimal fivecount3 = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 2).Count());
+    decimal pvalue3 = Convert.ToDecimal(fivecount3 / count * 100);
+    int per3 = Convert.ToInt16(pvalue3);
+                    <div class="w_right w_20" style="width:200px;display:inline-block">
+                        <span>2 star</span>
+                    </div>
+                    <div class="w_right w_20" style="width:200px;float:right">
+                        <span style="float:right"> @per3%</span>
+                    </div>
+                    <div class="w_center w_55">
+                        <div class="progress">
+
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @pvalue3%;">
+                                </div>
+                        </div>
+                    </div>
+    }
+                    <div class="clearfix"></div>
+                </div>
+                <div class="widget_summary">
+@{
+    decimal fivecount4 = Convert.ToDecimal(db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 1).Count());
+    decimal pvalue4 = Convert.ToDecimal(fivecount4 / count * 100);
+    int per4 = Convert.ToInt16(pvalue4);
+                    <div class="w_right w_20" style="width:200px;display:inline-block">
+                        <span>1 star</span>
+                    </div>
+                    <div class="w_right w_20" style="width:200px;float:right">
+                        <span style="float:right"> @per4%</span>
+                    </div>
+                    <div class="w_center w_55">
+                        <div class="progress">
+
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @pvalue4%;">
+                            </div>
+                        </div>
+                    </div>
+    }
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+
+        @{
+            foreach (TradeKerala2017.Models.tblreviews rv in db.tblreviews.Where(i => i.prodid == tp.pid && i.starValue == 5).ToList().Take(10))
+            {
+                string x = @rv.date.ToString();
+
+                <div class="col-xs-10  col-md-10 additional_info_sub_grid_right" style="margin-bottom:10px;">
+
+                    <div class="additional_info_sub_grid_rightl">
+                        
+                        <a >@rv.name</a>
+                        <div class="additional_info_sub_grid_rightr" style="float:none !important;">
+                            <div class="rating" style="margin-bottom:0px">
+                                <div class="row lead col-md-6" style="margin-bottom:0px; ">
+                                    <div class="starrr" data-rating='@rv.starValue'>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                        <p>
+                            @rv.reviews
+                        </p><p >Was this review  helpfull to you <a><span><i class="fa fa-thumbs-up" style="font-size:23px;margin-right: 25px;margin-left:10px;"></i></span></a> <a><span><i class="fa fa-thumbs-down" style="font-size:23px;margin-right: 25px;margin-left:10px;"></i></span></a> </p>
+                    </div>
+
+
+                    <div class="clearfix"> </div>
+                </div>
+            }
+        }
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+
+            }
+
+}
+
+
+<div class="container-fluid " id="hiddenfield">
+    <div class="row">
+        <div class="row well ">
+            <h4 style="font-size:18px"><b>Your recently viewed items and featured recommendations</b></h4>
+            <div class="col-md-11 col-lg-11" style="padding:0px">
+                @if (recentlog > 0)
+                {
+                    if (recent > 0)
+                    {
+                        List<string> recentList = new List<string>();
+                        foreach (TradeKerala2017.Models.tblRecentView rv in ViewBag.Myrecentbag)
+                        {
+                            if (!recentList.Contains(Convert.ToString(rv.pid)))
+                            {
+                                foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(J => J.Prodid == rv.pid).Take(1).ToList())
+                                {
+                                    <div class="well" style="display:inline-block;padding:5px;margin:4px;">
+                                        <a href="~/Public/NewProductDetails?id=@tm.Prodid" target="_blank"><img src="@tm.Image" class="img-responsive" style="width:80px;height:100px;"></a>
+                                    </div>
+
+                                }
+                                recentList.Add(Convert.ToString(rv.pid));
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        <p> View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.</p>
+                    }
+                }
+                else
+                {
+                    if (recent > 0)
+                    {
+                        string[] Related = ViewBag.Myrecentbag.Split('-');
+                        int Lengths = Related.Length;
+                        List<string> recentList = new List<string>();
+                        int qw = 0;
+                        for (int i = Lengths - 1; i > 0; i--)
+                        {
+                            int rid = Convert.ToInt32(Related[i]);
+                            foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(J => J.Prodid == rid).Take(1).ToList())
+                            {
+                                if (!recentList.Contains(Convert.ToString(tm.Prodid)) && qw < 12)
+                                {
+                                    <div class="well" style="display:inline-block;padding:5px;margin:4px;">
+                                        <a href="~/Public/NewProductDetails?id=@rid" target="_blank"><img src="@tm.Image" class="img-responsive" style="width:78px;height:95px;"></a>
+                                    </div>
+                                    qw = qw + 1;
+                                }
+                                recentList.Add(Convert.ToString(tm.Prodid));
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p> View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.</p>
+                    }
+                }
+            </div>
+            <div class="col-md-1 col-lg-1" style="padding:0px">
+                <a href="~/Public/BrowsingHistory">View or edit your browsing history</a>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+
+<!--zoom-->
+
+
+<script src="~/NewLayout/js/foundation.min.js"></script>
+<script src="~/NewLayout/js/setup.js"></script>
+
+
+<!--zoom-->
+
+
+<script>
+    $(function () {
+
+
+        $(".alert").hide();
+        var msg = $("#Hidmsg").val();
+        if (msg != "") {
+            $(".alert").fadeIn(2000);
+        }
+        else {
+            $(".alert").hide();
+        }
+    });
+</script>
+

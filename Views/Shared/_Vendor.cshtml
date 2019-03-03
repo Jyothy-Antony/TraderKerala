@@ -1,0 +1,335 @@
+﻿@{
+    String Name = "";
+    try
+    {
+        if (Session["Vendor"] != null)
+        {
+            Name = Session["Vendor"].ToString();
+        }
+        else
+        {
+            Response.Redirect("~/Vendor/Login");
+        }
+    }
+    catch
+    {
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Trade Kerala Admin Dashboard @ViewBag.Title</title>
+  
+    <!-- Bootstrap -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../css/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom Theme Style -->
+    <link href="~/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-table.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/png" href="../../images/favicon.png" />
+    <link href="~/css/jquery.filer-dragdropbox-theme.css" rel="stylesheet" />
+    <link href="~/css/jquery.filer.css" rel="stylesheet" />
+
+    <link href="~/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/css/switchery.min.css" rel="stylesheet" />
+    <link href="~/css/custom.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .navbar-nav.navbar-right:last-child {
+            margin-right: 0px !important;
+        }
+
+        .orientation-label {
+            margin-left: 13%;
+        }
+    </style>
+    
+
+
+
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="~/Vendor/Index" class="site_title"><span>Trade Kerala</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    
+                    
+                         
+                   
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        @*<div class="profile_pic">
+                            <img src="~/images/Admin_Pro.png" alt="..." class="img-circle profile_img">
+                        </div>*@
+                        <div class="profile_info" style="padding-left:50px">
+                            <h2 style="font-size:16px;">Welcome,</h2>
+                            <h2 style="font-size:16px;">@Name</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li><a href="/Vendor/Index"><i class="fa fa-home"></i> My Home</a></li>
+                                <li><a href="/Vendor/orderview"><i class="fa fa-picture-o"></i>Your Order</a></li>
+                               @* <li><a href="../Admin/vendors"><i class="fa fa-suitcase"></i> Add Vendor</a></li>
+                                <li><a href="../Admin/AddCategory"><i class="fa fa-th-large"></i> Add Categories</a></li>
+                                <li><a href="../Admin/AddSubCategory"><i class="fa fa-th"></i> Sub Categories</a></li>
+                                <li><a href="../Admin/AddBrand"><i class="fa fa-first-order"></i> Product Brands</a></li>
+                                <li><a href="../Admin/Product"><i class="fa fa-product-hunt"></i> Products</a></li>
+                                <li><a href="../Admin/TopBrands"><i class="fa fa-star"></i> Top Brands </a></li>
+                                <li><a href="../Admin/TopCategories"><i class="fa fa-line-chart"></i> Top Categories </a></li>
+                                <li><a href="../Admin/RelatedProduct"><i class="fa fa-share-alt-square"></i> Related Products</a></li>
+                                <li><a href="../Admin/TrendingProduct"><i class="fa fa-rocket"></i>trending Products</a></li>
+                                <li><a href="../Admin/AddProductOffer"><i class="fa fa-save"></i>Deals & Offers</a></li>
+                                <li><a href="../Admin/AddTodaysDeal"><i class="fa fa-save"></i>Today's Deals</a></li>
+                                <li><a href="../Admin/AddStock"><i class="fa fa-book"></i> Product Stock</a></li>
+                                <li><a href="../Admin/special_offer"><i class="fa fa-star"></i>Add Offers</a></li>
+                                <li><a href="../Admin/OrganicCertificte"><i class="fa fa-envira"></i>Organic certificate</a></li>
+                                <li><a href="../Admin/Review"><i class="fa fa-commenting"></i>Customer Review</a></li>*@
+
+                                @*<li>
+                                    <a><i class="fa fa-phone-square"></i> Enqiury <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="../Admin/ViewSeller"><i class="fa fa-briefcase"></i>Seller's Enquiry</a></li>
+                                        <li><a href="../Admin/PrebookingView"><i class="fa fa-cart-arrow-down"></i>Pre Booking</a></li>
+                                    </ul>
+                                </li>*@
+
+
+
+
+                               
+
+                            </ul>
+</div>
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" href="/Vendor/Logout" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="@Name">
+                                    <img src="../../images/user.png" alt="">@Name
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                   
+
+                                    <li><a href="/Vendor/Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Trade Kerala Admin Panel</h3>
+                        </div>
+
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                   Powered By <a href="http://www.fabstudioz.com/" target="_blank">Fab Studioz</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+ 
+    <!-- jQuery -->
+
+    <script src="~/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../js/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../js/nprogress.js"></script>
+
+ 
+
+    <script src="../../js/validator.js" type="text/javascript"></script>
+
+    <script src="../../js/select2.full.min.js" type="text/javascript"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../../js/custom.min.js"></script>
+
+    <script src="../../js/jquery.smartWizard.js" type="text/javascript"></script>
+    <!-- validator -->
+
+    <!--Text Area-->
+    <script src="~/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/js/jquery.hotkeys.js"></script>
+    <script src="~/js/prettify.js"></script>
+
+    <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
+    <!--End-->
+    <script>
+        // initialize the validator function
+        validator.message.date = 'not a real date';
+
+        // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+        $('form')
+        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+        .on('change', 'select.required', validator.checkField)
+        .on('keypress', 'input[required][pattern]', validator.keypress);
+
+        $('.multi.required').on('keyup blur', 'input', function () {
+            validator.checkField.apply($(this).siblings().last()[0]);
+        });
+
+        $('form').submit(function (e) {
+            e.preventDefault();
+            var submit = true;
+
+            // evaluate the form using generic validaing
+            if (!validator.checkAll($(this))) {
+                submit = false;
+            }
+
+            if (submit)
+                this.submit();
+
+            return false;
+        });
+
+        @*$(document).ready(function () {
+
+             $('#autocomplete-custom-append').autocomplete({
+              source: '@Url.Action("GetProducts", "admin")',
+                minLength: 1
+           });
+        })*@
+    </script>
+
+    <script>
+        $(function () {
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").fadeOut(500);
+            }
+
+            function log(message) {
+                $("<div>").text(message).prependTo("#log");
+                $("#log").scrollTop(0);
+            }
+
+           
+        });
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(function () {
+        var urls = "/Admin/KeywordList";
+
+        $("#tags").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: urls,
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.label, value: item.label };
+                        }))
+
+                    }
+                })
+            }
+        });
+
+
+    })
+
+    </script>
+    <!-- /validator -->
+
+</body>
+</html>

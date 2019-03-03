@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbTradekeralaModelStoreContainer" CdmEntityContainer="DbTradekeralaEntities">
+    <EntitySetMapping Name="tblBrands">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblBrand">
+        <MappingFragment StoreEntitySet="tblBrand">
+          <ScalarProperty Name="Brandid" ColumnName="Brandid" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="BrandLogo" ColumnName="BrandLogo" />
+          <ScalarProperty Name="BrandDesc" ColumnName="BrandDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblfavorites">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblfavorite">
+        <MappingFragment StoreEntitySet="tblfavorite">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCarts">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblCart">
+        <MappingFragment StoreEntitySet="tblCart">
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+          <ScalarProperty Name="Userid" ColumnName="Userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLogins">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblLogin">
+        <MappingFragment StoreEntitySet="tblLogin">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNewsletters">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblNewsletter">
+        <MappingFragment StoreEntitySet="tblNewsletter">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrders">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblOrder">
+        <MappingFragment StoreEntitySet="tblOrders">
+          <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="ProId" ColumnName="ProId" />
+          <ScalarProperty Name="Userid" ColumnName="Userid" />
+          <ScalarProperty Name="Orderno" ColumnName="Orderno" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProdImages">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblProdImage">
+        <MappingFragment StoreEntitySet="tblProdImage">
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRegistrations">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblRegistration">
+        <MappingFragment StoreEntitySet="tblRegistration">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="RegPassword" ColumnName="RegPassword" />
+          <ScalarProperty Name="RegEmail" ColumnName="RegEmail" />
+          <ScalarProperty Name="RegName" ColumnName="RegName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStocks">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblStock">
+        <MappingFragment StoreEntitySet="tblStock">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Totalamount" ColumnName="Totalamount" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSales">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblSale">
+        <MappingFragment StoreEntitySet="tblSale">
+          <ScalarProperty Name="Newprice" ColumnName="Newprice" />
+          <ScalarProperty Name="Oldprice" ColumnName="Oldprice" />
+          <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Sp_GetOffers" FunctionName="DbTradekeralaModel.Store.Sp_GetOffers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DbTradekeralaModel.Sp_GetOffers_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="Oldprice" ColumnName="Oldprice" />
+          <ScalarProperty Name="Newprice" ColumnName="Newprice" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblProducts">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblProduct">
+        <MappingFragment StoreEntitySet="tblProduct">
+          <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+          <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+          <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+          <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+          <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="Catid" ColumnName="Catid" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCategories">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblCategory">
+        <MappingFragment StoreEntitySet="tblCategory">
+          <ScalarProperty Name="Addeddate" ColumnName="Addeddate" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="Catid" ColumnName="Catid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_newproducts" FunctionName="DbTradekeralaModel.Store.sp_newproducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_newproducts_Result">
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="Catid" ColumnName="Catid" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+          <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+          <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+          <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+          <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_search" FunctionName="DbTradekeralaModel.Store.sp_search">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_search_Result">
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="Catid" ColumnName="Catid" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+          <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+          <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+          <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+          <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tbl_specialoffer">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_specialoffer">
+        <MappingFragment StoreEntitySet="tbl_specialoffer">
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="offer_image" ColumnName="offer_image" />
+          <ScalarProperty Name="offer_name" ColumnName="offer_name" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblreviews">
+      <EntityTypeMapping TypeName="DbTradekeralaModel.tblreview">
+        <MappingFragment StoreEntitySet="tblreviews">
+          <ScalarProperty Name="reviews" ColumnName="reviews" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="prodid" ColumnName="prodid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "SellerReg";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+<br />
+<div class="container">
+    <h2 class="head_underscore" style="display:inline-block">Vendor Details</h2>
+    <small>Please fill the following details our team will contact you soon </small>
+
+    <div class="alert alert-success alert-dismissable fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>
+            <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+        </strong>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="horizontal-form">
+            <form class="form-horizontal" action="SellerReg" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Vendor name</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Full_name" placeholder="Full name of Vendor" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Address</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Address" placeholder="Eg: Vendor Address Name,locality,District" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">E-mail Address</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="email" class="form-control" name="E-mail" placeholder="xyz@mail.com" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Product Information</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Pro_Info" placeholder="Product Details" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Product Image</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="file" name="files"  multiple alt="Image1" />
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">LandLine Number</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="LandLine" maxlength="11" pattern="[0-9]{11}" placeholder="Please enter a valid LandLine number" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Mobile Number</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Mobile_Number" maxlength="10" pattern="[0-9]{10}" placeholder="Please enter a valid 10-digit mobile number" required="">
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Pincode</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Pincode" minlength="06" maxlength="06" pattern="[0-9]{06}" placeholder="Please enter a valid 6 digits zip code" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">State</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="State" placeholder="State" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block" style="width:64%;float:left;margin-left:18%">
+                        Confirm Address
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".alert").hide();
+        var msg = $("#Hidmsg").val();
+        if (msg != "") {
+            $(".alert").fadeIn(2000);
+        }
+        else {
+            $(".alert").fadeOut(500);
+        }
+    });
+</script>

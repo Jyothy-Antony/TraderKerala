@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = null;
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+    }
+    catch
+    {
+    }
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Trader Kerala</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+   
+    <link href="~/NewLayout/css/style.css" rel="stylesheet" />
+    <link href="~/NewLayout/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/NewLayout/css/bootstrap.min.css">
+    <script src="~/NewLayout/js/jquery.min.js"></script>
+    <script src="~/NewLayout/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/NewLayout/css/animate.min.css">
+
+
+    <link href="~/NewLayout/css/instyle.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="~/NewLayout/css/main.css" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+      @@media screen and (min-width: 500px) {
+    .logi {
+    width: 70%;
+    }
+
+    }@@media screen and (min-width: 700px) {
+    .logi {
+    width: 50%;
+    }
+
+    }@@media screen and (min-width: 1000px) {
+    .logi {
+    width: 40%;
+    }
+
+    }
+        @@media screen and (min-width: 1200px) {
+            .logi {
+                width: 35%;
+            }
+        }
+    @@media screen and (min-width: 1400px) {
+    .logi {
+   width: 30%;
+    }
+    }
+    </style>
+    
+
+
+</head>
+<body>
+    <div class="container" align="center">
+ 
+        <a href="~/Public/NewIndex"> <img src="~/NewLayout/images/Logo.png"  alt=""  class="img-responsive logi"  > </a>
+
+        <div class="alert alert-success alert-dismissable fade in" style="width:31%">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>
+                <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+            </strong>
+        </div>
+        <div class="log_box" style="margin-bottom:20px;">
+            <h2 class="">Login</h2>
+
+            <form action="login" method="post">
+                <label>Email </label>
+                <input type="email" value="" class="form-control review_box" placeholder="Email" name="log_Email" required="">
+                <label>Password</label>
+                <input type="password" value="" class="form-control review_box" placeholder="Password" name="log_Password" required="">
+
+                
+                <label style="color:red;text-align:center">@ViewBag.Message</label>
+                <br />
+                <input type="hidden" value="@ViewBag.from" name="from"/>
+                <input type="hidden" value="@ViewBag.uname" name="uname"/> 
+                <input type="hidden" value="@ViewBag.pid" name="pid" />
+                <a href="ForgetPassword">Forgot your password?</a>
+                <button type="submit"class="form-control btn btn-warning">Login
+                    </button>
+            </form>
+        </div>
+        <a href="~/Public/Registration" style="padding-left:10%;padding-right:10%;background-color:#cccccc;border-radius:2%;color:black;" class="create_ac"> <i class="fa fa-user-plus" aria-hidden="true"></i>Create Account</a>
+        <hr />
+        <a href="~/Public/GuestAccoutnt?from=@ViewBag.from&name=@ViewBag.uname" class="create_ac"> <i class="fa fa-user-plus" aria-hidden="true"></i>Guest Account </a>
+
+        <p> © 2017 Trader Kerala. All rights reserved | Design by - <a href="#">Fabstudioz</a></p>
+    </div>
+    <script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+    </script>
+</body>
+</html>
+

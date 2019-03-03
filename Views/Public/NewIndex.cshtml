@@ -1,0 +1,1836 @@
+﻿@{
+    ViewBag.Title = "Trade Kerala.com";
+    Layout = null;
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    int Count = ViewBag.ItemCount;
+    int user = ViewBag.user;
+    int CookieCount = ViewBag.CookieCount;
+    int k = ViewBag.model;
+    int recent = ViewBag.recentCount;
+    int recentlog = ViewBag.recentlog;
+    int noti = ViewBag.notiCount;
+    decimal dec;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Trader Kerala</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="~/NewLayout/css/style.css">
+    <link href="~/NewLayout/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/NewLayout/css/bootstrap.min.css">
+    <script src="~/NewLayout/js/jquery.min.js"></script>
+    <script src="~/NewLayout/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/NewLayout/css/animate.min.css">
+    <link href="~/NewLayout/css/Notification.css" rel="stylesheet" />
+    <link href="~/NewLayout/css/instyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/NewLayout/css/main.css" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        #cat img {
+            /* Google Chrome, Safari 6+ & Opera 15+ */
+            -webkit-box-shadow: 0px 2px 6px 2px rgba(214, 214, 214, 0.75);
+            -moz-box-shadow: 0px 2px 6px 2px rgba(214, 214, 214, 0.75);
+            box-shadow: 0px 2px 6px 2px rgba(214, 214, 214, 0.75);
+            margin-bottom: 20px;
+
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // invoke the carousel
+            $('#myCarousel').carousel({
+                interval: 6000
+            });
+
+            // scroll slides on mouse scroll
+            $('#myCarousel').bind('mousewheel DOMMouseScroll', function (e) {
+
+                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                    $(this).carousel('prev');
+
+
+                }
+                else {
+                    $(this).carousel('next');
+
+                }
+            });
+
+            //scroll slides on swipe for touch enabled devices
+
+            $("#myCarousel").on("touchstart", function (event) {
+
+                var yClick = event.originalEvent.touches[0].pageY;
+                $(this).one("touchmove", function (event) {
+
+                    var yMove = event.originalEvent.touches[0].pageY;
+                    if (Math.floor(yClick - yMove) > 1) {
+                        $(".carousel").carousel('next');
+                    }
+                    else if (Math.floor(yClick - yMove) < -1) {
+                        $(".carousel").carousel('prev');
+                    }
+                });
+                $(".carousel").on("touchend", function () {
+                    $(this).off("touchmove");
+                });
+            });
+
+        });
+        //animated  carousel start
+        $(document).ready(function () {
+
+            //to add  start animation on load for first slide
+            $(function () {
+                $.fn.extend({
+                    animateCss: function (animationName) {
+                        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                        this.addClass('animated ' + animationName).one(animationEnd, function () {
+                            $(this).removeClass(animationName);
+                        });
+                    }
+                });
+                $('.item1.active img').animateCss('slideInDown');
+                $('.item1.active h2').animateCss('zoomIn');
+                $('.item1.active p').animateCss('fadeIn');
+
+            });
+
+            //to start animation on  mousescroll , click and swipe
+
+
+
+            $("#myCarousel").on('slide.bs.carousel', function () {
+                $.fn.extend({
+                    animateCss: function (animationName) {
+                        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                        this.addClass('animated ' + animationName).one(animationEnd, function () {
+                            $(this).removeClass(animationName);
+                        });
+                    }
+                });
+
+                // add animation type  from animate.css on the element which you want to animate
+
+                $('.item1 img').animateCss('slideInDown');
+                $('.item1 h2').animateCss('zoomIn');
+                $('.item1 p').animateCss('fadeIn');
+
+                $('.item2 img').animateCss('zoomIn');
+                $('.item2 h2').animateCss('swing');
+                $('.item2 p').animateCss('fadeIn');
+
+                $('.item3 img').animateCss('fadeInLeft');
+                $('.item3 h2').animateCss('fadeInDown');
+                $('.item3 p').animateCss('fadeIn');
+            });
+
+
+
+
+        });
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $('#itemslider').carousel({ interval: 3000 });
+
+            $('#itemslider .item').each(function () {
+                var itemToClone = $(this);
+
+                for (var i = 1; i < 6; i++) {
+                    itemToClone = itemToClone.next();
+
+                    if (!itemToClone.length) {
+                        itemToClone = $(this).siblings(':first');
+                    }
+
+                    itemToClone.children(':first-child').clone()
+                    .addClass("cloneditem-" + (i))
+                    .appendTo($(this));
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#itemslider1').carousel({ interval: 3000 });
+
+            $('#itemslider1 .item').each(function () {
+                var itemToClone = $(this);
+
+                for (var i = 1; i < 6; i++) {
+                    itemToClone = itemToClone.next();
+
+                    if (!itemToClone.length) {
+                        itemToClone = $(this).siblings(':first');
+                    }
+
+                    itemToClone.children(':first-child').clone()
+                    .addClass("cloneditem-" + (i))
+                    .appendTo($(this));
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#itemslider2').carousel({ interval: 3000 });
+
+            $('#itemslider2 .item').each(function () {
+                var itemToClone = $(this);
+
+                for (var i = 1; i < 6; i++) {
+                    itemToClone = itemToClone.next();
+
+                    if (!itemToClone.length) {
+                        itemToClone = $(this).siblings(':first');
+                    }
+
+                    itemToClone.children(':first-child').clone()
+                    .addClass("cloneditem-" + (i))
+                    .appendTo($(this));
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#itemslider3').carousel({ interval: 3000 });
+
+            $('#itemslider3 .item').each(function () {
+                var itemToClone = $(this);
+
+                for (var i = 1; i < 6; i++) {
+                    itemToClone = itemToClone.next();
+
+                    if (!itemToClone.length) {
+                        itemToClone = $(this).siblings(':first');
+                    }
+
+                    itemToClone.children(':first-child').clone()
+                    .addClass("cloneditem-" + (i))
+                    .appendTo($(this));
+                }
+            });
+        });
+    </script>
+
+
+    <!--dropdown--seachpanel-button-->
+
+    <script>
+        $(document).ready(function (e) {
+            $('.flipkart-navbar-search .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#", "");
+                var concept = $(this).text();
+                $('.flipkart-navbar-search span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+
+            });
+        });
+
+
+    </script>
+
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--ends dropdown--seachpanel-button-->
+    <script>
+        $(function () {
+            var urls = "/Public/KeywordList";
+
+            $("#txt_search").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Public/KeywordList",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.label, value: item.label };
+                            }))
+
+                        }
+                    })
+                }
+            });
+
+
+        });
+    </script>
+    <!--category vise auto complete-->
+    <script>
+        $(document).ready(function (e) {
+            $('.flipkart-navbar-search .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#", "");
+                var concept = $(this).text();
+                $('.flipkart-navbar-search span#selected').text(concept);
+                $("#Hidden_name").val(concept);
+
+
+                var urls = "/Public/CatKeywordList";
+
+                $("#txt_search").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Public/CatKeywordList",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: concept, Sufix: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.label, value: item.label };
+                                }))
+
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+               /*=========================
+         Icons
+        ================= */
+
+               /* footer social icons */
+               ul.social-network {
+                   list-style: none;
+                   display: inline;
+                   margin-left: 0 !important;
+                   padding: 0;
+               }
+
+                   ul.social-network li {
+                       display: inline;
+                       margin: 0 5px;
+                   }
+
+
+               /* footer social icons */
+               .social-network a.icoRss:hover {
+                   background-color: #F56505;
+               }
+
+               .social-network a.icoFacebook:hover {
+                   background-color: #3B5998;
+               }
+
+               .social-network a.icoTwitter:hover {
+                   background-color: #33ccff;
+               }
+
+               .social-network a.icoGoogle:hover {
+                   background-color: #BD3518;
+               }
+
+               .social-network a.icoVimeo:hover {
+                   background-color: #0590B8;
+               }
+
+               .social-network a.icoLinkedin:hover {
+                   background-color: #007bb7;
+               }
+
+                   .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+                   .social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+                       color: #fff;
+                   }
+
+               a.socialIcon:hover, .socialHoverClass {
+                   color: #44BCDD;
+               }
+
+               .social-circle li a {
+                   display: inline-block;
+                   position: relative;
+                   margin: 0 auto 0 auto;
+                   -moz-border-radius: 50%;
+                   -webkit-border-radius: 50%;
+                   border-radius: 50%;
+                   text-align: center;
+                   width: 50px;
+                   height: 50px;
+                   font-size: 20px;
+               }
+
+               .social-circle li i {
+                   margin: 0;
+                   line-height: 50px;
+                   text-align: center;
+               }
+
+               .social-circle li a:hover i, .triggeredHover {
+                   -moz-transform: rotate(360deg);
+                   -webkit-transform: rotate(360deg);
+                   -ms--transform: rotate(360deg);
+                   transform: rotate(360deg);
+                   -webkit-transition: all 0.2s;
+                   -moz-transition: all 0.2s;
+                   -o-transition: all 0.2s;
+                   -ms-transition: all 0.2s;
+                   transition: all 0.2s;
+               }
+
+               .social-circle i {
+                   color: #fff;
+                   -webkit-transition: all 0.8s;
+                   -moz-transition: all 0.8s;
+                   -o-transition: all 0.8s;
+                   -ms-transition: all 0.8s;
+                   transition: all 0.8s;
+               }
+
+               }
+    </style>
+    <style>
+        .topmarg {
+            margin-top: 25px;
+            width: 280px;
+        }
+
+        @@media screen and (min-width: 1200px) {
+            #cat1 {
+                width: 20% !important;
+            }
+        }
+
+        @@media screen and (max-width: 1200px) {
+            .topmarg {
+                margin-top: 20px;
+                width: 280px;
+            }
+        }
+
+        @@media screen and (min-width:650px ) {
+            .topmarg {
+                margin-top: 15px;
+                width: 280px;
+                margin-left: 60px !important;
+            }
+            
+        }
+
+
+        @@media screen and (max-width:650px ) {
+            .flipkart-navbar-input {
+                padding: 7px 9px;
+                font-size: 11px;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .flipkart-navbar-button {
+                width: 42px!important;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                height: 29px;
+                 border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+            #cssmenu ul li a {
+                padding: 8px 20px !important;
+            }
+            #cssmenu > ul > li > a{
+                font-size:13px;
+            }
+            .topmarg{
+                margin-top:10px;
+            }
+            #slider-text{
+                margin-left:0px!important;
+            }
+            #slider-text h2{
+                font-size:18px;
+            }
+            #recent{
+                width:40px!important;
+                height:50px!important;
+            }
+           #headsize
+           {
+               font-size:12px!important;
+           }
+           #banner{
+               height:140px;
+           }
+           #para{ font-size:10px;}
+            
+        }
+
+        @@media (min-width: 992px) {
+            .topmarg {
+                margin-left: 0px !important;
+            }
+        }
+
+        @@media screen and (min-width: 1000px) {
+            .topmarg {
+                margin-top: 20px;
+                width: 280px;
+            }
+        }
+
+        @@media screen and (max-width: 991px) {
+            .marg5 {
+                margin-top: 20px;
+            }
+        }
+
+        @@media screen and (max-width: 473px) {
+            .search {
+                margin-left: 0px;
+            }
+        }
+    </style>
+    <style>
+        @@media screen and (max-width: 1200px) {
+            .cart1 {
+                display: none;
+            }
+        }
+
+        @@media screen and (min-width:1200px) {
+            .cart2 {
+                display: none !important;
+            }
+        }
+
+
+        @@media screen and (max-width: 1200px) {
+            #hiddenfield {
+                display: none !important;
+            }
+        }
+
+        @@media screen and (min-width: 1200px) {
+            hiddenfield1 {
+                display: none !important;
+            }
+        }
+
+
+        @@media screen and (min-width: 1200px) {
+            #MenuFooter {
+                display: none !important;
+            }
+        }
+
+        @@media screen and (max-width: 1200px) {
+            #menufooter1 {
+                display: none !important;
+            }
+        }
+
+        @@media screen and (min-width: 1550px) {
+            #contain1 {
+                width: 90%;
+                margin-right: 5%;
+                margin-left: 5%;
+            }
+        }
+
+        @@media screen and (max-width: 1549px) {
+            #contain1 {
+                width: 100%;
+            }
+        }
+
+        @@media screen and (max-width: 1124px) {
+            #hideFooter2 {
+                display: none;
+            }
+        }
+
+        @@media screen and (max-width: 1124px) {
+            #hideFooter1 {display: none;}
+            #ads{display:none;}
+            #pinBoot{
+                max-width:100%!important;
+            }
+        }
+
+
+        .third-half {
+            min-height: 1px;
+            position: relative;
+            float: left;
+            padding: 10px 50px;
+            box-sizing: border-box;
+            border: .5px solid white;
+        }
+
+            .third-half .textCase {
+                width: 70%;
+                min-height: 1px;
+                position: relative;
+            }
+
+            .third-half .iconLarge {
+                width: 22%;
+                min-height: 1px;
+                position: relative;
+                padding-top: 10px;
+            }
+
+        .two-half {
+            color: #fff;
+            font-size: 13px;
+            min-height: 1px;
+            position: relative;
+            float: left;
+            padding: 10px 3px;
+            box-sizing: border-box;
+            text-align: center;
+            border: .5px solid white;
+        }
+
+
+        .category-gridHard {
+            width: 100%;
+            display: inline-block;
+            font-size: 11px;
+            line-height: 11px;
+            padding-bottom: 2px;
+        }
+
+            .category-gridHard h5.headingstrong {
+                float: left;
+                margin: 0 10px 0 0;
+                font-size: inherit;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .category-gridHard ul {
+                display: block;
+                float: left;
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+
+                .category-gridHard ul > li {
+                    display: inline-block;
+                }
+
+        #ref1 a {
+            color: white;
+        }
+
+        #ref2 a {
+            color: white;
+        }
+
+        .icon {
+            font-size: 44px;
+            padding: 15px;
+        }
+
+        .img-padding-top {
+            padding-top: 110px;
+        }
+
+        .mar {
+            margin-top: 20px;
+            padding: 0px;
+        }
+        .f {
+            font-size: 17px;
+        }
+    </style>
+
+</head>
+
+<body style="overflow-x:hidden">
+    @if (k > 0)
+    {
+        <script>
+            $(function () {
+                {
+                    $('#myModal88').modal('show');
+                }
+            });
+        </script>
+    }
+    <script>
+        $(document).ready(function () {
+            $(".modal-content").click(function () {
+                $(".modal-content").hide();
+            });
+        });
+    </script>
+    <div class="modal" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="margin-top:10%">
+            <div class="modal-content">
+                <img src="~/NewLayout/images/Trader.JPG" class="img-responsive" style="border-radius:1%" />
+            </div>
+        </div>
+    </div>
+    <div id="flipkart-navbar">
+        <div class="container-fluid">
+            <div class="@*row*@ row2 @*col-xs-12 col-sm-12 col-md-3*@" style="padding:0px">
+                <div class="col-xs-8 col-sm-6  col-sm-8 col-sm-offset-2 col-md-3 col-md-offset-0 col-xs-offset-2 " style="align-content:center;">
+
+                    <a href="~/Public/NewIndex"><img src="~/NewLayout/images/logo (3).png" alt="" class="img-responsive topmarg" ></a>
+
+                </div>
+
+
+                <form action="/Public/searchdetails" method="post">
+
+                    <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-8 col-sm-offset-2  col-md-offset-0 col-xs-offset-2">
+                        <div class="row marg5" aria-expanded="true">
+                            <button type="button" class="cate1_drpdw btn dropdown-toggle flipkart-navbar-button1 col-xs-1" data-toggle="dropdown" aria-expanded="true">
+                                <span id="selected">All</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                @{
+
+
+                                    foreach (TradeKerala2017.Models.tblCategory tc in ViewBag.catlist)
+
+                                    {
+                                        <li><a href="#">@tc.CatName</a></li>
+                                
+
+                                    }
+                                }
+                            </ul>
+                            <input id="Hidden_name" type="hidden" name="Hidden_name" />
+                            <input type="hidden" name="search_param" value="all" id="search_param">
+                            <div class="col-xs-10 pad">
+                                <input class="flipkart-navbar-input  @*col-xs-10*@ " style="width:100%;" type="text" placeholder="Search for Products, Brands and more" name="txt_search" id="txt_search" aria-expanded="true">
+                            </div>
+                            <div class="col-xs-1 pad " style="margin-right:-15px;">
+                                <button class="flipkart-navbar-button  @*col-xs-1*@ " style="width:65px;">
+                                    <svg width="15px" height="15px">
+                                        <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <style>
+                    .pad {
+                        padding: 0px;
+                    }
+
+                    .pad1 {
+                        margin-left: 10px;
+                        width: 70px;
+                    }
+                </style>
+
+
+                <div class="cart  col-sm-1 col-xs-2  cart1 pad pad1">
+                    <a href="~/Public/cart" class="cart-button">
+                        @{
+                            int Qty = 0;
+                            foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cart)
+                            {
+
+                                Qty = Qty + Convert.ToInt32(@tt.pro_qty);
+
+                            }
+
+                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:17px;"></i>   <span class="item-number" style="margin:0px;">@Qty</span>
+                        }
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="menu_fixtop">
+            <div class="container paddnt">
+                <div id='cssmenu'>
+                    <ul>
+                        <li class='active has-sub pull-left'>
+                            <a href="~/Public/Directory"><span> <i class="fa fa-superpowers" aria-hidden="true"></i>  Category</span></a>
+                            <ul class="category">
+                                @{foreach (TradeKerala2017.Models.tblCategory tc in ViewBag.catlist)
+
+                                    {
+                                        <li class='has-sub'>
+                                            <a href="~/Public/products?keyword=&Catword=@tc.Catid|@tc.CatName" style="padding-top:13px;padding-bottom:13px;"><span>@tc.CatName</span> </a>
+                                            <ul>
+                                                @{foreach (TradeKerala2017.Models.tblCategory td in db.tblCategories.Where(i => i.ParentId == tc.Catid).ToList())
+                                                    {
+                                                        <li class='has-sub'>
+                                                            <a href="~/Public/products?keyword=&Catword=@td.Catid|@td.CatName" style="padding-top:13px;padding-bottom:13px;"><span>@td.CatName</span></a>
+                                                            @{foreach (TradeKerala2017.Models.tblCategory sd in db.tblCategories.Where(j => j.ParentId == td.Catid).ToList())
+                                                                {
+                                                                    <ul>
+                                                                        <li class='last'> <a href="~/Public/products?keyword=&Catword=@sd.Catid|@sd.CatName" style="padding-top:13px;padding-bottom:13px;"> <span> @sd.CatName</span></a> </li>
+                                                                    </ul>
+                                                                }
+                                                            }
+                                                        </li>
+                                                                }
+                                                }
+                                            </ul>
+                                        </li>
+
+                                                                }
+                                }
+                            </ul>
+                        </li>
+                        <li class="rigalign cart2">
+                            <a href="~/Public/cart" style="width:110px;">
+                                Cart
+                                @{
+                                    int Qty1 = 0;
+                                    foreach (TradeKerala2017.Models.tbl_cart tt in ViewBag.cart)
+                                    {
+
+                                        Qty1 = Qty1 + Convert.ToInt32(@tt.pro_qty);
+
+                                    }
+
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="color:white;"> <span class="item-number" style="color:white;margin-left:0px;">@Qty1</span></i>
+                                }
+                            </a>
+
+                        </li>
+                        @if (user > 0)
+                        {
+                            <li class="rigalign"><a href='~/Public/SignOut'><span> <i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</span></a></li>
+                        }
+                        else
+                        {
+                            <li class="rigalign"><a href='~/Public/login?from=login' target='_blank'><span> <i class="fa fa-user-o" aria-hidden="true"></i> Login</span></a></li>
+
+                        }
+                        <li class="rigalign" id="hiddenfield"><a href='~/Public/Wishlist' target='_blank'><span>Wishlist</span></a></li>
+                        @if (user > 0)
+                        {
+                            if (noti > 0)
+                            {
+                        <li class="dropdown head-dpdn open rigalign" id="hiddenfield">
+                            <a href='#'><i class="fa fa-bell" style="font-size:22px" aria-hidden="true"></i>@*<span  class="badge1 blue">4</span>*@</a>
+                            <ul class="dropdown-menu" style="padding: 1em;min-width: 350px;top: 101%; width:auto;">
+                                <li>
+                                    <div class="notification_header">
+                                        <h3>You have @noti new notification</h3>
+                                    </div>
+                                </li>
+                                @foreach (TradeKerala2017.Models.tbl_Notfication nt in ViewBag.notification)
+                                {
+                                <li>
+                                    <a href="#" style="padding:0px;">
+                                        <div class="user_img"></div>
+                                        <div class="notification_desc" style="margin-left:25px;margin-right:25px">
+                                            <p>@nt.status</p>
+                                            <p>Enjoy Shopping With traderkerala.com</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                }
+                                <li>
+                                    <div class="notification_bottom">
+                                        <a href="~/Public/ClearNotification">clear all notifications</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        
+                        </li>
+
+                            }
+                            else
+                            {
+                                <li class="dropdown head-dpdn open rigalign" id="hiddenfield">
+                                    <a href='#'><i class="fa fa-bell" style="font-size:22px" aria-hidden="true"></i>@*<span  class="badge1 blue">4</span>*@</a>
+                                    <ul class="dropdown-menu" style="padding: 1em;min-width: 280px;top: 101%;">
+                                        <li>
+                                            <div class="notification_header">
+                                                <h3>Your new notification</h3>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a style="padding:0px;">
+                                                <div class="user_img"></div>
+                                                <div class="notification_desc">
+                                                    <p>You Have No New Notification</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="notification_bottom">
+                                                <a>clear all notifications</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li class="dropdown head-dpdn open rigalign" id="hiddenfield">
+                                <a href='#'><i class="fa fa-bell" style="font-size:22px" aria-hidden="true"></i>@*<span  class="badge1 blue">4</span>*@</a>
+                                <ul class="dropdown-menu" style="padding: 1em;min-width: 280px;top: 101%;">
+                                    <li>
+                                        <div class="notification_header">
+                                            <h3>Your new notification</h3>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="~/Public/login" style="padding:0px;">
+                                            <div class="user_img"></div>
+                                            <div class="notification_desc">
+                                                <p>Please Signin To View Your Notification</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="notification_bottom">
+                                            <a>clear all notifications</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+
+                        }
+                        <li class="rigalign" id="hiddenfield"><a href='~/Public/Offerlist?offer_id=-1' target='_blank'><span>Deals & Offers</span></a></li>
+                        <li class="rigalign" id="hiddenfield"><a href='#' target='_blank'><span>Track Your Order</span></a></li>
+                        <li class="rigalign" id="hiddenfield"><a href='~/Public/todayDeal?offer_Name=-1' target='_blank'><span>Today's Deal</span></a></li>
+                        <li class="rigalign" id="hiddenfield"><a href='~/Public/CustomerServices' target='_blank'><span>Customer Services</span></a></li>
+                      
+                        @if (user > 0)
+                        {
+                            <li class="dropdown  open rigalign" id="hiddenfield">
+                                <a><span>@ViewBag.username's Traderkerala </span></a>
+                                <ul class="dropdown-menu" style="padding: 1em;min-width: 200px;top: 101%;">
+                                    <li>
+                                        <a href="~/Public/UserAccount" style="padding:0px;border-bottom:0px;">
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Your Account</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Public/Wishlist" style="padding:0px;border-bottom:0px;">
+
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Your Wishlist</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="padding:0px;border-bottom:0px;">
+
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Your Orders</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Public/UserAddress" style="padding:0px;border-bottom:0px;">
+
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Your Address</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Public/BrowsingHistory" style="padding:0px;border-bottom:0px;">
+
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Your Recommendation</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Public/SignOut" style="padding:0px;border-bottom:0;">
+                                            <div class="notification_header" style="padding:7px 15px;">
+                                                <p style="font-size:13px;">Sign Out</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--slider-->
+
+    <section class="slide-wrapper">
+        <div class="container" style="margin:0px;width:100%">
+            <div id="myCarousel" class="carousel slide">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    @{
+                        List<string> BannerList = new List<string>();
+
+                        foreach (TradeKerala2017.Models.tbl_Banner bn in ViewBag.BannerActive)
+                        {
+                            <div class="item item3 active">
+                                <a href="~/Public/@bn.Related_To" target='_blank'><img src="@bn.BannerImage" alt="sofa" class="img img-responsive" style="width:100%; margin:0px" id="banner" /></a>
+                            </div>
+                            BannerList.Add(bn.BannerName);
+                        }
+                        foreach (TradeKerala2017.Models.tbl_Banner bn in ViewBag.Banner)
+                        {
+                            if (!BannerList.Contains(bn.BannerName))
+                            {
+                                <div class="item item3">
+                                    <a href="~/Public/@bn.Related_To" target='_blank'> <img src="@bn.BannerImage" alt="sofa" class="img img-responsive" style="width:100%; margin:0px" id="banner"/></a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--slider end-->
+    <!--Offers-->
+
+    <div class="container" id="contain1">
+        <div class="container" style="width:96%;margin-right:2%;margin-left:2%;">
+            <div class="row">
+                <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+
+                    <h2 class="head_underscore" style="display:inline-block">Deals and Offers</h2>
+                    &nbsp; &nbsp;
+                    <a href="~/Public/Offerlist?offer_id=-1" style="font-size:14px;font-weight:600;">See More</a>
+
+                </div>
+                <section id="pinBoot" style="display:inline-block;max-width:80%; ">
+                    @{
+                        foreach (TradeKerala2017.Models.tbl_specialoffer tb1 in db.tbl_specialoffer.Where(i => i.Hide == "Show").OrderByDescending(I => I.AddedDate).ToList())
+                        {
+                            <article class="white-panel imgs">
+                                <a href="~/Public/Offerlist?offer_id=@tb1.id" target='_blank'><img src="@tb1.offer_image" alt="@tb1.offer_name"></a>
+
+                            </article>
+                        }
+                    }
+                </section>
+                <section style="float:right;width:20%;" id="ads">
+
+                    <a href="~/Public/SellerReg"> <img src="~/NewLayout/images/WORK012.png" style="width:88%;" /></a>
+                </section>
+            </div>
+        </div>
+
+        <!--Offers-->
+        <!-- Item slider-->
+
+        <div class="container-fluid ">
+
+            <div class="row">
+                <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+
+                    <h2 class="head_underscore">Trending products</h2>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+                        <div class="carousel-inner">
+                            @{
+                                List<string> trendList = new List<string>();
+                                foreach (TradeKerala2017.Models.sp_Trending_Result tb1 in ViewBag.TrendingActive)
+                                {
+                                    <div class="item active">
+                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pro_id).Take(1).ToList())
+                                            {
+                                                <a href="/Public/NewProductDetails?id=@tb1.pro_id" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                            }
+                                            <a href="/Public/NewProductDetails?id=@tb1.pro_id" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.pro_name</h4></a>
+                                            @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pro_id).ToList())
+                                            {
+                                                <h5 class="text-center">
+                                                    <b style="font-size:16px;">
+                                                        @{
+                                                        dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                        dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                    }
+                                                    &#8377; @dec
+                                                </b>
+                                            </h5>
+                                                        }
+                                        </div>
+                                    </div>
+                                                            trendList.Add(tb1.pro_name);
+                                                        }
+                                                        foreach (TradeKerala2017.Models.sp_Trending_Result tb1 in ViewBag.trending)
+                                                        {
+                                                            if (!trendList.Contains(tb1.pro_name))
+                                                            {
+                                                                <div class="item">
+                                                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                        @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pro_id).Take(1).ToList())
+                                                                        { <a href="/Public/NewProductDetails?id=@tb1.pro_id" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                                        }
+                                                                        <a href="/Public/NewProductDetails?id=@tb1.pro_id" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.pro_name</h4></a>
+                                                                        @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pro_id).ToList())
+                                                                        {
+                                                                            <h5 class="text-center">
+                                                                                <b style="font-size:16px;">
+                                                                                    @{
+                                                                                        dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                        dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                                                    }
+                                                                                    &#8377; @dec
+                                                                                </b>
+                                                                            </h5>
+                                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                                            }
+                                                                                            trendList.Add(tb1.pro_name);
+                                                                                        }
+                            }
+
+                        </div>
+
+                        <div id="slider-control">
+                            <a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                            <a class="right carousel-control" href="#itemslider" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item slider end-->
+        <!-- Item slider-->
+        <!-- Item slider end-->
+        <!--Shop By Category-->
+        <div class="container" style="width:96%;margin-right:2%;margin-left:2%;">
+            <div class="row" id="cat">
+                <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+
+                    <h2 class="head_underscore" style="display:inline-block">Shop By Category</h2> &nbsp; &nbsp;
+                    <a href="~/Public/Directory" style="font-size:14px;font-weight:600;">See More</a>
+                </div>
+                @{
+                    foreach (TradeKerala2017.Models.tb_TopCategory tb in db.tb_TopCategory.Where(i => i.Hide == "show").ToList())
+                    {
+                        <div class="col-md-3 col-sm-4 col-xs-6" id="cat1"><a href="~/Public/products?keyword=&Catword=@tb.Cat_Name" target="_blank"><img class="img-responsive" style="width:400px;" src="@tb.Image" /></a> </div>
+                    } }
+            </div>
+        </div>
+
+        <div class="container-fluid ">
+
+            <div class="row">
+                <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+
+                    <h2 class="head_underscore">New products</h2>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="carousel carousel-showmanymoveone slide" id="itemslider1">
+                        <div class="carousel-inner">
+
+                            @{
+                                List<string> newList = new List<string>();
+                                foreach (TradeKerala2017.Controllers.sp_newproducts tb1 in ViewBag.NewproductsActive)
+                                {
+                                    <div class="item active">
+                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                            {
+                                                <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                            }
+                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.ProdName</h4></a>
+                                            @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                            {
+                                                <h5 class="text-center">
+                                                    <b style="font-size:16px;">
+                                                        @{
+                                                            dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                            dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                        }
+                                                        &#8377; @dec
+                                                    </b>
+                                                </h5>
+                                                            }
+                                        </div>
+                                    </div>
+                                                                newList.Add(tb1.ProdName);
+                                                            }
+
+
+
+                                                            foreach (TradeKerala2017.Controllers.sp_newproducts tb1 in ViewBag.newproducts)
+                                                            {
+                                                                if (!newList.Contains(tb1.ProdName))
+
+                                                                {
+                                                                    <div class="item">
+                                                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                                            { <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                                            }
+                                                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.ProdName</h4></a>
+                                                                            @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                                            {
+                                                                                <h5 class="text-center">
+                                                                                    <b style="font-size:16px;">
+                                                                                        @{
+                                                                                            dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                            dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                                                        }
+                                                                                        &#8377; @dec
+                                                                                    </b>
+                                                                                </h5>
+                                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                                                }
+                                                                                                newList.Add(tb1.ProdName);
+                                                                                            }
+                            }
+                        </div>
+
+                        <div id="slider-control">
+                            <a class="left carousel-control" href="#itemslider1" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                            <a class="right carousel-control" href="#itemslider1" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--Top Selling Brands-->
+        <div class="container" style="width:96%;margin-right:2%;margin-left:2%;">
+            <div class="row" id="cat">
+                <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+                    <h2 class="head_underscore" style="display:inline-block">Brands On Focus</h2> &nbsp; &nbsp;
+                    <a href="~/public/brands" style="font-size:14px;font-weight:600;">See More</a>
+                </div>
+                @{
+                    foreach (TradeKerala2017.Models.tb_TopBrand tb in db.tb_TopBrand.Where(i => i.Hide == "show").ToList())
+                    {
+                        <div class="col-md-3 col-sm-4 col-xs-6" id="cat1"><a href="~/Public/products?keyword=&Catword=&Brand=@tb.Brand_Name" target="_blank"><img class="img-responsive" style="width:400px;" src="@tb.Image" /></a></div>
+                    } }
+            </div>
+        </div>
+
+        <!--Top Selling Brands-->
+
+
+
+
+        @if (CookieCount > 3)
+        {
+
+
+
+    <!-- Item slider-->
+            <div class="container-fluid ">
+
+                <div class="row">
+                    <div class="row" id="slider-text" style="margin-left:63px;padding-top:0px;">
+
+                        <h2 class="head_underscore">Recommended items</h2>
+                        <h4>Inspired by your Browsing History</h4>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom:30px;">
+                        <div class="carousel carousel-showmanymoveone slide" id="itemslider2">
+                            <div class="carousel-inner">
+                                @{
+                                    List<string> relatedList = new List<string>();
+                                    foreach (TradeKerala2017.Models.Relatedpro_Result tb1 in ViewBag.relatedActive)
+                                    {
+                                        <div class="item active">
+                                            <div class="col-xs-12 col-sm-6 col-md-2">
+                                                @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                {
+                                                    <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                }
+                                                <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.ProdName</h4></a>
+                                                @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                {
+                                                    <h5 class="text-center">
+                                                        <b style="font-size:16px;">
+                                                            @{
+                                                            dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                            dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                        }
+                                                        &#8377; @dec
+                                                    </b>
+                                                </h5>
+                                                            }
+                                            </div>
+                                        </div>
+                                                                relatedList.Add(tb1.ProdName);
+                                                            }
+
+
+
+
+                                                            foreach (TradeKerala2017.Models.Relatedpro_Result tb1 in ViewBag.related)
+                                                            {
+                                                                if (!relatedList.Contains(tb1.ProdName))
+                                                                {
+                                                                    <div class="item">
+                                                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                            @foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(i => i.Prodid == tb1.pid).Take(1).ToList())
+                                                                            {
+                                                                                <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><img src="@tm.Image" class="img-responsive center-block" style="width:180px;height:200px;"></a>
+                                                                            }
+                                                                            <a href="/Public/NewProductDetails?id=@tb1.pid" target="_blank"><h4 class="text-center" @*style="height:50px;"*@>@tb1.ProdName</h4></a>
+                                                                            @foreach (TradeKerala2017.Models.tblProduct pd in db.tblProduct.Where(i => i.pid == tb1.pid).ToList())
+                                                                            {
+                                                                                <h5 class="text-center">
+                                                                                    <b style="font-size:16px;">
+                                                                                        @{
+                                                                                        dec = Convert.ToDecimal(pd.ProdNewPrice);
+                                                                                        dec = decimal.Round(dec, 2, MidpointRounding.AwayFromZero);
+                                                                                    }
+                                                                                    &#8377; @dec
+                                                                                </b>
+                                                                            </h5>
+                                                                                        }
+                                                                        </div>
+                                                                    </div>
+                                                                                            }
+                                                                                            relatedList.Add(tb1.ProdName);
+                                                                                        }
+                                }
+
+                            </div>
+
+                            <div id="slider-control">
+                                <a class="left carousel-control" href="#itemslider2" data-slide="prev"><img src="~/images/av8a49a4f81c3318dc69d.png" alt="Left" class="img-responsive"></a>
+                                <a class="right carousel-control" href="#itemslider2" data-slide="next"><img src="~/images/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                                                                                        }
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    
+
+    <div class="container-fluid " >
+        <div class="row">
+            <div class="row well ">
+                <h4 style="font-size:18px" id="headsize"><b>Your recently viewed items and featured recommendations</b></h4>
+                <div class="col-md-11 col-lg-11" style="padding:0px">
+                    @if (recentlog > 0)
+                    {
+                        if (recent > 0)
+                        {
+                            List<string> recentList = new List<string>();
+                            foreach (TradeKerala2017.Models.tblRecentView rv in ViewBag.Myrecentbag)
+                            {
+                                if (!recentList.Contains(Convert.ToString(rv.pid)))
+                                {
+                                    foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(J => J.Prodid == rv.pid).Take(1).ToList())
+                                    {
+                                        <div class="well" style="display:inline-block;padding:5px;margin:4px;">
+                                            <a href="~/Public/NewProductDetails?id=@tm.Prodid" target="_blank"><img src="@tm.Image" class="img-responsive" style="width:78px;height:95px;" id="recent"></a>
+                                        </div>
+
+                                    }
+                                    recentList.Add(Convert.ToString(rv.pid));
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            <p id="para"> View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.</p>
+                        }
+                    }
+                    else
+                    {
+                        if (recent > 0)
+                        {
+                            string[] Related = ViewBag.Myrecentbag.Split('-');
+                            int Lengths = Related.Length;
+                            List<string> recentList = new List<string>();
+                            int qw = 0;
+                            for (int i = Lengths - 1; i > 0; i--)
+                            {
+                                int rid = Convert.ToInt32(Related[i]);
+                                foreach (TradeKerala2017.Models.tblProdImage tm in db.tblProdImages.Where(J => J.Prodid == rid).Take(1).ToList())
+                                {
+                                    if (!recentList.Contains(Convert.ToString(tm.Prodid)) && qw < 12)
+                                    {
+                                        <div class="well" style="display:inline-block;padding:5px;margin:4px;">
+                                            <a href="~/Public/NewProductDetails?id=@rid" target="_blank"><img src="@tm.Image" class="img-responsive" style="width:78px;height:95px;" id="recent"></a>
+                                        </div>
+                                        qw = qw + 1;
+                                    }
+                                    recentList.Add(Convert.ToString(tm.Prodid));
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p id="para"> View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.</p>
+                        }
+                    }
+                </div>
+                <div class="col-md-1 col-lg-1" style="padding:0px">
+                    <a href="~/Public/BrowsingHistory" id="headsize">View or edit your browsing history</a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--Footer-->
+    <footer class="page-footer center-on-small-only stylish-color-dark">
+
+        <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin:0px">
+
+            <div class="row" id="hideFooter1">
+                <div class="col-md-1 text-left ">
+                    <span class="glyphicon glyphicon-shopping-cart icon iconbox"></span>
+                </div>
+                <div class="col-md-3 text-left mar ">
+                    <div class="para_text"><p>Secure Shopping</p><p>Shop with confidence as all payments are 100% secure</p></div>
+                </div>
+
+                <div class="col-md-1 text-left ">
+                    <span class="glyphicon glyphicon-user icon iconbox"></span>
+                </div>
+                <div class="col-md-3 text-left mar ">
+                    <div class="para_text"><p>Buyer Protection Policy</p><p>5 Day Hassle Free Return, if you don't like the product.</p></div>
+                </div>
+                <div class="col-md-1 text-left ">
+                    <span class="fa fa-android icon iconbox"></span>
+                </div>
+                <div class="col-md-3 text-left mar ">
+
+                    <div class="para_text"><p>Download our App</p><p>Shop on the move, anywhere and anytime via our app</p></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" id="hideFooter2">
+            <div class="two-half col-lg-4 col-md-4" style="width:33.65%!important;">
+                <span>Payment Options</span>
+                <img class="lazy" data-original="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531910_payment_options.png" alt="kraftly payment option" src="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531910_payment_options.png" style="display: inline;">
+            </div>
+            <div class="two-half col-lg-4 col-md-4" style="width:32.7%!important;">
+                <span>Shipping Partners</span>
+                <img class="lazy" data-original="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531925_shipping_partners.png" alt="kraftly payment option" src="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531925_shipping_partners.png" style="display: inline;">
+            </div>
+            <div class="two-half col-lg-4 col-md-4">
+                <span>eCommerce Logistics Powered By</span>
+                <a href="#" title="eCommerce Logistics" target="_blank">
+                    <img class="lazy" data-original="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531963_shiprocket_logo-(1).png" alt="kraftly payment option" src="https://kartrocket-res.cloudinary.com/image/fetch/q_auto,f_auto/https://nozzle.s3-ap-southeast-1.amazonaws.com/push/images/1483531963_shiprocket_logo-(1).png" style="display: inline;">
+                </a>
+            </div>
+        </div>
+        <div class="row container-fluid" style="padding:10px;">
+
+            <!--First column-->
+            <!--/.First column-->
+            <!--Second column-->
+            <div class="col-md-2 col-sm-3 col-xs-6 mx-auto">
+                <h5 class="title mb-4 mt-3 font-bold">Know Us</h5>
+                <ul>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/About">About</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="/Public/FeedBack">Contact Us</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="/Public/bulkorder">Bulk Order</a></li>
+                </ul>
+            </div>
+
+            <!--/.Second column-->
+            <!--Third column-->
+            <!--/.Third column-->
+            <div class="col-md-2 col-sm-3 col-xs-6 mx-auto">
+                <h5 class="title mb-4 mt-3 font-bold ">Customer Services</h5>
+                <ul>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/UserAccount">Account Settings</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/Career">Career & Internship</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/Prebooking">Pre Booking</a></li>
+                </ul>
+            </div>
+            <!--Fourth column-->
+            <div class="col-md-2 col-sm-3 col-xs-6 mx-auto">
+                <h5 class="title mb-4 mt-3 font-bold ">
+                    TraderKerala Policies
+                </h5>
+                <ul>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/privacypolicy">Privacy Policies</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/PaymentandShipping">Payment Policies</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href="~/Public/returnpolicy">Return & Cancellation</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="col-md-2 col-sm-3 col-xs-6 mx-auto">
+                <h5 class="title mb-4 mt-3 font-bold ">
+                    Added Services
+                </h5>
+                <ul>
+
+                    <li style="padding-top:15px;" id="ref1"><a href='~/Public/Offerlist?offer_id=-1' target='_blank'>Deals & Offers</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href='#'>Track Your Order</a></li>
+                    <li style="padding-top:15px;" id="ref1"><a href='~/Public/todayDeal?offer_Name=-1' target='_blank'>Today's Deal</a></li>
+                </ul>
+            </div>
+
+
+            <!--/.Fourth column-->
+           
+            <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4" id="hideFooter1">
+                <h5 class="title mb-4 mt-3 font-bold">Traderkerala</h5>
+                <br />
+                <p>
+                    Traderkerala.com is a hi-tech e commerce platform designed and developed by Hornbill Ventures Pvt. Ltd. It is designed to support the Diaspora of world Malayalees.   </p>
+            </div>
+        </div>
+        <!--Social buttons-->
+        <div class="row" style="display:inline-block">
+
+            <div class="col-md-6" style="float:left;" id="hideFooter1">
+                <img src="~/NewLayout/images/unnamed (1).jpg" />
+            </div>
+                <div style="float:right;margin-left:50px;">
+                    <ul class="social-network social-circle">
+                        <li><a href="https://www.facebook.com/Trader-Kerala-551188155235566/" target="_blank" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/TraderKerala" target="_blank" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.instagram.com/traderkerala" target="_blank" class="icoGoogle" title="Google +"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#" target="_blank" class="icoLinkedin" title="Pininterest"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+    <!--/.Footer-->
+    <div class="footer_btm_bar"> © 2017 Trader Kerala. All rights reserved | Design by - <a href="http://www.fabstudioz.com/">Fabstudioz</a></div>
+    <!--End Footer-->
+
+
+
+
+
+
+    <script type="text/javascript">
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "70%";
+            // document.getElementById("flipkart-navbar").style.width = "50%";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#pinBoot').pinterest_grid({
+                no_columns: 4,
+                padding_x: 10,
+                padding_y: 10,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
+        });
+
+
+        (function ($, window, document, undefined) {
+            var pluginName = 'pinterest_grid',
+                defaults = {
+                    padding_x: 10,
+                    padding_y: 10,
+                    no_columns: 3,
+                    margin_bottom: 50,
+                    single_column_breakpoint: 700
+                },
+                columns,
+                $article,
+                article_width;
+
+            function Plugin(element, options) {
+                this.element = element;
+                this.options = $.extend({}, defaults, options);
+                this._defaults = defaults;
+                this._name = pluginName;
+                this.init();
+            }
+
+            Plugin.prototype.init = function () {
+                var self = this,
+                    resize_finish;
+
+                $(window).resize(function () {
+                    clearTimeout(resize_finish);
+                    resize_finish = setTimeout(function () {
+                        self.make_layout_change(self);
+                    }, 11);
+                });
+
+                self.make_layout_change(self);
+
+                setTimeout(function () {
+                    $(window).resize();
+                }, 500);
+            };
+
+            Plugin.prototype.calculate = function (single_column_mode) {
+                var self = this,
+                    tallest = 0,
+                    row = 0,
+                    $container = $(this.element),
+                    container_width = $container.width();
+                $article = $(this.element).children();
+
+                if (single_column_mode === true) {
+                    article_width = $container.width() - self.options.padding_x;
+                } else {
+                    article_width = ($container.width() - self.options.padding_x * self.options.no_columns) / self.options.no_columns;
+                }
+
+                $article.each(function () {
+                    $(this).css('width', article_width);
+                });
+
+                columns = self.options.no_columns;
+
+                $article.each(function (index) {
+                    var current_column,
+                        left_out = 0,
+                        top = 0,
+                        $this = $(this),
+                        prevAll = $this.prevAll(),
+                        tallest = 0;
+
+                    if (single_column_mode === false) {
+                        current_column = (index % columns);
+                    } else {
+                        current_column = 0;
+                    }
+
+                    for (var t = 0; t < columns; t++) {
+                        $this.removeClass('c' + t);
+                    }
+
+                    if (index % columns === 0) {
+                        row++;
+                    }
+
+                    $this.addClass('c' + current_column);
+                    $this.addClass('r' + row);
+
+                    prevAll.each(function (index) {
+                        if ($(this).hasClass('c' + current_column)) {
+                            top += $(this).outerHeight() + self.options.padding_y;
+                        }
+                    });
+
+                    if (single_column_mode === true) {
+                        left_out = 0;
+                    } else {
+                        left_out = (index % columns) * (article_width + self.options.padding_x);
+                    }
+
+                    $this.css({
+                        'left': left_out,
+                        'top': top
+                    });
+                });
+
+                this.tallest($container);
+                $(window).resize();
+            };
+
+            Plugin.prototype.tallest = function (_container) {
+                var column_heights = [],
+                    largest = 0;
+
+                for (var z = 0; z < columns; z++) {
+                    var temp_height = 0;
+                    _container.find('.c' + z).each(function () {
+                        temp_height += $(this).outerHeight();
+                    });
+                    column_heights[z] = temp_height;
+                }
+
+                largest = Math.max.apply(Math, column_heights);
+                _container.css('height', largest + (this.options.padding_y + this.options.margin_bottom));
+            };
+
+            Plugin.prototype.make_layout_change = function (_self) {
+                if ($(window).width() < _self.options.single_column_breakpoint) {
+                    _self.calculate(true);
+                } else {
+                    _self.calculate(false);
+                }
+            };
+
+            $.fn[pluginName] = function (options) {
+                return this.each(function () {
+                    if (!$.data(this, 'plugin_' + pluginName)) {
+                        $.data(this, 'plugin_' + pluginName,
+                        new Plugin(this, options));
+                    }
+                });
+            }
+
+        })(jQuery, window, document);
+    </script>
+
+
+    <script src="scripts/main.js"></script>
+
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+
+
+
+    <!--scroller-->
+    <!--scroller-->
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            function fixDiv() {
+                var $cache = $('#menu_fixtop');
+                if ($(window).scrollTop() > 100)
+                    $cache.css({
+                        'position': 'fixed',
+                        'top': '0px',
+                        'z-index': '1',
+                        'width': '100%',
+                        'background-color': 'rgb(4, 20, 63)',
+                        'padding-top': '5px'
+                    });
+                else
+                    $cache.css({
+                        'position': 'relative',
+                        'top': 'auto'
+                    });
+            }
+            $(window).scroll(fixDiv);
+            fixDiv();
+        });
+    </script>
+</body>
+</html>

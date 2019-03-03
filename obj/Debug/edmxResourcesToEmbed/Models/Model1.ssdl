@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbTradekeralaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tb_address">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_Id" Type="varchar" MaxLength="50" />
+    <Property Name="fullname" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Phone" Type="bigint" />
+    <Property Name="pincode" Type="bigint" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_TopBrand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand_Id" Type="int" />
+    <Property Name="Brand_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="Hide" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_TopCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cat_Id" Type="int" />
+    <Property Name="Cat_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="Hide" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_Banner">
+    <Key>
+      <PropertyRef Name="Banner_id" />
+    </Key>
+    <Property Name="Banner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BannerName" Type="varchar" MaxLength="50" />
+    <Property Name="Related_To" Type="varchar" MaxLength="50" />
+    <Property Name="BannerImage" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_BulkOrder">
+    <Key>
+      <PropertyRef Name="Bulk_id" />
+    </Key>
+    <Property Name="Bulk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="varchar" MaxLength="50" />
+    <Property Name="product" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="varchar" MaxLength="50" />
+    <Property Name="Delivary" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_cart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="varchar" MaxLength="50" />
+    <Property Name="prod_id" Type="int" />
+    <Property Name="cat_id" Type="int" />
+    <Property Name="pro_name" Type="varchar" MaxLength="50" />
+    <Property Name="pro_price" Type="varchar" MaxLength="50" />
+    <Property Name="pro_image" Type="varchar(max)" />
+    <Property Name="pro_qty" Type="varchar" MaxLength="50" />
+    <Property Name="sub_total" Type="varchar" MaxLength="50" />
+    <Property Name="total" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Discount" Type="varchar" MaxLength="50" />
+    <Property Name="Tax" Type="varchar" MaxLength="50" />
+    <Property Name="shipping" Type="varchar" MaxLength="50" />
+    <Property Name="Gift_wrap" Type="varchar" MaxLength="50" />
+    <Property Name="address_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_HiddenImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Prodid" Type="int" />
+    <Property Name="Image" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_HidedProducts">
+    <Key>
+      <PropertyRef Name="Current_Pid" />
+    </Key>
+    <Property Name="Current_Pid" Type="int" Nullable="false" />
+    <Property Name="ProdName" Type="varchar(max)" />
+    <Property Name="Catid" Type="int" />
+    <Property Name="CatName" Type="varchar(max)" />
+    <Property Name="Vendor" Type="int" />
+    <Property Name="ProdNewPrice" Type="money" />
+    <Property Name="ProdOldPrice" Type="money" />
+    <Property Name="Dollar_NewPrice" Type="money" />
+    <Property Name="Dollar_OldPrice" Type="money" />
+    <Property Name="ProdTitle" Type="varchar" MaxLength="100" />
+    <Property Name="ProdDesc" Type="varchar(max)" />
+    <Property Name="ProdInfo" Type="varchar(max)" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Weight" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="Height" Type="varchar" MaxLength="50" />
+    <Property Name="Width" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Bestsell" Type="bit" />
+    <Property Name="Isoffer" Type="bit" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="IsRelatedTo" Type="varchar" MaxLength="50" />
+    <Property Name="ParCategories" Type="varchar(max)" />
+    <Property Name="Organic" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Job">
+    <Key>
+      <PropertyRef Name="Job_Id" />
+    </Key>
+    <Property Name="Job_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Job_Name" Type="varchar(max)" />
+    <Property Name="job_Category" Type="varchar(max)" />
+    <Property Name="Job_Description" Type="varchar(max)" />
+    <Property Name="key_skills" Type="varchar(max)" />
+    <Property Name="Experience" Type="varchar(max)" />
+    <Property Name="location" Type="varchar(max)" />
+    <Property Name="Posted_date" Type="date" />
+    <Property Name="End_Date" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_JobSeeker">
+    <Key>
+      <PropertyRef Name="Seeker_Id" />
+    </Key>
+    <Property Name="Seeker_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Seerker_Name" Type="varchar(max)" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Qualification" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Job_Applied" Type="varchar" MaxLength="50" />
+    <Property Name="Resume" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Logistics">
+    <Key>
+      <PropertyRef Name="Logistic_Id" />
+    </Key>
+    <Property Name="Logistic_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Log_Name" Type="varchar" MaxLength="50" />
+    <Property Name="weight" Type="varchar" MaxLength="50" />
+    <Property Name="category_One" Type="varchar" MaxLength="50" />
+    <Property Name="category_Two" Type="varchar" MaxLength="50" />
+    <Property Name="category_Three" Type="varchar" MaxLength="50" />
+    <Property Name="category_Four" Type="varchar" MaxLength="50" />
+    <Property Name="category_Five" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_Notfication">
+    <Key>
+      <PropertyRef Name="Noti_Id" />
+    </Key>
+    <Property Name="Noti_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="pro_id" Type="bigint" />
+    <Property Name="status" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Organic">
+    <Key>
+      <PropertyRef Name="Organic_Id" />
+    </Key>
+    <Property Name="Organic_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Organic_name" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Pincode">
+    <Key>
+      <PropertyRef Name="Post_id" />
+    </Key>
+    <Property Name="Post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pincode" Type="int" />
+    <Property Name="Place" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="District" Type="varchar" MaxLength="50" />
+    <Property Name="Taluk" Type="varchar" MaxLength="50" />
+    <Property Name="latitude" Type="varchar" MaxLength="50" />
+    <Property Name="longitude" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_PreBooking">
+    <Key>
+      <PropertyRef Name="Pre_Id" />
+    </Key>
+    <Property Name="Pre_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Contact" Type="bigint" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Pro_Enquiry" Type="varchar(max)" />
+    <Property Name="Quantity" Type="varchar" MaxLength="50" />
+    <Property Name="Pro_Image" Type="varchar(max)" />
+    <Property Name="Delivary" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_ProductOffer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pid" Type="int" />
+    <Property Name="Offer_Id" Type="int" />
+    <Property Name="ProdName" Type="varchar" MaxLength="50" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="NewPrice" Type="money" />
+    <Property Name="DollarPrice" Type="money" />
+  </EntityType>
+  <EntityType Name="tbl_RelatedProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Prodct_Id" Type="int" />
+    <Property Name="prodct_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Related_Id" Type="int" />
+    <Property Name="Related_Product" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_SellerImage">
+    <Key>
+      <PropertyRef Name="SelImage_Id" />
+    </Key>
+    <Property Name="SelImage_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vendor_id" Type="int" />
+    <Property Name="Image" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_specialoffer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="offer_name" Type="varchar(max)" />
+    <Property Name="offer_image" Type="varchar(max)" />
+    <Property Name="position" Type="varchar" MaxLength="50" />
+    <Property Name="Hide" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_TodaysDeal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pid" Type="int" />
+    <Property Name="Offer_Name" Type="varchar" MaxLength="50" />
+    <Property Name="ProdName" Type="varchar" MaxLength="50" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="NewPrice" Type="money" />
+    <Property Name="DollarPrice" Type="money" />
+  </EntityType>
+  <EntityType Name="tbl_trendingProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_id" Type="int" />
+    <Property Name="pro_name" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_Vendor">
+    <Key>
+      <PropertyRef Name="Vendor_id" />
+    </Key>
+    <Property Name="Vendor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vendor_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Mobile" Type="bigint" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="LandLine" Type="bigint" />
+    <Property Name="Pro_Image" Type="varchar(max)" />
+    <Property Name="Pro_Info" Type="varchar(max)" />
+    <Property Name="Pincode" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="SignIn" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_wishlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="varchar" MaxLength="50" />
+    <Property Name="prod_id" Type="int" />
+    <Property Name="cat_id" Type="int" />
+    <Property Name="pro_name" Type="varchar" MaxLength="50" />
+    <Property Name="pro_price" Type="varchar" MaxLength="50" />
+    <Property Name="pro_image" Type="varchar(max)" />
+    <Property Name="pro_qty" Type="varchar" MaxLength="50" />
+    <Property Name="vendor_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblBrand">
+    <Key>
+      <PropertyRef Name="Brandid" />
+    </Key>
+    <Property Name="Brandid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrandName" Type="varchar" MaxLength="200" />
+    <Property Name="BrandLogo" Type="varchar" MaxLength="200" />
+    <Property Name="BrandDesc" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tblCart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Userid" Type="varchar(max)" />
+    <Property Name="ProdId" Type="int" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Shipping" Type="money" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="Catid" />
+    </Key>
+    <Property Name="Catid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatName" Type="varchar(max)" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="Addeddate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblfavorite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Prodid" Type="int" />
+    <Property Name="userid" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="log_Id" />
+    </Key>
+    <Property Name="log_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastlogin" Type="datetime" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblNewsletter">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="Fromemail" Type="varchar(max)" />
+    <Property Name="subject" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tblOrders">
+    <Key>
+      <PropertyRef Name="Orderno" />
+    </Key>
+    <Property Name="Orderno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Invoice_Id" Type="varchar(max)" />
+    <Property Name="Userid" Type="varchar" MaxLength="150" />
+    <Property Name="ProId" Type="int" />
+    <Property Name="ProdName" Type="varchar" MaxLength="50" />
+    <Property Name="Vendor" Type="int" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Discount" Type="varchar" MaxLength="50" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Shipping" Type="money" />
+    <Property Name="Tax" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="int" />
+    <Property Name="Gift" Type="varchar" MaxLength="50" />
+    <Property Name="DeliveryMethod" Type="varchar" MaxLength="50" />
+    <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar(max)" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="OrderTime" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProdImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Prodid" Type="int" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="position" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProdName" Type="varchar(max)" />
+    <Property Name="Catid" Type="int" />
+    <Property Name="CatName" Type="varchar(max)" />
+    <Property Name="Vendor" Type="int" />
+    <Property Name="ProdNewPrice" Type="money" />
+    <Property Name="ProdOldPrice" Type="money" />
+    <Property Name="Dollar_NewPrice" Type="money" />
+    <Property Name="Dollar_OldPrice" Type="money" />
+    <Property Name="ProdTitle" Type="varchar" MaxLength="100" />
+    <Property Name="ProdDesc" Type="varchar(max)" />
+    <Property Name="ProdInfo" Type="varchar(max)" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Weight" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="Height" Type="varchar" MaxLength="50" />
+    <Property Name="Width" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Bestsell" Type="bit" />
+    <Property Name="Isoffer" Type="bit" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="IsRelatedTo" Type="varchar" MaxLength="50" />
+    <Property Name="ParCategories" Type="varchar(max)" />
+    <Property Name="Organic" Type="varchar(max)" />
+    <Property Name="Hide" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblRecentView">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="1000" />
+    <Property Name="pid" Type="int" />
+  </EntityType>
+  <EntityType Name="tblRegistration">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegName" Type="varchar(max)" />
+    <Property Name="RegEmail" Type="varchar(max)" Nullable="false" />
+    <Property Name="RegPassword" Type="varchar(max)" />
+    <Property Name="RegMobile" Type="varchar(max)" />
+    <Property Name="status" Type="varchar(max)" />
+    <Property Name="type" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tblreviews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prodid" Type="int" />
+    <Property Name="starValue" Type="int" />
+    <Property Name="date" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="50" />
+    <Property Name="reviews" Type="varchar(max)" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblSale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProdId" Type="int" />
+    <Property Name="Oldprice" Type="money" />
+    <Property Name="Newprice" Type="money" />
+  </EntityType>
+  <EntityType Name="tblStock">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="Product" Type="varchar(max)" />
+    <Property Name="Category" Type="varchar" MaxLength="200" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Dollar _Price" Type="money" />
+    <Property Name="Brand" Type="varchar" MaxLength="200" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Totalamount" Type="money" />
+    <Property Name="DollarAmount" Type="money" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTradekerala.dbo.Vw_DealsOffer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Vw_DealsOffer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Pid" Type="int" />
+    <Property Name="Offer_Id" Type="int" />
+    <Property Name="ProdName" Type="varchar" MaxLength="50" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="NewPrice" Type="money" />
+    <Property Name="Vendor" Type="int" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Weight" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Expr1" Type="int" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTradekerala.dbo.Vw_TodaysDeals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Vw_TodaysDeals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="ProdName" Type="varchar(max)" />
+    <Property Name="Catid" Type="int" />
+    <Property Name="CatName" Type="varchar(max)" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Offer_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="NewPrice" Type="money" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Weight" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="Pid" Type="int" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblProdImage_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblProdImage" Type="Self.tblProdImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="tblProdImage">
+        <PropertyRef Name="Prodid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblProduct_tblCategory">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="Catid" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="Catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Relatedpro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="catid" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_autocomplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="keyword" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Catautocomplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Catkeyword" Type="varchar" Mode="In" />
+    <Parameter Name="CatWord" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Sp_GetOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_newproducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="min" Type="varchar(max)" Mode="In" />
+    <Parameter Name="max" Type="varchar(max)" Mode="In" />
+    <Parameter Name="color" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_Search_Deals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="diMin" Type="varchar(max)" Mode="In" />
+    <Parameter Name="diMax" Type="varchar(max)" Mode="In" />
+    <Parameter Name="min" Type="varchar(max)" Mode="In" />
+    <Parameter Name="max" Type="varchar(max)" Mode="In" />
+    <Parameter Name="color" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_search_products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="min" Type="varchar(max)" Mode="In" />
+    <Parameter Name="max" Type="varchar(max)" Mode="In" />
+    <Parameter Name="color" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_search_productspaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="min" Type="varchar(max)" Mode="In" />
+    <Parameter Name="max" Type="varchar(max)" Mode="In" />
+    <Parameter Name="color" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_Search_Today" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="diMin" Type="varchar(max)" Mode="In" />
+    <Parameter Name="diMax" Type="varchar(max)" Mode="In" />
+    <Parameter Name="min" Type="varchar(max)" Mode="In" />
+    <Parameter Name="max" Type="varchar(max)" Mode="In" />
+    <Parameter Name="color" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_searchdummy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_Trending" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_TrendPro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="DbTradekeralaModelStoreContainer">
+    <EntitySet Name="tb_address" EntityType="Self.tb_address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_TopBrand" EntityType="Self.tb_TopBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_TopCategory" EntityType="Self.tb_TopCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Banner" EntityType="Self.tbl_Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_BulkOrder" EntityType="Self.tbl_BulkOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_cart" EntityType="Self.tbl_cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_HiddenImage" EntityType="Self.tbl_HiddenImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_HidedProducts" EntityType="Self.tbl_HidedProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Job" EntityType="Self.tbl_Job" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_JobSeeker" EntityType="Self.tbl_JobSeeker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Logistics" EntityType="Self.tbl_Logistics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Notfication" EntityType="Self.tbl_Notfication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Organic" EntityType="Self.tbl_Organic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Pincode" EntityType="Self.tbl_Pincode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PreBooking" EntityType="Self.tbl_PreBooking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ProductOffer" EntityType="Self.tbl_ProductOffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RelatedProducts" EntityType="Self.tbl_RelatedProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SellerImage" EntityType="Self.tbl_SellerImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_specialoffer" EntityType="Self.tbl_specialoffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_TodaysDeal" EntityType="Self.tbl_TodaysDeal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_trendingProducts" EntityType="Self.tbl_trendingProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Vendor" EntityType="Self.tbl_Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_wishlist" EntityType="Self.tbl_wishlist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCart" EntityType="Self.tblCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblfavorite" EntityType="Self.tblfavorite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNewsletter" EntityType="Self.tblNewsletter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrders" EntityType="Self.tblOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProdImage" EntityType="Self.tblProdImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRecentView" EntityType="Self.tblRecentView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRegistration" EntityType="Self.tblRegistration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblreviews" EntityType="Self.tblreviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSale" EntityType="Self.tblSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStock" EntityType="Self.tblStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vw_DealsOffer" EntityType="Self.Vw_DealsOffer" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_DealsOffer].[Pid] AS [Pid], 
+    [Vw_DealsOffer].[Offer_Id] AS [Offer_Id], 
+    [Vw_DealsOffer].[ProdName] AS [ProdName], 
+    [Vw_DealsOffer].[Discount] AS [Discount], 
+    [Vw_DealsOffer].[NewPrice] AS [NewPrice], 
+    [Vw_DealsOffer].[Vendor] AS [Vendor], 
+    [Vw_DealsOffer].[Color] AS [Color], 
+    [Vw_DealsOffer].[Weight] AS [Weight], 
+    [Vw_DealsOffer].[Size] AS [Size], 
+    [Vw_DealsOffer].[Id] AS [Id], 
+    [Vw_DealsOffer].[Expr1] AS [Expr1], 
+    [Vw_DealsOffer].[Brand] AS [Brand]
+    FROM [dbo].[Vw_DealsOffer] AS [Vw_DealsOffer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Vw_TodaysDeals" EntityType="Self.Vw_TodaysDeals" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_TodaysDeals].[ProdName] AS [ProdName], 
+    [Vw_TodaysDeals].[Catid] AS [Catid], 
+    [Vw_TodaysDeals].[CatName] AS [CatName], 
+    [Vw_TodaysDeals].[Id] AS [Id], 
+    [Vw_TodaysDeals].[Offer_Name] AS [Offer_Name], 
+    [Vw_TodaysDeals].[Discount] AS [Discount], 
+    [Vw_TodaysDeals].[NewPrice] AS [NewPrice], 
+    [Vw_TodaysDeals].[Qty] AS [Qty], 
+    [Vw_TodaysDeals].[Color] AS [Color], 
+    [Vw_TodaysDeals].[Weight] AS [Weight], 
+    [Vw_TodaysDeals].[Size] AS [Size], 
+    [Vw_TodaysDeals].[Pid] AS [Pid], 
+    [Vw_TodaysDeals].[Brand] AS [Brand]
+    FROM [dbo].[Vw_TodaysDeals] AS [Vw_TodaysDeals]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblProdImage_tblProduct" Association="Self.FK_tblProdImage_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="tblProdImage" EntitySet="tblProdImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblProduct_tblCategory" Association="Self.FK_tblProduct_tblCategory">
+      <End Role="tblCategory" EntitySet="tblCategory" />
+      <End Role="tblProduct" EntitySet="tblProduct" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

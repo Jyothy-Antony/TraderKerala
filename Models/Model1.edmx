@@ -1,0 +1,2241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbTradekeralaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_Id" Type="varchar" MaxLength="50" />
+          <Property Name="fullname" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Phone" Type="bigint" />
+          <Property Name="pincode" Type="bigint" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_TopBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand_Id" Type="int" />
+          <Property Name="Brand_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Hide" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_TopCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cat_Id" Type="int" />
+          <Property Name="Cat_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Hide" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Banner">
+          <Key>
+            <PropertyRef Name="Banner_id" />
+          </Key>
+          <Property Name="Banner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BannerName" Type="varchar" MaxLength="50" />
+          <Property Name="Related_To" Type="varchar" MaxLength="50" />
+          <Property Name="BannerImage" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_BulkOrder">
+          <Key>
+            <PropertyRef Name="Bulk_id" />
+          </Key>
+          <Property Name="Bulk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Contact" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="varchar" MaxLength="50" />
+          <Property Name="product" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="varchar" MaxLength="50" />
+          <Property Name="Delivary" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="varchar" MaxLength="50" />
+          <Property Name="prod_id" Type="int" />
+          <Property Name="cat_id" Type="int" />
+          <Property Name="pro_name" Type="varchar" MaxLength="50" />
+          <Property Name="pro_price" Type="varchar" MaxLength="50" />
+          <Property Name="pro_image" Type="varchar(max)" />
+          <Property Name="pro_qty" Type="varchar" MaxLength="50" />
+          <Property Name="sub_total" Type="varchar" MaxLength="50" />
+          <Property Name="total" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Discount" Type="varchar" MaxLength="50" />
+          <Property Name="Tax" Type="varchar" MaxLength="50" />
+          <Property Name="shipping" Type="varchar" MaxLength="50" />
+          <Property Name="Gift_wrap" Type="varchar" MaxLength="50" />
+          <Property Name="address_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_HiddenImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prodid" Type="int" />
+          <Property Name="Image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_HidedProducts">
+          <Key>
+            <PropertyRef Name="Current_Pid" />
+          </Key>
+          <Property Name="Current_Pid" Type="int" Nullable="false" />
+          <Property Name="ProdName" Type="varchar(max)" />
+          <Property Name="Catid" Type="int" />
+          <Property Name="CatName" Type="varchar(max)" />
+          <Property Name="Vendor" Type="int" />
+          <Property Name="ProdNewPrice" Type="money" />
+          <Property Name="ProdOldPrice" Type="money" />
+          <Property Name="Dollar_NewPrice" Type="money" />
+          <Property Name="Dollar_OldPrice" Type="money" />
+          <Property Name="ProdTitle" Type="varchar" MaxLength="100" />
+          <Property Name="ProdDesc" Type="varchar(max)" />
+          <Property Name="ProdInfo" Type="varchar(max)" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="Weight" Type="varchar" MaxLength="50" />
+          <Property Name="Size" Type="varchar" MaxLength="50" />
+          <Property Name="Height" Type="varchar" MaxLength="50" />
+          <Property Name="Width" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Bestsell" Type="bit" />
+          <Property Name="Isoffer" Type="bit" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="IsRelatedTo" Type="varchar" MaxLength="50" />
+          <Property Name="ParCategories" Type="varchar(max)" />
+          <Property Name="Organic" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Job">
+          <Key>
+            <PropertyRef Name="Job_Id" />
+          </Key>
+          <Property Name="Job_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job_Name" Type="varchar(max)" />
+          <Property Name="job_Category" Type="varchar(max)" />
+          <Property Name="Job_Description" Type="varchar(max)" />
+          <Property Name="key_skills" Type="varchar(max)" />
+          <Property Name="Experience" Type="varchar(max)" />
+          <Property Name="location" Type="varchar(max)" />
+          <Property Name="Posted_date" Type="date" />
+          <Property Name="End_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_JobSeeker">
+          <Key>
+            <PropertyRef Name="Seeker_Id" />
+          </Key>
+          <Property Name="Seeker_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Seerker_Name" Type="varchar(max)" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Qualification" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Job_Applied" Type="varchar" MaxLength="50" />
+          <Property Name="Resume" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Logistics">
+          <Key>
+            <PropertyRef Name="Logistic_Id" />
+          </Key>
+          <Property Name="Logistic_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Log_Name" Type="varchar" MaxLength="50" />
+          <Property Name="weight" Type="varchar" MaxLength="50" />
+          <Property Name="category_One" Type="varchar" MaxLength="50" />
+          <Property Name="category_Two" Type="varchar" MaxLength="50" />
+          <Property Name="category_Three" Type="varchar" MaxLength="50" />
+          <Property Name="category_Four" Type="varchar" MaxLength="50" />
+          <Property Name="category_Five" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Notfication">
+          <Key>
+            <PropertyRef Name="Noti_Id" />
+          </Key>
+          <Property Name="Noti_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="pro_id" Type="bigint" />
+          <Property Name="status" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Organic">
+          <Key>
+            <PropertyRef Name="Organic_Id" />
+          </Key>
+          <Property Name="Organic_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Organic_name" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Pincode">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pincode" Type="int" />
+          <Property Name="Place" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="District" Type="varchar" MaxLength="50" />
+          <Property Name="Taluk" Type="varchar" MaxLength="50" />
+          <Property Name="latitude" Type="varchar" MaxLength="50" />
+          <Property Name="longitude" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_PreBooking">
+          <Key>
+            <PropertyRef Name="Pre_Id" />
+          </Key>
+          <Property Name="Pre_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Contact" Type="bigint" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Pro_Enquiry" Type="varchar(max)" />
+          <Property Name="Quantity" Type="varchar" MaxLength="50" />
+          <Property Name="Pro_Image" Type="varchar(max)" />
+          <Property Name="Delivary" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_ProductOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pid" Type="int" />
+          <Property Name="Offer_Id" Type="int" />
+          <Property Name="ProdName" Type="varchar" MaxLength="50" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="NewPrice" Type="money" />
+          <Property Name="DollarPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="tbl_RelatedProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prodct_Id" Type="int" />
+          <Property Name="prodct_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Related_Id" Type="int" />
+          <Property Name="Related_Product" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_SellerImage">
+          <Key>
+            <PropertyRef Name="SelImage_Id" />
+          </Key>
+          <Property Name="SelImage_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor_id" Type="int" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_specialoffer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="offer_name" Type="varchar(max)" />
+          <Property Name="offer_image" Type="varchar(max)" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="Hide" Type="varchar" MaxLength="50" />
+          <Property Name="AddedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_TodaysDeal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pid" Type="int" />
+          <Property Name="Offer_Name" Type="varchar" MaxLength="50" />
+          <Property Name="ProdName" Type="varchar" MaxLength="50" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="NewPrice" Type="money" />
+          <Property Name="DollarPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="tbl_trendingProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pro_id" Type="int" />
+          <Property Name="pro_name" Type="varchar" MaxLength="50" />
+          <Property Name="AddedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_Vendor">
+          <Key>
+            <PropertyRef Name="Vendor_id" />
+          </Key>
+          <Property Name="Vendor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Mobile" Type="bigint" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="LandLine" Type="bigint" />
+          <Property Name="Pro_Image" Type="varchar(max)" />
+          <Property Name="Pro_Info" Type="varchar(max)" />
+          <Property Name="Pincode" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="SignIn" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_wishlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="varchar" MaxLength="50" />
+          <Property Name="prod_id" Type="int" />
+          <Property Name="cat_id" Type="int" />
+          <Property Name="pro_name" Type="varchar" MaxLength="50" />
+          <Property Name="pro_price" Type="varchar" MaxLength="50" />
+          <Property Name="pro_image" Type="varchar(max)" />
+          <Property Name="pro_qty" Type="varchar" MaxLength="50" />
+          <Property Name="vendor_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblBrand">
+          <Key>
+            <PropertyRef Name="Brandid" />
+          </Key>
+          <Property Name="Brandid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="200" />
+          <Property Name="BrandLogo" Type="varchar" MaxLength="200" />
+          <Property Name="BrandDesc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblCart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="varchar(max)" />
+          <Property Name="ProdId" Type="int" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="money" />
+          <Property Name="Total" Type="money" />
+          <Property Name="Shipping" Type="money" />
+          <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AddedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Catid" />
+          </Key>
+          <Property Name="Catid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatName" Type="varchar(max)" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Addeddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblfavorite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prodid" Type="int" />
+          <Property Name="userid" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="log_Id" />
+          </Key>
+          <Property Name="log_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastlogin" Type="datetime" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblNewsletter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="Fromemail" Type="varchar(max)" />
+          <Property Name="subject" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblOrders">
+          <Key>
+            <PropertyRef Name="Orderno" />
+          </Key>
+          <Property Name="Orderno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoice_Id" Type="varchar(max)" />
+          <Property Name="Userid" Type="varchar" MaxLength="150" />
+          <Property Name="ProId" Type="int" />
+          <Property Name="ProdName" Type="varchar" MaxLength="50" />
+          <Property Name="Vendor" Type="int" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Discount" Type="varchar" MaxLength="50" />
+          <Property Name="Total" Type="money" />
+          <Property Name="Shipping" Type="money" />
+          <Property Name="Tax" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="int" />
+          <Property Name="Gift" Type="varchar" MaxLength="50" />
+          <Property Name="DeliveryMethod" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar(max)" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderTime" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblProdImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prodid" Type="int" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="position" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdName" Type="varchar(max)" />
+          <Property Name="Catid" Type="int" />
+          <Property Name="CatName" Type="varchar(max)" />
+          <Property Name="Vendor" Type="int" />
+          <Property Name="ProdNewPrice" Type="money" />
+          <Property Name="ProdOldPrice" Type="money" />
+          <Property Name="Dollar_NewPrice" Type="money" />
+          <Property Name="Dollar_OldPrice" Type="money" />
+          <Property Name="ProdTitle" Type="varchar" MaxLength="100" />
+          <Property Name="ProdDesc" Type="varchar(max)" />
+          <Property Name="ProdInfo" Type="varchar(max)" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="Weight" Type="varchar" MaxLength="50" />
+          <Property Name="Size" Type="varchar" MaxLength="50" />
+          <Property Name="Height" Type="varchar" MaxLength="50" />
+          <Property Name="Width" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Bestsell" Type="bit" />
+          <Property Name="Isoffer" Type="bit" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="IsRelatedTo" Type="varchar" MaxLength="50" />
+          <Property Name="ParCategories" Type="varchar(max)" />
+          <Property Name="Organic" Type="varchar(max)" />
+          <Property Name="Hide" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblRecentView">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="1000" />
+          <Property Name="pid" Type="int" />
+        </EntityType>
+        <EntityType Name="tblRegistration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegName" Type="varchar(max)" />
+          <Property Name="RegEmail" Type="varchar(max)" Nullable="false" />
+          <Property Name="RegPassword" Type="varchar(max)" />
+          <Property Name="RegMobile" Type="varchar(max)" />
+          <Property Name="status" Type="varchar(max)" />
+          <Property Name="type" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblreviews">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prodid" Type="int" />
+          <Property Name="starValue" Type="int" />
+          <Property Name="date" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="reviews" Type="varchar(max)" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdId" Type="int" />
+          <Property Name="Oldprice" Type="money" />
+          <Property Name="Newprice" Type="money" />
+        </EntityType>
+        <EntityType Name="tblStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Product" Type="varchar(max)" />
+          <Property Name="Category" Type="varchar" MaxLength="200" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Dollar _Price" Type="money" />
+          <Property Name="Brand" Type="varchar" MaxLength="200" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Totalamount" Type="money" />
+          <Property Name="DollarAmount" Type="money" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTradekerala.dbo.Vw_DealsOffer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_DealsOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Pid" Type="int" />
+          <Property Name="Offer_Id" Type="int" />
+          <Property Name="ProdName" Type="varchar" MaxLength="50" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="NewPrice" Type="money" />
+          <Property Name="Vendor" Type="int" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="Weight" Type="varchar" MaxLength="50" />
+          <Property Name="Size" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="int" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTradekerala.dbo.Vw_TodaysDeals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_TodaysDeals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="ProdName" Type="varchar(max)" />
+          <Property Name="Catid" Type="int" />
+          <Property Name="CatName" Type="varchar(max)" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Offer_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="NewPrice" Type="money" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="Weight" Type="varchar" MaxLength="50" />
+          <Property Name="Size" Type="varchar" MaxLength="50" />
+          <Property Name="Pid" Type="int" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tblProdImage_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblProdImage" Type="Self.tblProdImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="tblProdImage">
+              <PropertyRef Name="Prodid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="Catid" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Catid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Relatedpro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_autocomplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="keyword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Catautocomplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Catkeyword" Type="varchar" Mode="In" />
+          <Parameter Name="CatWord" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_newproducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="min" Type="varchar(max)" Mode="In" />
+          <Parameter Name="max" Type="varchar(max)" Mode="In" />
+          <Parameter Name="color" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Search_Deals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="diMin" Type="varchar(max)" Mode="In" />
+          <Parameter Name="diMax" Type="varchar(max)" Mode="In" />
+          <Parameter Name="min" Type="varchar(max)" Mode="In" />
+          <Parameter Name="max" Type="varchar(max)" Mode="In" />
+          <Parameter Name="color" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_search_products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="min" Type="varchar(max)" Mode="In" />
+          <Parameter Name="max" Type="varchar(max)" Mode="In" />
+          <Parameter Name="color" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_search_productspaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="min" Type="varchar(max)" Mode="In" />
+          <Parameter Name="max" Type="varchar(max)" Mode="In" />
+          <Parameter Name="color" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Search_Today" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OfferName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="diMin" Type="varchar(max)" Mode="In" />
+          <Parameter Name="diMax" Type="varchar(max)" Mode="In" />
+          <Parameter Name="min" Type="varchar(max)" Mode="In" />
+          <Parameter Name="max" Type="varchar(max)" Mode="In" />
+          <Parameter Name="color" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Wt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sz" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Br" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="RowsPerPage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_searchdummy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Property_name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="cat_name" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Trending" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_TrendPro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="DbTradekeralaModelStoreContainer">
+          <EntitySet Name="tb_address" EntityType="Self.tb_address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_TopBrand" EntityType="Self.tb_TopBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_TopCategory" EntityType="Self.tb_TopCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Banner" EntityType="Self.tbl_Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BulkOrder" EntityType="Self.tbl_BulkOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_cart" EntityType="Self.tbl_cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_HiddenImage" EntityType="Self.tbl_HiddenImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_HidedProducts" EntityType="Self.tbl_HidedProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Job" EntityType="Self.tbl_Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_JobSeeker" EntityType="Self.tbl_JobSeeker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Logistics" EntityType="Self.tbl_Logistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Notfication" EntityType="Self.tbl_Notfication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Organic" EntityType="Self.tbl_Organic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Pincode" EntityType="Self.tbl_Pincode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PreBooking" EntityType="Self.tbl_PreBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProductOffer" EntityType="Self.tbl_ProductOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_RelatedProducts" EntityType="Self.tbl_RelatedProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SellerImage" EntityType="Self.tbl_SellerImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_specialoffer" EntityType="Self.tbl_specialoffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_TodaysDeal" EntityType="Self.tbl_TodaysDeal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_trendingProducts" EntityType="Self.tbl_trendingProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Vendor" EntityType="Self.tbl_Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_wishlist" EntityType="Self.tbl_wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCart" EntityType="Self.tblCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblfavorite" EntityType="Self.tblfavorite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNewsletter" EntityType="Self.tblNewsletter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProdImage" EntityType="Self.tblProdImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRecentView" EntityType="Self.tblRecentView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRegistration" EntityType="Self.tblRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblreviews" EntityType="Self.tblreviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSale" EntityType="Self.tblSale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStock" EntityType="Self.tblStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vw_DealsOffer" EntityType="Self.Vw_DealsOffer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_DealsOffer].[Pid] AS [Pid], 
+    [Vw_DealsOffer].[Offer_Id] AS [Offer_Id], 
+    [Vw_DealsOffer].[ProdName] AS [ProdName], 
+    [Vw_DealsOffer].[Discount] AS [Discount], 
+    [Vw_DealsOffer].[NewPrice] AS [NewPrice], 
+    [Vw_DealsOffer].[Vendor] AS [Vendor], 
+    [Vw_DealsOffer].[Color] AS [Color], 
+    [Vw_DealsOffer].[Weight] AS [Weight], 
+    [Vw_DealsOffer].[Size] AS [Size], 
+    [Vw_DealsOffer].[Id] AS [Id], 
+    [Vw_DealsOffer].[Expr1] AS [Expr1], 
+    [Vw_DealsOffer].[Brand] AS [Brand]
+    FROM [dbo].[Vw_DealsOffer] AS [Vw_DealsOffer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vw_TodaysDeals" EntityType="Self.Vw_TodaysDeals" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_TodaysDeals].[ProdName] AS [ProdName], 
+    [Vw_TodaysDeals].[Catid] AS [Catid], 
+    [Vw_TodaysDeals].[CatName] AS [CatName], 
+    [Vw_TodaysDeals].[Id] AS [Id], 
+    [Vw_TodaysDeals].[Offer_Name] AS [Offer_Name], 
+    [Vw_TodaysDeals].[Discount] AS [Discount], 
+    [Vw_TodaysDeals].[NewPrice] AS [NewPrice], 
+    [Vw_TodaysDeals].[Qty] AS [Qty], 
+    [Vw_TodaysDeals].[Color] AS [Color], 
+    [Vw_TodaysDeals].[Weight] AS [Weight], 
+    [Vw_TodaysDeals].[Size] AS [Size], 
+    [Vw_TodaysDeals].[Pid] AS [Pid], 
+    [Vw_TodaysDeals].[Brand] AS [Brand]
+    FROM [dbo].[Vw_TodaysDeals] AS [Vw_TodaysDeals]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tblProdImage_tblProduct" Association="Self.FK_tblProdImage_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblProdImage" EntitySet="tblProdImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblCategory" Association="Self.FK_tblProduct_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategory" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTradekeralaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_RelatedProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prodct_Id" Type="Int32" />
+          <Property Name="prodct_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Related_Id" Type="Int32" />
+          <Property Name="Related_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_specialoffer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offer_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="offer_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_trendingProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pro_id" Type="Int32" />
+          <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_wishlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prod_id" Type="Int32" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pro_qty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vendor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblBrand">
+          <Key>
+            <PropertyRef Name="Brandid" />
+          </Key>
+          <Property Name="Brandid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BrandLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BrandDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProdId" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Catid" />
+          </Key>
+          <Property Name="Catid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Addeddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblProduct" Relationship="DbTradekeralaModel.FK_tblProduct_tblCategory" FromRole="tblCategory" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblfavorite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prodid" Type="Int32" />
+          <Property Name="userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblProdImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prodid" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="Int32" />
+          <NavigationProperty Name="tblProduct" Relationship="DbTradekeralaModel.FK_tblProdImage_tblProduct" FromRole="tblProdImage" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblSale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdId" Type="Int32" />
+          <Property Name="Oldprice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Newprice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="tblStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Dollar__Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Brand" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Totalamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DollarAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DbTradekeralaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_RelatedProducts" EntityType="Self.tbl_RelatedProducts" />
+          <EntitySet Name="tbl_specialoffer" EntityType="Self.tbl_specialoffer" />
+          <EntitySet Name="tbl_trendingProducts" EntityType="Self.tbl_trendingProducts" />
+          <EntitySet Name="tbl_wishlist" EntityType="Self.tbl_wishlist" />
+          <EntitySet Name="tblBrands" EntityType="Self.tblBrand" />
+          <EntitySet Name="tblCarts" EntityType="Self.tblCart" />
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+          <EntitySet Name="tblfavorites" EntityType="Self.tblfavorite" />
+          <EntitySet Name="tblProdImages" EntityType="Self.tblProdImage" />
+          <EntitySet Name="tblSales" EntityType="Self.tblSale" />
+          <EntitySet Name="tblStocks" EntityType="Self.tblStock" />
+          <FunctionImport Name="Relatedpro" ReturnType="Collection(DbTradekeralaModel.Relatedpro_Result)">
+          <Parameter Name="catid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_autocomplete" ReturnType="Collection(DbTradekeralaModel.sp_autocomplete_Result)">
+          <Parameter Name="keyword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Catautocomplete" ReturnType="Collection(DbTradekeralaModel.sp_Catautocomplete_Result)">
+            <Parameter Name="Catkeyword" Mode="In" Type="String" />
+            <Parameter Name="CatWord" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetOffers" ReturnType="Collection(DbTradekeralaModel.Sp_GetOffers_Result)" />
+          <FunctionImport Name="sp_newproducts" ReturnType="Collection(DbTradekeralaModel.sp_newproducts_Result)" />
+          <FunctionImport Name="sp_Offer" ReturnType="Collection(DbTradekeralaModel.sp_Offer_Result)">
+            <Parameter Name="OfferName" Mode="In" Type="String" />
+            <Parameter Name="min" Mode="In" Type="String" />
+            <Parameter Name="max" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="Wt" Mode="In" Type="String" />
+            <Parameter Name="sz" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_searchdummy">
+            <Parameter Name="Property_name" Mode="In" Type="String" />
+            <Parameter Name="cat_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Trending" ReturnType="Collection(DbTradekeralaModel.sp_Trending_Result)" />
+          <EntitySet Name="tbl_ProductOffer" EntityType="DbTradekeralaModel.tbl_ProductOffer" />
+          <EntitySet Name="tbl_TodaysDeal" EntityType="DbTradekeralaModel.tbl_TodaysDeal" />
+          <FunctionImport Name="sp_TrendAdd">
+            <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TrendPro" ReturnType="Collection(DbTradekeralaModel.sp_TrendPro_Result)">
+          <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tb_TopCategory" EntityType="DbTradekeralaModel.tb_TopCategory" />
+          <EntitySet Name="Vw_TodaysDeals" EntityType="DbTradekeralaModel.Vw_TodaysDeals" />
+          <EntitySet Name="Vw_DealsOffer" EntityType="DbTradekeralaModel.Vw_DealsOffer" />
+          <EntitySet Name="tb_TopBrand" EntityType="DbTradekeralaModel.tb_TopBrand" />
+          <EntitySet Name="tblNewsletters" EntityType="DbTradekeralaModel.tblNewsletter" />
+          <EntitySet Name="tbl_Banner" EntityType="DbTradekeralaModel.tbl_Banner" />
+          <EntitySet Name="tblLogins" EntityType="DbTradekeralaModel.tblLogin" />
+          <EntitySet Name="tbl_PreBooking" EntityType="DbTradekeralaModel.tbl_PreBooking" />
+          <EntitySet Name="tbl_JobSeeker" EntityType="DbTradekeralaModel.tbl_JobSeeker" />
+          <EntitySet Name="tbl_Job" EntityType="DbTradekeralaModel.tbl_Job" />
+          <EntitySet Name="tbl_SellerImage" EntityType="DbTradekeralaModel.tbl_SellerImage" />
+          <EntitySet Name="tblRecentView" EntityType="DbTradekeralaModel.tblRecentView" />
+          <EntitySet Name="tbl_Notfication" EntityType="DbTradekeralaModel.tbl_Notfication" />
+          <EntitySet Name="tbl_Organic" EntityType="DbTradekeralaModel.tbl_Organic" />
+          <FunctionImport Name="sp_search_products">
+            <Parameter Name="Property_name" Mode="In" Type="String" />
+            <Parameter Name="cat_name" Mode="In" Type="String" />
+            <Parameter Name="min" Mode="In" Type="String" />
+            <Parameter Name="max" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="Wt" Mode="In" Type="String" />
+            <Parameter Name="sz" Mode="In" Type="String" />
+            <Parameter Name="Br" Mode="In" Type="String" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="RowsPerPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_search_productspaging">
+            <Parameter Name="Property_name" Mode="In" Type="String" />
+            <Parameter Name="cat_name" Mode="In" Type="String" />
+            <Parameter Name="min" Mode="In" Type="String" />
+            <Parameter Name="max" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="Wt" Mode="In" Type="String" />
+            <Parameter Name="sz" Mode="In" Type="String" />
+            <Parameter Name="Br" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Search_Today" EntitySet="Vw_TodaysDeals" ReturnType="Collection(DbTradekeralaModel.Vw_TodaysDeals)">
+            <Parameter Name="OfferName" Mode="In" Type="String" />
+            <Parameter Name="diMin" Mode="In" Type="String" />
+            <Parameter Name="diMax" Mode="In" Type="String" />
+            <Parameter Name="min" Mode="In" Type="String" />
+            <Parameter Name="max" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="Wt" Mode="In" Type="String" />
+            <Parameter Name="sz" Mode="In" Type="String" />
+            <Parameter Name="Br" Mode="In" Type="String" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="RowsPerPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Search_Deals" EntitySet="Vw_DealsOffer" ReturnType="Collection(DbTradekeralaModel.Vw_DealsOffer)">
+            <Parameter Name="OfferName" Mode="In" Type="String" />
+            <Parameter Name="diMin" Mode="In" Type="String" />
+            <Parameter Name="diMax" Mode="In" Type="String" />
+            <Parameter Name="min" Mode="In" Type="String" />
+            <Parameter Name="max" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="Wt" Mode="In" Type="String" />
+            <Parameter Name="sz" Mode="In" Type="String" />
+            <Parameter Name="Br" Mode="In" Type="String" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="RowsPerPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tbl_Logistics" EntityType="DbTradekeralaModel.tbl_Logistics" />
+          <EntitySet Name="tbl_Pincode" EntityType="DbTradekeralaModel.tbl_Pincode" />
+          <EntitySet Name="tbl_HidedProducts" EntityType="DbTradekeralaModel.tbl_HidedProducts" />
+          <EntitySet Name="tbl_HiddenImage" EntityType="DbTradekeralaModel.tbl_HiddenImage" />
+          <EntitySet Name="tblProduct" EntityType="DbTradekeralaModel.tblProduct" />
+          <AssociationSet Name="FK_tblProduct_tblCategory" Association="DbTradekeralaModel.FK_tblProduct_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategories" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProdImage_tblProduct" Association="DbTradekeralaModel.FK_tblProdImage_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblProdImage" EntitySet="tblProdImages" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Vendor" EntityType="DbTradekeralaModel.tbl_Vendor" />
+          <EntitySet Name="tblRegistration" EntityType="DbTradekeralaModel.tblRegistration" />
+          <EntitySet Name="tblreviews" EntityType="DbTradekeralaModel.tblreviews" />
+          <EntitySet Name="tbl_cart" EntityType="DbTradekeralaModel.tbl_cart" />
+          <EntitySet Name="tb_address" EntityType="DbTradekeralaModel.tb_address" />
+          <EntitySet Name="tblOrders" EntityType="DbTradekeralaModel.tblOrders" />
+          <EntitySet Name="tbl_BulkOrder" EntityType="DbTradekeralaModel.tbl_BulkOrder" />
+        </EntityContainer>
+        <ComplexType Name="Relatedpro_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="Int32" Name="Catid" Nullable="true" />
+          <Property Type="String" Name="CatName" Nullable="true" />
+          <Property Type="Int32" Name="Vendor" Nullable="true" />
+          <Property Type="Decimal" Name="ProdNewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="ProdOldPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_NewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_OldPrice" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ProdTitle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ProdDesc" Nullable="true" />
+          <Property Type="String" Name="ProdInfo" Nullable="true" />
+          <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Weight" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="Bestsell" Nullable="true" />
+          <Property Type="Boolean" Name="Isoffer" Nullable="true" />
+          <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IsRelatedTo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_autocomplete_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_Catautocomplete_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetOffers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="ProdId" Nullable="true" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="Decimal" Name="Oldprice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Newprice" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="sp_newproducts_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="Int32" Name="Catid" Nullable="true" />
+          <Property Type="String" Name="CatName" Nullable="true" />
+          <Property Type="Int32" Name="Vendor" Nullable="true" />
+          <Property Type="Decimal" Name="ProdNewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="ProdOldPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_NewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_OldPrice" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ProdTitle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ProdDesc" Nullable="true" />
+          <Property Type="String" Name="ProdInfo" Nullable="true" />
+          <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Weight" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="Bestsell" Nullable="true" />
+          <Property Type="Boolean" Name="Isoffer" Nullable="true" />
+          <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IsRelatedTo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_Offer_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Pid" Nullable="true" />
+          <Property Type="Int32" Name="Offer_Id" Nullable="true" />
+          <Property Type="String" Name="ProdName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Discount" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="NewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DollarPrice" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Trending_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="pro_id" Nullable="true" />
+          <Property Type="String" Name="pro_name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="AddedDate" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tbl_ProductOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Offer_Id" Type="Int32" />
+          <Property Name="ProdName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DollarPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="tbl_TodaysDeal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Offer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProdName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DollarPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <ComplexType Name="sp_TrendPro_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="ProdName" Nullable="true" />
+          <Property Type="Int32" Name="Catid" Nullable="true" />
+          <Property Type="String" Name="CatName" Nullable="true" />
+          <Property Type="Int32" Name="Vendor" Nullable="true" />
+          <Property Type="Decimal" Name="ProdNewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="ProdOldPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_NewPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Dollar_OldPrice" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ProdTitle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ProdDesc" Nullable="true" />
+          <Property Type="String" Name="ProdInfo" Nullable="true" />
+          <Property Type="String" Name="Brand" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Weight" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="Bestsell" Nullable="true" />
+          <Property Type="Boolean" Name="Isoffer" Nullable="true" />
+          <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IsRelatedTo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ParCategories" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tb_TopCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cat_Id" Type="Int32" />
+          <Property Name="Cat_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vw_TodaysDeals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="ProdName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Catid" Type="Int32" />
+          <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Offer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vw_DealsOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Offer_Id" Type="Int32" />
+          <Property Name="ProdName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Vendor" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Expr1" Type="Int32" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_TopBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand_Id" Type="Int32" />
+          <Property Name="Brand_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblNewsletter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fromemail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Banner">
+          <Key>
+            <PropertyRef Name="Banner_id" />
+          </Key>
+          <Property Name="Banner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BannerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Related_To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="log_Id" />
+          </Key>
+          <Property Name="log_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastlogin" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_PreBooking">
+          <Key>
+            <PropertyRef Name="Pre_Id" />
+          </Key>
+          <Property Name="Pre_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="Int64" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pro_Enquiry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pro_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Delivary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_JobSeeker">
+          <Key>
+            <PropertyRef Name="Seeker_Id" />
+          </Key>
+          <Property Name="Seeker_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Seerker_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Applied" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resume" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Job">
+          <Key>
+            <PropertyRef Name="Job_Id" />
+          </Key>
+          <Property Name="Job_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="job_Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="key_skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Posted_date" Type="DateTime" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_SellerImage">
+          <Key>
+            <PropertyRef Name="SelImage_Id" />
+          </Key>
+          <Property Name="SelImage_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor_id" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblRecentView">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="pid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Notfication">
+          <Key>
+            <PropertyRef Name="Noti_Id" />
+          </Key>
+          <Property Name="Noti_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_id" Type="Int64" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Organic">
+          <Key>
+            <PropertyRef Name="Organic_Id" />
+          </Key>
+          <Property Name="Organic_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Organic_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="ComplexType1" />
+        <EntityType Name="tbl_Logistics">
+          <Key>
+            <PropertyRef Name="Logistic_Id" />
+          </Key>
+          <Property Name="Logistic_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Log_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_One" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_Two" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_Three" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_Four" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_Five" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Pincode">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Taluk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_HidedProducts">
+          <Key>
+            <PropertyRef Name="Current_Pid" />
+          </Key>
+          <Property Name="Current_Pid" Type="Int32" Nullable="false" />
+          <Property Name="ProdName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Catid" Type="Int32" />
+          <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor" Type="Int32" />
+          <Property Name="ProdNewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ProdOldPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Dollar_NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Dollar_OldPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ProdTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProdDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProdInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Width" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Bestsell" Type="Boolean" />
+          <Property Name="Isoffer" Type="Boolean" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsRelatedTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParCategories" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Organic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_HiddenImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prodid" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Catid" Type="Int32" />
+          <Property Name="CatName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor" Type="Int32" />
+          <Property Name="ProdNewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ProdOldPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Dollar_NewPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Dollar_OldPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ProdTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProdDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProdInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Width" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Bestsell" Type="Boolean" />
+          <Property Name="Isoffer" Type="Boolean" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsRelatedTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParCategories" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Organic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCategory" Relationship="DbTradekeralaModel.FK_tblProduct_tblCategory" FromRole="tblProduct" ToRole="tblCategory" />
+          <NavigationProperty Name="tblProdImage" Relationship="DbTradekeralaModel.FK_tblProdImage_tblProduct" FromRole="tblProduct" ToRole="tblProdImage" />
+        </EntityType>
+        <Association Name="FK_tblProduct_tblCategory">
+          <End Type="DbTradekeralaModel.tblCategory" Role="tblCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTradekeralaModel.tblProduct" Role="tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="Catid" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Catid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProdImage_tblProduct">
+          <End Type="DbTradekeralaModel.tblProduct" Role="tblProduct" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTradekeralaModel.tblProdImage" Role="tblProdImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="tblProdImage">
+              <PropertyRef Name="Prodid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Vendor">
+          <Key>
+            <PropertyRef Name="Vendor_id" />
+          </Key>
+          <Property Name="Vendor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LandLine" Type="Int64" />
+          <Property Name="Pro_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pro_Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SignIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblRegistration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblreviews">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prodid" Type="Int32" />
+          <Property Name="starValue" Type="Int32" />
+          <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reviews" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prod_id" Type="Int32" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pro_qty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub_total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shipping" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gift_wrap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Int64" />
+          <Property Name="pincode" Type="Int64" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblOrders">
+          <Key>
+            <PropertyRef Name="Orderno" />
+          </Key>
+          <Property Name="Orderno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Userid" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ProId" Type="Int32" />
+          <Property Name="ProdName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor" Type="Int32" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Shipping" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Tax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="Int32" />
+          <Property Name="Gift" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="OrderTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_BulkOrder">
+          <Key>
+            <PropertyRef Name="Bulk_id" />
+          </Key>
+          <Property Name="Bulk_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Delivary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTradekeralaModelStoreContainer" CdmEntityContainer="DbTradekeralaEntities1">
+          <EntitySetMapping Name="tbl_RelatedProducts">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_RelatedProducts">
+              <MappingFragment StoreEntitySet="tbl_RelatedProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Prodct_Id" ColumnName="Prodct_Id" />
+                <ScalarProperty Name="prodct_Name" ColumnName="prodct_Name" />
+                <ScalarProperty Name="Related_Id" ColumnName="Related_Id" />
+                <ScalarProperty Name="Related_Product" ColumnName="Related_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_specialoffer">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_specialoffer">
+              <MappingFragment StoreEntitySet="tbl_specialoffer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="offer_name" ColumnName="offer_name" />
+                <ScalarProperty Name="offer_image" ColumnName="offer_image" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_trendingProducts">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_trendingProducts">
+              <MappingFragment StoreEntitySet="tbl_trendingProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_wishlist">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_wishlist">
+              <MappingFragment StoreEntitySet="tbl_wishlist">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+                <ScalarProperty Name="pro_image" ColumnName="pro_image" />
+                <ScalarProperty Name="pro_qty" ColumnName="pro_qty" />
+                <ScalarProperty Name="vendor_name" ColumnName="vendor_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBrands">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblBrand">
+              <MappingFragment StoreEntitySet="tblBrand">
+                <ScalarProperty Name="Brandid" ColumnName="Brandid" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandLogo" ColumnName="BrandLogo" />
+                <ScalarProperty Name="BrandDesc" ColumnName="BrandDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCarts">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblCart">
+              <MappingFragment StoreEntitySet="tblCart">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCategories">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblCategory">
+              <MappingFragment StoreEntitySet="tblCategory">
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Addeddate" ColumnName="Addeddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblfavorites">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblfavorite">
+              <MappingFragment StoreEntitySet="tblfavorite">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProdImages">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblProdImage">
+              <MappingFragment StoreEntitySet="tblProdImage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSales">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblSale">
+              <MappingFragment StoreEntitySet="tblSale">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+                <ScalarProperty Name="Oldprice" ColumnName="Oldprice" />
+                <ScalarProperty Name="Newprice" ColumnName="Newprice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStocks">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblStock">
+              <MappingFragment StoreEntitySet="tblStock">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Dollar__Price" ColumnName="Dollar _Price" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Totalamount" ColumnName="Totalamount" />
+                <ScalarProperty Name="DollarAmount" ColumnName="DollarAmount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Relatedpro" FunctionName="DbTradekeralaModel.Store.Relatedpro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.Relatedpro_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+                <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+                <ScalarProperty Name="Dollar_NewPrice" ColumnName="Dollar_NewPrice" />
+                <ScalarProperty Name="Dollar_OldPrice" ColumnName="Dollar_OldPrice" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+                <ScalarProperty Name="ProdInfo" ColumnName="ProdInfo" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+                <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_autocomplete" FunctionName="DbTradekeralaModel.Store.sp_autocomplete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_autocomplete_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Catautocomplete" FunctionName="DbTradekeralaModel.Store.sp_Catautocomplete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_Catautocomplete_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_GetOffers" FunctionName="DbTradekeralaModel.Store.Sp_GetOffers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.Sp_GetOffers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProdId" ColumnName="ProdId" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Oldprice" ColumnName="Oldprice" />
+                <ScalarProperty Name="Newprice" ColumnName="Newprice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_newproducts" FunctionName="DbTradekeralaModel.Store.sp_newproducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_newproducts_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+                <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+                <ScalarProperty Name="Dollar_NewPrice" ColumnName="Dollar_NewPrice" />
+                <ScalarProperty Name="Dollar_OldPrice" ColumnName="Dollar_OldPrice" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+                <ScalarProperty Name="ProdInfo" ColumnName="ProdInfo" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+                <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Offer" FunctionName="DbTradekeralaModel.Store.sp_Offer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_Offer_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Offer_Id" ColumnName="Offer_Id" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="DollarPrice" ColumnName="DollarPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchdummy" FunctionName="DbTradekeralaModel.Store.sp_searchdummy" />
+          <FunctionImportMapping FunctionImportName="sp_Trending" FunctionName="DbTradekeralaModel.Store.sp_Trending">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_Trending_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_ProductOffer">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_ProductOffer">
+              <MappingFragment StoreEntitySet="tbl_ProductOffer">
+                <ScalarProperty Name="DollarPrice" ColumnName="DollarPrice" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Offer_Id" ColumnName="Offer_Id" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TodaysDeal">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_TodaysDeal">
+              <MappingFragment StoreEntitySet="tbl_TodaysDeal">
+                <ScalarProperty Name="DollarPrice" ColumnName="DollarPrice" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Offer_Name" ColumnName="Offer_Name" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_TrendPro" FunctionName="DbTradekeralaModel.Store.sp_TrendPro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbTradekeralaModel.sp_TrendPro_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+                <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+                <ScalarProperty Name="Dollar_NewPrice" ColumnName="Dollar_NewPrice" />
+                <ScalarProperty Name="Dollar_OldPrice" ColumnName="Dollar_OldPrice" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+                <ScalarProperty Name="ProdInfo" ColumnName="ProdInfo" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+                <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+                <ScalarProperty Name="ParCategories" ColumnName="ParCategories" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tb_TopCategory">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tb_TopCategory">
+              <MappingFragment StoreEntitySet="tb_TopCategory">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Cat_Name" ColumnName="Cat_Name" />
+                <ScalarProperty Name="Cat_Id" ColumnName="Cat_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_TodaysDeals">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.Vw_TodaysDeals">
+              <MappingFragment StoreEntitySet="Vw_TodaysDeals">
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Offer_Name" ColumnName="Offer_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_DealsOffer">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.Vw_DealsOffer">
+              <MappingFragment StoreEntitySet="Vw_DealsOffer">
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Offer_Id" ColumnName="Offer_Id" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_TopBrand">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tb_TopBrand">
+              <MappingFragment StoreEntitySet="tb_TopBrand">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNewsletters">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblNewsletter">
+              <MappingFragment StoreEntitySet="tblNewsletter">
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="Fromemail" ColumnName="Fromemail" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Banner">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Banner">
+              <MappingFragment StoreEntitySet="tbl_Banner">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BannerImage" ColumnName="BannerImage" />
+                <ScalarProperty Name="Related_To" ColumnName="Related_To" />
+                <ScalarProperty Name="BannerName" ColumnName="BannerName" />
+                <ScalarProperty Name="Banner_id" ColumnName="Banner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLogins">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblLogin">
+              <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="log_Id" ColumnName="log_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PreBooking">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_PreBooking">
+              <MappingFragment StoreEntitySet="tbl_PreBooking">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Delivary" ColumnName="Delivary" />
+                <ScalarProperty Name="Pro_Image" ColumnName="Pro_Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Pro_Enquiry" ColumnName="Pro_Enquiry" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pre_Id" ColumnName="Pre_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_JobSeeker">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_JobSeeker">
+              <MappingFragment StoreEntitySet="tbl_JobSeeker">
+                <ScalarProperty Name="Resume" ColumnName="Resume" />
+                <ScalarProperty Name="Job_Applied" ColumnName="Job_Applied" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Seerker_Name" ColumnName="Seerker_Name" />
+                <ScalarProperty Name="Seeker_Id" ColumnName="Seeker_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Job">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Job">
+              <MappingFragment StoreEntitySet="tbl_Job">
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Posted_date" ColumnName="Posted_date" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="key_skills" ColumnName="key_skills" />
+                <ScalarProperty Name="Job_Description" ColumnName="Job_Description" />
+                <ScalarProperty Name="job_Category" ColumnName="job_Category" />
+                <ScalarProperty Name="Job_Name" ColumnName="Job_Name" />
+                <ScalarProperty Name="Job_Id" ColumnName="Job_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SellerImage">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_SellerImage">
+              <MappingFragment StoreEntitySet="tbl_SellerImage">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
+                <ScalarProperty Name="SelImage_Id" ColumnName="SelImage_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRecentView">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblRecentView">
+              <MappingFragment StoreEntitySet="tblRecentView">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Notfication">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Notfication">
+              <MappingFragment StoreEntitySet="tbl_Notfication">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Noti_Id" ColumnName="Noti_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Organic">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Organic">
+              <MappingFragment StoreEntitySet="tbl_Organic">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Organic_name" ColumnName="Organic_name" />
+                <ScalarProperty Name="Organic_Id" ColumnName="Organic_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_search_products" FunctionName="DbTradekeralaModel.Store.sp_search_products" />
+          <FunctionImportMapping FunctionImportName="sp_search_productspaging" FunctionName="DbTradekeralaModel.Store.sp_search_productspaging" />
+          <FunctionImportMapping FunctionImportName="sp_Search_Today" FunctionName="DbTradekeralaModel.Store.sp_Search_Today" />
+          <FunctionImportMapping FunctionImportName="sp_Search_Deals" FunctionName="DbTradekeralaModel.Store.sp_Search_Deals" />
+          <EntitySetMapping Name="tbl_Logistics">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Logistics">
+              <MappingFragment StoreEntitySet="tbl_Logistics">
+                <ScalarProperty Name="category_Five" ColumnName="category_Five" />
+                <ScalarProperty Name="category_Four" ColumnName="category_Four" />
+                <ScalarProperty Name="category_Three" ColumnName="category_Three" />
+                <ScalarProperty Name="category_Two" ColumnName="category_Two" />
+                <ScalarProperty Name="category_One" ColumnName="category_One" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="Log_Name" ColumnName="Log_Name" />
+                <ScalarProperty Name="Logistic_Id" ColumnName="Logistic_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Pincode">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Pincode">
+              <MappingFragment StoreEntitySet="tbl_Pincode">
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="Taluk" ColumnName="Taluk" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Post_id" ColumnName="Post_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_HidedProducts">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_HidedProducts">
+              <MappingFragment StoreEntitySet="tbl_HidedProducts">
+                <ScalarProperty Name="Organic" ColumnName="Organic" />
+                <ScalarProperty Name="ParCategories" ColumnName="ParCategories" />
+                <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+                <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ProdInfo" ColumnName="ProdInfo" />
+                <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="Dollar_OldPrice" ColumnName="Dollar_OldPrice" />
+                <ScalarProperty Name="Dollar_NewPrice" ColumnName="Dollar_NewPrice" />
+                <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+                <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="Current_Pid" ColumnName="Current_Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_HiddenImage">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_HiddenImage">
+              <MappingFragment StoreEntitySet="tbl_HiddenImage">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProduct">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblProduct">
+              <MappingFragment StoreEntitySet="tblProduct">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Organic" ColumnName="Organic" />
+                <ScalarProperty Name="ParCategories" ColumnName="ParCategories" />
+                <ScalarProperty Name="IsRelatedTo" ColumnName="IsRelatedTo" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Isoffer" ColumnName="Isoffer" />
+                <ScalarProperty Name="Bestsell" ColumnName="Bestsell" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ProdInfo" ColumnName="ProdInfo" />
+                <ScalarProperty Name="ProdDesc" ColumnName="ProdDesc" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="Dollar_OldPrice" ColumnName="Dollar_OldPrice" />
+                <ScalarProperty Name="Dollar_NewPrice" ColumnName="Dollar_NewPrice" />
+                <ScalarProperty Name="ProdOldPrice" ColumnName="ProdOldPrice" />
+                <ScalarProperty Name="ProdNewPrice" ColumnName="ProdNewPrice" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Catid" ColumnName="Catid" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Vendor">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_Vendor">
+              <MappingFragment StoreEntitySet="tbl_Vendor">
+                <ScalarProperty Name="SignIn" ColumnName="SignIn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Pro_Info" ColumnName="Pro_Info" />
+                <ScalarProperty Name="Pro_Image" ColumnName="Pro_Image" />
+                <ScalarProperty Name="LandLine" ColumnName="LandLine" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
+                <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRegistration">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblRegistration">
+              <MappingFragment StoreEntitySet="tblRegistration">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="RegMobile" ColumnName="RegMobile" />
+                <ScalarProperty Name="RegPassword" ColumnName="RegPassword" />
+                <ScalarProperty Name="RegEmail" ColumnName="RegEmail" />
+                <ScalarProperty Name="RegName" ColumnName="RegName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblreviews">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblreviews">
+              <MappingFragment StoreEntitySet="tblreviews">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="reviews" ColumnName="reviews" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="starValue" ColumnName="starValue" />
+                <ScalarProperty Name="prodid" ColumnName="prodid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_cart">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_cart">
+              <MappingFragment StoreEntitySet="tbl_cart">
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="Gift_wrap" ColumnName="Gift_wrap" />
+                <ScalarProperty Name="shipping" ColumnName="shipping" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+                <ScalarProperty Name="pro_qty" ColumnName="pro_qty" />
+                <ScalarProperty Name="pro_image" ColumnName="pro_image" />
+                <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_address">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tb_address">
+              <MappingFragment StoreEntitySet="tb_address">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tblOrders">
+              <MappingFragment StoreEntitySet="tblOrders">
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
+                <ScalarProperty Name="Gift" ColumnName="Gift" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+                <ScalarProperty Name="ProId" ColumnName="ProId" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Invoice_Id" ColumnName="Invoice_Id" />
+                <ScalarProperty Name="Orderno" ColumnName="Orderno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BulkOrder">
+            <EntityTypeMapping TypeName="DbTradekeralaModel.tbl_BulkOrder">
+              <MappingFragment StoreEntitySet="tbl_BulkOrder">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Delivary" ColumnName="Delivary" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Bulk_id" ColumnName="Bulk_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

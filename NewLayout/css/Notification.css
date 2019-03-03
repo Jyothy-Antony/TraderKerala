@@ -1,0 +1,127 @@
+﻿li.dropdown.head-dpdn {
+    display: inline-block;
+    padding: 1.25em 0;
+    float: left;
+}
+/*li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 0.5em .7em;
+    background: #629aa9;
+    margin: 0 .5em;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}*/
+.header-left i.fa.fa-bell {
+    color: #fff;
+    font-size: 14px;
+}
+.header-left span.blue {
+    background-color: #2dde98;
+}
+.header-left span.badge1 {
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFF;
+    background: #ff6c5f;
+    line-height: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    top: 16%;
+    padding: 2px 0 0;
+}
+.badge1 {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #04143f;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: super;
+    background-color: #fff;
+    border-radius: 10px;
+}
+ul.dropdown-menu {
+    padding: 1em;
+    min-width: 280px;
+    top: 101%;
+}
+ul.dropdown-menu {
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+/*ul.dropdown-menu li {
+    margin-left: 0;
+    width: 100%;
+    padding: 0;
+    background: #fff;
+}*/
+.notification_header {
+    background-color: #FAFAFA;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+}
+.notification_header h3 {
+    color: #6A6A6A;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+}
+.user_img {
+    float: left;
+    width: 19%;
+}
+.notification_desc {
+    float: left;
+    width: 70%;
+    margin-left: 5%;
+}
+.notification_desc p {
+    color: #757575;
+    font-size: 13px;
+    padding: 2px 0;
+}
+.notification_bottom {
+    background-color: rgba(200, 129, 230, 0.14);
+    padding: 4px 0;
+    text-align: center;
+    margin-top: 5px;
+}
+.notification_bottom a {
+    color: #6F6F6F;
+    font-size: 1em;
+}
+.header-left i.fa.fa-bell {
+    color: #fff;
+    font-size: 14px;
+}
+
+
+/*i.fa.fa-bell:active, :focus, :hover {
+    outline: 0 !important;
+    -webkit-tap-highlight-color: transparent !important;
+}*/
+
+
+.badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10px;
+}

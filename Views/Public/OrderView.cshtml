@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "OrderView";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tb_address ad = ViewBag.address;
+
+    decimal other = 0;
+    decimal Gtotal = 0;
+
+}
+<style>
+  table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border:3px solid #021035;
+        text-align: center;
+        padding: 8px;
+
+    }
+    th,td {
+                            background-color: #fff;
+                            font-weight:bold;
+                        }
+
+    th{
+        padding-top:15px;
+    }
+    </style>
+
+<div class="container" style="margin-bottom:20px;margin-top:20px;">
+  
+    <div class="row color-invoice" style="padding-top:2px;">
+        <h2 style="margin:0px;text-align:center;padding-top: 15px">Final Details of your Order</h2>
+        <div class="col-md-12">
+
+            #Sr. No: @ViewBag.invoice_number
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:100px;padding-right:0px;">
+                    <h1>INVOICE</h1>
+                    <br />
+                    <strong>Email:</strong> info@traderkerala.com
+                    <br />
+                    <strong>Call:</strong> +91 9605894561
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5" style="padding-left:100px;padding-right:0px;">
+                    <h2>   TraderKerala</h2> Hornbill Ventures Pvt.Ltd
+                    <br />Box No – 850
+                    <br />Poothole,
+                    <br />Thrissur – 680004 Kerala
+                </div>
+            </div>
+            
+              
+                  <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:100px;padding-right:0px;">
+                   
+                    <h3>Client Details : </h3>
+                    <h5>@ad.fullname</h5> @ad.Address
+                    <br /> @ad.pincode
+                    <br /> @ad.city
+                    <br /> @ad.state
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5" style="padding-left:100px;padding-right:0px;">
+                    <h3>Client Contact :</h3> Mob: @ad.Phone
+                    <br> email: @ad.user_Id;
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <strong>ITEM DESCRIPTION & DETAILS :</strong>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Perticulars</th>
+                                    <th>Quantity.</th>
+                                    <th>Unit Price</th>
+                                    <th>Other Charges</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (TradeKerala2017.Models.tblOrders ct in ViewBag.Order)
+                                    {
+
+                                        decimal tax = 0;
+                                        decimal ship = 0;
+                                        decimal gift = 0;
+
+                                        <tr style="height:70px">
+                                            <td>
+                                                <div class="col-sm-10">
+                                                    <h4 class="nomargin" style="margin-top:10px;">@ct.ProdName</h4>
+                                                </div>
+                                            </td>
+                                            <td style="padding-top:25px;">  @ct.Qty</td>
+                                            <td style="padding-top:25px;"> &#8377 @ct.Total</td>
+                                            @{
+                                                tax = Convert.ToDecimal(ct.Tax);
+                                                ship = Convert.ToDecimal(ct.Shipping);
+                                                gift = Convert.ToDecimal(ct.Gift);
+                                                other = Convert.ToDecimal(tax + ship + gift);
+                                            }
+                                            <td style="padding-top:25px;"> &#8377 @other</td>
+                                        </tr>
+                                                }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div style="margin-left:850px;">
+                        <h4>  Total :@{decimal sum = 0;
+                            foreach (TradeKerala2017.Models.tblOrders ct in ViewBag.Order)
+                            {
+
+
+                                sum = sum + Convert.ToDecimal(@ct.Total);
+
+                            }
+                        }
+                                 @sum 
+    </h4>
+                    </div>
+                    <hr>
+                    <div style="margin-left:850px;">
+                        <h4>  Taxes :@{
+
+                            decimal t = 0;
+                            decimal s = 0;
+                            decimal g = 0;
+                            decimal ot = 0;
+                            decimal sumot = 0;
+                            foreach (TradeKerala2017.Models.tblOrders ct in ViewBag.Order)
+                            {
+
+
+                                t = Convert.ToDecimal(ct.Tax);
+                                s = Convert.ToDecimal(ct.Shipping);
+                                g = Convert.ToDecimal(ct.Gift);
+                                ot = Convert.ToDecimal(t + s + g);
+                                sumot = sumot + ot;
+                            }
+                        }
+                        @sumot
+</h4>
+                    </div>
+                    <hr>
+                    <div style="margin-left:850px;">
+                        <h3>  Bill Amount : @{
+                            decimal total = 0;
+                            foreach (TradeKerala2017.Models.tblOrders ct in ViewBag.Order)
+                            {
+
+
+                                total = total + Convert.ToDecimal(@ct.Total);
+
+                            }
+
+                            Gtotal = total + sumot;
+
+                        } @Gtotal   </h3>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <strong> Important: </strong>
+                    <Ul>
+                        <li>
+                            the above charges include charges incurred by your account as well as by all account you are responsible for through consolidated billing
+
+                        </li>
+                        <li>
+                            for further complaints and details of billing please contact our customer services
+                        </li>
+                        <li>
+                            thank you for using traderKerala services
+                            <br />
+                            sincereley,
+                            <br />
+                            the TraderKerala Team.
+                        </li>
+                    </Ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <a href="#" class="btn btn-success btn-sm">Print Invoice</a>
+                    <a href="#" class="btn btn-info btn-sm">Download In Pdf</a>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.color-invoice{
+  background-color: #ffffff;
+    border: 1px solid #d7d7d7;
+    padding-top:100px;
+    padding-bottom:100px;
+}
+</style>
+
+
+
+
+
+
+

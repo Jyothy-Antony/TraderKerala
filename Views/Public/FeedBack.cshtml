@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "FeedBack";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+
+
+<style>
+
+
+    
+.btn1 
+{
+    color: #fff;
+    background-color: #04143f !important;
+    border-color: #04143f;
+}
+
+.btn1:hover
+{
+    color: #fff;
+    background-color: #04143f !important;
+    border-color: #04143f;
+}
+    /*Contact sectiom*/
+.content-header{
+  font-family: 'Oleo Script', cursive;
+  color:#fcc500;
+  font-size: 45px;
+}
+
+.section-content{
+  text-align: center; 
+
+}
+#contact{
+    
+    font-family: 'Teko', sans-serif;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  width: 100%;
+  width: 100vw;
+  /*background: #3a6186;*/ /* fallback for old browsers */
+  /*background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
+  /*background: linear-gradient(to left, #3a6186 , #89253e);*/
+    color : #04143f;    
+}
+.contact-section{
+  padding-top: 40px;
+}
+.contact-section .col-md-6{
+  width: 50%;
+}
+
+.form-line{
+  border-right: 1px solid #B29999;
+}
+
+.form-group{
+  margin-top: 10px;
+}
+label{
+  font-size: 1.3em;
+  line-height: 1em;
+  font-weight: normal;
+}
+.form-control{
+  font-size: 1.3em;
+  color: #080808;
+}
+textarea.form-control {
+    height: 135px;
+   /* margin-top: px;*/
+}
+
+.submit{
+  font-size: 1.1em;
+  float: right;
+  width: 150px;
+  background-color: transparent;
+  color: #fff;
+
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:10px;
+    width: 30%;
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+<section id="contact" >
+    
+    <div class="section-content">
+       
+        <h1 class="section-header">Get in <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Touch with us</span></h1>
+    </div>
+
+    <div class="col-md-4"><img class="img-responsive center"  src="~/images/gmail.png" /><p style="text-align:center"><b>Email us at:<br />info@traderkerala.com</b></p></div>
+    <div class="col-md-4"><img class="img-responsive center" src="~/images/emergency-call.png" /><p style="text-align:center"><b>Call us at :<br />+91-8921770711</b></p></div>
+    <div class="col-md-4"><img class="img-responsive center"  src="~/images/envelope.png"  /><p style="text-align:center"><b>Write us at:<br />Hornbill Ventures Pvt.Ltd<br />
+BOX NO – 850<br />
+Poothole,<br />
+Thrissur – 680004
+Kerala</b></p></div>
+    <div class="x_content">
+        <label>@ViewBag.Message</label>
+        <div class="alert alert-success alert-dismissable fade in" style="background-color: #1b2c58;color:white">
+
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+            <strong style="text-align:center">
+                <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+            </strong>
+        </div>
+    </div>
+    <div class="contact-section container">
+        <div class="">
+            <form action="FeedBack" method="post">
+                <div class="col-md-6 col-sm-6 col-xs-6 form-line">
+                    <div class="form-group">
+                        <label for="exampleInputUsername">Your name</label>
+                        <input type="text" class="form-control" placeholder="Enter Name" name="Name" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail">Email Address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter Email id" name="Email" required="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description"> Message</label>
+                        <textarea class="form-control" id="description" placeholder="Enter Your Message" name="Message" required=""></textarea>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default btn1 submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+</script>

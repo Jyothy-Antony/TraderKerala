@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "JobSeekers";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    String Message = "";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    int t;
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+    }
+    catch
+    {
+    }
+}
+
+<h2>JobSeekers</h2>
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Add Job vacancies <small>Details of Job vacancies</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <label>@ViewBag.Message</label>
+                <div class="alert alert-success alert-dismissable fade in">
+
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+
+                </div>
+                <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="Job Seeker" data-sortable="true">Job Seeker</th>
+                            <th data-field="Address" data-sortable="true">Address</th>
+                            <th data-field="contact" data-sortable="true">contact</th>
+                            <th data-field="email" data-sortable="true">Email</th>
+                            <th data-field="Job Applied" data-sortable="true">Job Applied For</th>
+                            <th data-field="Qualifications" data-sortable="true">Qualification</th>
+                            <th data-field="Resume" data-sortable="true">Resume/cv</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+
+                    @{
+
+                        foreach (TradeKerala2017.Models.tbl_JobSeeker tc in db.tbl_JobSeeker.ToList())
+                        {
+                           t = Convert.ToInt32(tc.Job_Applied);
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => @tc.Seerker_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => @tc.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => @tc.Contact)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => @tc.Email)
+                                </td>
+                                <td>
+                                   
+                                    @foreach(TradeKerala2017.Models.tbl_Job jb in db.tbl_Job.Where(i=>i.Job_Id==t).ToList())
+                                        {
+                                    @Html.DisplayFor(modelItem => @jb.Job_Name)
+                                }
+                                   </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => @tc.Qualification)
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm"  href="@tc.Resume" >Resume<span class="fa fa-arrow-circle-right"></span></a>
+                                </td>
+                                <td><a class="btn btn-primary btn-sm"  href="~/Admin/DeleteJobseeker?id=@tc.Seeker_Id"><i class="fa fa-trash-o" aria-hidden="true" title="Delete Details" onclick="return confirm('Do You Want To Delete?')">Delete</i></a></td>
+
+                            </tr>
+                        }
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

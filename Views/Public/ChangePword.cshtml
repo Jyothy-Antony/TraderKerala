@@ -1,0 +1,124 @@
+﻿@{
+    Layout = null;
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblLogin log = ViewBag.email;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Trader Kerala</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="~/NewLayout/css/style.css">
+
+
+    <link href="~/NewLayout/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/NewLayout/css/bootstrap.min.css">
+    <script src="~/NewLayout/js/jquery.min.js"></script>
+    <script src="~/NewLayout/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/NewLayout/css/animate.min.css">
+
+
+    <link href="~/NewLayout/css/instyle.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="~/NewLayout/css/main.css" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        @@media screen and (min-width: 500px) {
+            .logi {
+                width: 70%;
+            }
+        }
+
+        @@media screen and (min-width: 700px) {
+            .logi {
+                width: 50%;
+            }
+        }
+
+        @@media screen and (min-width: 1000px) {
+            .logi {
+                width: 40%;
+            }
+        }
+
+        @@media screen and (min-width: 1200px) {
+            .logi {
+                width: 35%;
+            }
+        }
+
+        @@media screen and (min-width: 1400px) {
+            .logi {
+                width: 30%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+
+
+
+    <div class="container" align="center">
+
+        <a href="~/Public/NewIndex"> <img src="~/NewLayout/images/Logo.png" alt="" class="img-responsive logi" style="max-width:25%"> </a>
+
+        <div class="log_box1" style="min-height:initial">
+            <h2 class="">Create Password</h2>
+
+
+            <form action="ChangePword" method="post">
+                <label>Password</label>
+                <input type="password" value="" class="form-control review_box" placeholder="Atleast 6 character" name="Password" required="">
+                <label>Confirm Password</label>
+                <input type="password" value="" class="form-control review_box" placeholder="Re-enter Password" name="confirm_Password" required="">
+                <label style="color:red;text-align:center">@ViewBag.Message</label>
+                <br />
+                <input type="hidden" name="log_email" value="@log.username" />
+                <button type="submit" class="form-control btn btn-warning">
+                    Confirm
+                </button>
+            </form>
+        </div>
+        <hr />
+        <p> © 2017 Trader Kerala. All rights reserved | Design by - <a href="#">Fabstudioz</a></p>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+

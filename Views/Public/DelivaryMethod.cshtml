@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.tb_address ad = ViewBag.address;
+}
+
+<style>
+  
+    label {
+        font-weight: 300;
+        line-height: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    hr {
+        margin: 0px;
+    }
+
+    input[type="radio"] {
+        margin-top: 7px;
+    }
+    @@media screen and (max-width: 768px) {
+        #add{ margin-left:0px !important;padding:0px;}
+        #del {margin-right:0px !important;padding:0px;
+        }
+        .container-fluid{
+            padding:0px;
+        }
+   h3{font-size:20px;}
+    }
+</style>
+<div class="grid_3 grid_5" style="margin:25px;">
+    <h3>Choose your delivery options</h3>
+    <hr style="margin:20px;" />
+    <div class="container-fluid">
+        <div class="row col-md-4 col-sm-4 col-xs-6 "  id="add" style="float:left; margin-left:25px">
+            <h3>Shipping from TraderKerala</h3>
+            <h5>
+    Deliver to:</h5>
+            <p>
+                @ad.fullname &nbsp;
+                <br /> @ad.Address  &nbsp;
+                <br />@ad.pincode &nbsp;
+                <br /> @ad.city
+                <br /> @ad.state
+                <br />
+                @ad.Phone
+            </p> 
+           
+            @*<div class="col-md-6 col-xs-6 col-sm-6 ">
+                <div class="panel panel-info" style="width:650px">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @{
+                            foreach (TradeKerala2017.Models.tbl_cart ct in ViewBag.cartlist)
+                            {
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <h4 class="product-name">@ct.pro_name</h4>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="col-xs-6">
+                                            <h6><strong>@ct.pro_qty</strong></h6>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <h6><strong>@ct.pro_price</strong></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            }
+                        }
+                       
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <div class="row col-md-4 col-sm-4 col-xs-6" id="del" style="float:right;margin-right:10%">
+            <h3>Delivary Options</h3>
+            <form action="DelivaryMethod" method="post">
+                <div class="form-group">
+                    <label for="radio" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10" style="padding:0px;">
+                        <div class="radio-inline" style="display:inline-grid">
+                            <label><input type="radio" name="delivary" value="1" checked> Standard delivary</label>
+                            <label><input type="radio" name="delivary" value="1"> scheduled delivary</label>
+                            <label><input type="radio" name="delivary" value="1"> Oneday delivary</label>
+                            <label><input type="radio" name="delivary" value="1"> Twoday Delivary</label>
+                            <label><input type="radio" name="delivary" value="1"> Normal Delivary</label>
+                            <label><input type="radio" name="delivary" value="1"> Fastrack Delivary</label>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning btn-block" style="width:326px;float:right;">
+                        Continue
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

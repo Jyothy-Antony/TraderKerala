@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "EditMail";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblRegistration reg = ViewBag.RegDetail;
+    int con = ViewBag.Confirm;
+
+    String Message = "";
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+
+
+<link href="~/NewLayout/css/UserAccount.css" rel="stylesheet" />
+
+
+
+<body>
+    <div  class="container">
+        <div class="row main">
+            <div class="alert alert-success alert-dismissable fade in" style="background-color: #04143f;color:white">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color:white">&times;</a>
+                <strong style="text-align:center">
+                    <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                </strong>
+            </div>
+            <h3 style="display:inline-block">Security Settings</h3>
+            <a href="~/Public/UserAccount" id="button1">Show Account</a>
+            <div class="main-login main-center">
+
+@if (con == 0)
+{
+                <form class="" method="post" action="EditMail">
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Your Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mail-reply" aria-hidden="true"></i></span>
+                                <input type="email" class="form-control" name="Uname"  placeholder="Enter Your Current Email Address" id="Mobile" required="" />
+            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Your Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                <input type="password" name="Pword" placeholder="Enter Your Password" class="form-control"  required="" />
+                         
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <input type="hidden" name="from" value="@ViewBag.from" />
+                        <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Continue</button>
+                    </div>
+                </form>
+}
+else if(con==1)
+{
+
+    <form  method="post" action="Addemail">
+        <div class="form-group">
+            <label for="username" class="cols-sm-2 control-label">Your Email</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mail-reply" aria-hidden="true"></i></span>
+                    <input type="email" class="form-control" name="NewUname" placeholder="Enter Your New Email Address"  required="" />
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Continue</button>
+        </div>
+    </form>
+}
+else if (con == 2)
+{
+    <form method="post" action="AddPword">
+        <div class="form-group">
+            <label for="username" class="cols-sm-2 control-label">Your New Password</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mail-reply" aria-hidden="true"></i></span>
+                    <input type="password" class="form-control" name="npass" minlength="6" placeholder="Enter Your New Password"  required=""  />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="cols-sm-2 control-label">Cofirm Your New Password</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mail-reply" aria-hidden="true"></i></span>
+                    <input type="password" class="form-control" name="cpass" placeholder="Confirm Your New Password"  required=""  />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group ">
+            <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Continue</button>
+        </div>
+    </form>
+
+}
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/NewLayout/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+<script>
+        $(function () {
+
+
+            $(".alert").hide();
+            var msg = $("#Hidmsg").val();
+            if (msg != "") {
+                $(".alert").fadeIn(2000);
+            }
+            else {
+                $(".alert").hide();
+            }
+        });
+</script>

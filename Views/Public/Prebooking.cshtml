@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "Prebooking";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    int user = ViewBag.user;
+
+    String Message = "";
+    string name = ViewBag.name;
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+    }
+    catch
+    {
+    }
+}
+
+<style>
+body{
+	font-family: 'Raleway', sans-serif;
+}
+.colmd3{
+    width:24%!important;
+    margin-right:10px;
+}
+
+.big-price span{
+	color: #333;
+	font-size:40px;
+}
+
+.btn-price{
+       background-color: #5db4c0;
+    color: #fff;
+    border-radius: 4%;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.prices-box{
+	margin:50px 0px;
+}
+
+.top-content{
+	background-color:#4d4d4d;
+	padding:20px;
+}
+
+.bottom-content{
+	background-color:#f6f6f6;
+	padding:60px;
+}
+
+#prices h3{
+	color:#FFF;
+}
+
+#prices .features li{
+	padding:10px;
+}
+
+#prices .btn.btn-default{
+	margin:20px 0px;
+}
+
+#prices .features-border li{
+	border-bottom:1px solid #c7c7c7;
+	padding: 10px 0px;
+}
+
+#prices .features-border li:last-child{
+	border-bottom:1px solid #c7c7c7;
+}
+
+
+
+</style>
+<br />
+<div class="container">
+    <h2 class="head_underscore" style="display:inline-block">Pre Booking  </h2>
+    &nbsp; &nbsp;&nbsp;
+    <small>Please fill the following details for Pre booking product at traderkerala, our team will contact you soon </small>
+
+    <div class="alert alert-success alert-dismissable fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>
+            <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+        </strong>
+    </div>
+
+
+    @if (user > 0)
+    {
+
+        {
+            foreach (TradeKerala2017.Models.tblRegistration tb in db.tblRegistration.Where(i => i.RegEmail == name).ToList())
+            {
+    <div class="tab-content">
+        <div class="tab-pane active" id="horizontal-form">
+            <form class="form-horizontal" action="PreBooking" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Name</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Full_name" maxlength="15" placeholder="Full name of Enquire" required="" value="@tb.RegName">
+                    </div>
+                </div>
+                @foreach (TradeKerala2017.Models.tb_address ad in db.tb_address.Where(i => i.user_Id == name).ToList().Take(1))
+                {
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Address</label>
+                    <div class="col-sm-8 col-md-8">
+                        <textarea class="form-control" name="Address" required="" >
+                            @ad.Address
+                            &nbsp;@ad.pincode
+                            &nbsp;@ad.state
+                        </textarea>
+                    </div>
+                </div>
+                }
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Contact Number</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="contact" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Please enter a valid Contact number" required="" value="@tb.RegMobile">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">E-mail</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="email" class="form-control" name="E-mail" placeholder="xyz@mail.com" required="" readonly="readonly" value="@tb.RegEmail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Product Information</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Pro_Info" placeholder="Product Details" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Quantity</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="number" class="form-control" name="Quant" placeholder="Quantity Needed" min="1"  maxlength="2" pattern="[0-9]{10}" required="">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Product Image</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="file" name="file1" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Delivary Date</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="date" name="deldate" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block" style="width:64%;float:left;margin-left:18%">
+                        Confirm Address
+                    </button>
+                </div>
+            </form>
+            <small>
+                For Further clarification and Enquires
+                please visit <a href="#">Prebooking policies</a>
+            </small>
+        </div>
+    </div>
+            } } }
+    else
+    {
+
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="horizontal-form">
+            <form class="form-horizontal" action="PreBooking" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Name</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Full_name" placeholder="Full name of Enquire" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Address</label>
+                    <div class="col-sm-8 col-md-8">
+                        <textarea class="form-control" name="Address"  required="">
+                            </textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Contact Number</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="contact" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="Please enter a valid Contact number" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">E-mail</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="email" class="form-control" name="E-mail" placeholder="xyz@mail.com"  required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Product Information</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" class="form-control" name="Pro_Info" placeholder="Product Details" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2  control-label">Quantity</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="number" class="form-control" name="Quant" placeholder="Quantity Needed" min="1" required="">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Product Image</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="file" name="file1"  class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Delivary Date</label>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="date" name="deldate"  class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block" style="width:64%;float:left;margin-left:18%">
+                        Confirm Address
+                    </button>
+                </div>
+            </form>
+            <small>For Further clarification and Enquires
+            please visit <a href="#">Prebooking policies</a> </small>
+        </div>
+    </div>
+    }
+
+  
+    @*<section id="prices">
+        <div class="container">
+
+
+            <div class="prices-box">
+                <div class="row">
+                    @{ 
+                        foreach (TradeKerala2017.Models.tbl_PreBooking bk in ViewBag.prebook)
+                        {
+                    <div class="col-lg-3 col-md-3 colmd3 col-sm-4 col-xs-12 price-table aos-init aos-animate well" data-aos="fade-left">
+                        <div class="bottom-content text-center" style="padding-bottom:20px;padding-top:10px;padding-left:30px;padding-right:30px;">
+                            <ul class="features-border list-unstyled" style="margin-bottom:20px;">
+                                <li> @bk.Name</li>
+                                <li> @bk.Pro_Enquiry</li>
+                                <li>Quantity: @bk.Quantity</li>
+                                <li>Delivary: @bk.Delivary</li>
+                            </ul>
+                            <a href="~/Public/Prebookdelete?id=@bk.Pre_Id" class="btn-price">Cancel Booking</a>
+                        </div>
+                    </div>
+                        }
+                        }
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(function () {
+        $(".alert").hide();
+        var msg = $("#Hidmsg").val();
+        if (msg != "") {
+            $(".alert").fadeIn(2000);
+        }
+        else {
+            $(".alert").fadeOut(500);
+        }
+    });
+</script>
+

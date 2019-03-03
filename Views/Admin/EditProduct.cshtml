@@ -1,0 +1,1291 @@
+﻿
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+    String Message = "";
+    TradeKerala2017.Models.DbTradekeralaEntities1 db = new TradeKerala2017.Models.DbTradekeralaEntities1();
+    TradeKerala2017.Models.tblProduct tblProd = ViewBag.ProductDetails;
+    String CategoryName = db.tblCategories.Where(i => i.Catid == tblProd.Catid).FirstOrDefault().CatName;
+
+    try
+    {
+        if (!String.IsNullOrEmpty(Request.QueryString["Msg"].ToString()))
+        {
+            Message = Request.QueryString["Msg"].ToString();
+        }
+
+
+    }
+    catch
+    {
+    }
+    }
+<style>
+    #Sub1, #Sub2, #Sub3,#Sub4 {
+        display: none;
+    }
+
+</style>
+<!-- page content -->
+<script>
+    /*Check box change*/
+    function AddRelated(id) {
+        var data = $("#Hideid").val();
+        debugger;
+        if (data != "") {
+            if ($("#ch-" + id).prop("checked") == true) {
+                data = data + "," + id;
+            }
+            else {
+                data = data.replace("," + id, "");
+                data = data.replace(id + ",", "");
+                data = data.replace(id, "");
+            }
+            $("#Hideid").val(data);
+        }
+        else {
+            data = id;
+            $("#Hideid").val(data);
+        }
+    }
+</script>
+
+
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Edit Products <small>Details of Products</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <label>@ViewBag.Message</label>
+                <div class="alert alert-success alert-dismissable fade in">
+
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>
+                        <input id="Hidmsg" type="hidden" value="@Message" /> @Message
+                    </strong>
+
+                </div>
+                
+                @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @Class = "form-horizontal form-label-left input_mask", @novalidate = "true", @onsubmit = "return SubmitForm()" }))
+                {
+                    <input id="HiddenID" name="HiddenID" type="hidden" value="@tblProd.pid" />
+                    <span class="section">Add Product Details</span>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Product Name<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           
+                            <input id="tags" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtProduct" placeholder="both name(s) e.g Vaporesso VECO Verdampfer" required="required" type="text" value="@tblProd.ProdName">
+
+                        </div>
+                    </div>
+
+                     <!--vendor Details-->
+                                        <span class="section">Vendor Details </span>
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                Vendor Name <span class="required">*</span>
+                                                <br />
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="select2_single form-control col-md-7 col-xs-12" name="Ddvendor" tabindex="-1">
+                                                    <option value="@tblProd.Vendor">
+                                                        @foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == @tblProd.Vendor))
+                                                        {
+                                                            @vd.Vendor_Name;
+                                                        }
+                                                    </option>
+                                                    @{
+                                                        foreach (TradeKerala2017.Models.tbl_Vendor tbB in db.tbl_Vendor.Where(i => i.Status == "Direct").ToList())
+                                                        {
+                                                            <option value="@tbB.Vendor_id">@tbB.Vendor_Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                 <!--vendor Details Ends-->
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="number">
+                            *Your Have Already Selected Vendor as  <span style="color:red"> <b>@foreach (TradeKerala2017.Models.tbl_Vendor vd in db.tbl_Vendor.Where(i => i.Vendor_id == @tblProd.Vendor))
+                            {
+                                @vd.Vendor_Name;
+                            }
+                            </b></span> . If you want to change Vendor please choose again!
+                        </label>
+
+                    </div>
+                    <span class="section">Category Details </span>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                            Category <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="HiddenParentId" name="HiddenParentId" type="hidden" value="@tblProd.Catid" />
+                            <input id="HiddenCatName" name="HiddenCatName" type="hidden" value="" />
+
+                            <select class="select2_single form-control col-md-7 col-xs-12" name="CategoryId" id="Category" tabindex="-1"  onchange="LoadSubCat('Category','Subcat1','Sub1')">
+                                <option value="@tblProd.Catid">@tblProd.CatName</option>
+                                @{
+                                    foreach (TradeKerala2017.Models.tblCategory tbD in db.tblCategories.Where(i => i.ParentId == 0).ToList())
+                                    {
+
+                                        <option value="@tbD.Catid">@tbD.CatName</option>
+                                    }
+                                    }
+                            </select>
+
+
+                        </div>
+                    </div>
+
+                    <!--Subcategory1-->
+                                    <div class="item form-group" id="Sub1">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Sub Category 1 <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="Subcat1" id="Subcat1" tabindex="-1" onchange="LoadSubCat('Subcat1','Subcat2','Sub2')">
+                                                <option></option>
+
+                                            </select>
+
+
+                                        </div>
+                                    </div>
+                     <!--Subcategory End-->
+
+                    <!--Subcategory2-->
+                                    <div class="item form-group" id="Sub2">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Sub Category 2 <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="Subcat2" id="Subcat2" tabindex="-1" onchange="LoadSubCat('Subcat2','Subcat3','Sub3')">
+                                                <option></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                    <!--Subcategory End-->
+
+                    <!--Subcategory3-->
+                                    <div class="item form-group" id="Sub3">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Sub Category 3 <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="Subcat3" id="Subcat3" tabindex="-1" onchange="LoadSubCat('Subcat3','Subcat4','Sub4')">
+                                                <option></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                     <!--Subcategory End-->
+
+                     <!--Subcategory4-->
+
+                                    <div class="item form-group" id="Sub4">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Sub Category 4 <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="Subcat4" id="Subcat4" tabindex="-1" onchange="LoadSubCat('Subcat4','Subcat4','Sub4')">
+                                                <option></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                     <!--Subcategory End-->
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="number">
+                                            *Your Have Already Selected Category/Subcategory as  <span style="color:red"> <b>@CategoryName</b></span> . If you want to change category/subcategory please choose again!
+                                        </label>
+
+                                    </div>
+
+                                    <!--Upload Images-->
+
+                                    <span class="section">Upload Images  <small> [images max of 300 X 300px]</small></span>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Image 1<span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="files" name="files" type="file" class="jFiler-input-choose-btn" multiple alt="Image1"  style="width:497px;" />
+                                          
+                                            @{
+
+                                                try
+                                                {
+
+                                                    foreach (TradeKerala2017.Models.tblProdImage pr in db.tblProdImages.Where(u => u.Prodid == tblProd.pid).ToList())
+                                                    {
+
+                                                    <div class="thumbnail col-md-3 col-sm-3 col-xs-6">
+                                                        <a class="close" href="/Admin/DeleteImage?img=@pr.id&id=@tblProd.pid">×</a>
+                                                        <img src="@pr.Image" class="img-responsive" />
+                                                    </div>
+                                                    }
+                                                }
+                                                catch
+                                                {
+
+                                                }
+
+                                            }
+                                                <input type="hidden" id="HiddenImg1" name="HiddenImg1" value="@tblProd.pid" />
+                                            
+                                          
+                                        </div>
+                                        
+                                    </div>
+
+
+
+
+                                    <span class="section">Title Description</span>
+                                    <!--Description 1-->
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Description<span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <textarea id="txtDesc1" class="form-control" name="txtDesc1" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                                                      data-parsley-validation-threshold="10">@tblProd.ProdTitle</textarea>
+
+                                        </div>
+
+
+                                    </div>
+                                    <!--End---->
+
+                                    <span class="section">Detail Description</span>
+                                    <!--Description 1-->
+                                    <div class="item form-group">
+
+                                        <div class="x_content">
+                                            <div id="alerts"></div>
+                                            <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor1">
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+                                                    <ul class="dropdown-menu"></ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a data-edit="fontSize 5">
+                                                                <p style="font-size:17px">Huge</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-edit="fontSize 3">
+                                                                <p style="font-size:14px">Normal</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-edit="fontSize 1">
+                                                                <p style="font-size:11px">Small</p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+                                                    <div class="dropdown-menu input-append">
+                                                        <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                                        <button class="btn" type="button">Add</button>
+                                                    </div>
+                                                    <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                                </div>
+                                            </div>
+                                            <div id="editor1" class="editor-wrapper">@Html.Raw((String.IsNullOrEmpty(tblProd.ProdDesc) ? "" : tblProd.ProdDesc))</div>
+                                            <textarea name="txtDetailDesc" id="descr" style="display:none;"></textarea>
+                                            <br />
+                                        </div>
+                                    </div>
+                                    <!--End---->
+
+                                                <span class="section">Product Information</span>
+                                    <!--Description 1-->
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                    <textarea id="txtprodinfo" class="form-control" name="txtproductinfo" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="200" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                                                              data-parsley-validation-threshold="10" style="height: 114px;">@Html.Raw((String.IsNullOrEmpty(tblProd.ProdInfo) ? "" : tblProd.ProdInfo))</textarea>
+
+                                                </div>
+
+
+                                                <br /> <br /> <br /><br />   <br /><br />                 <br /><br />
+                                  <!--Colors-->
+
+                                                string statusColor = "";
+                                                if (!String.IsNullOrEmpty(tblProd.Color))
+                                                {
+                                                    statusColor = "checked";
+                                                }
+
+
+
+
+                                                <span class="section">Add Product Colors&nbsp; <input type="checkbox" class="js-switch switchery-small" name="ChkColor" @statusColor value="" id="ChkColor" /></span>
+                                                <section class="SectionColor">
+                                                    <div class="item form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                            Color<span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="col-sm-2 col-xs-5">
+                                                                <input id="txtColor" class="form-control" data-validate-length-range="6" name="txtColor" placeholder="both name(s) e.g RED,GREEN" required="required" value="@tblProd.Color" type="color">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                    <!--End-->
+
+                                     <!--Weight-->
+
+                                                string statusWeight = "";
+                                                if (!String.IsNullOrEmpty(tblProd.Weight))
+                                                {
+                                                    statusWeight = "checked";
+                                                }
+                                                <span class="section">Add Product Weight&nbsp; <input type="checkbox" class="js-switch switchery-small" name="ChkWeight" @statusWeight value="" id="ChkWeight" /></span>
+                                                <section class="SectionWeight">
+                                                    <div class="item form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                            Weight<span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="col-sm-5 col-xs-12">
+                                                                    @{
+                                                                        if (String.IsNullOrEmpty(tblProd.Weight))
+                                                                        {
+                                                                            <input type="number" class="form-control" min="0" name="SelWeight" />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                        string wt = tblProd.Weight.Split(' ')[0];
+                                                                        <input type="number" class="form-control" min="0" value="@wt" name="SelWeight" />
+                                                                        }
+                                                                        }
+                                                            </div>
+                                                            <div class="col-sm-3 col-xs-12">
+                                                                <select class="form-control" name="SelWeightM">
+                                                                    <option value="">Select</option>
+                                                                    @{ 
+                                                                        string Msr = "";
+                                                                        try
+                                                                        {
+                                                                            Msr = tblProd.Weight.Split(' ')[1];
+                                                                        }
+                                                                        catch
+                                                                        {
+
+                                                                        }
+                                                                    }
+                                                                    @{
+                                                                        if (Msr == "Ltr")
+                                                                        {
+                                                                            <option value="Ltr" selected>Ltr</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="Ltr">Ltr</option>
+                                                                        }
+
+                                                                        if (Msr == "KG")
+                                                                        {
+                                                                            <option value="KG" selected>KG</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="KG">KG</option>
+                                                                        }
+                                                                        if (Msr == "GM")
+                                                                        {
+                                                                            <option value="GM" selected>Gram</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="GM">Gram</option>
+                                                                        }
+                                                                        if (Msr == "Ml")
+                                                                        {
+                                                                            <option value="Ml" selected>Ml</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value="Ml">Ml</option>
+                                                                        }
+
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                    <!--End-->
+
+                                                              <!--Size-->
+
+                                                                        string statusSize = "";
+                                                                        if (!String.IsNullOrEmpty(tblProd.Size))
+                                                                        {
+                                                                            statusSize = "checked";
+                                                                        }
+
+
+
+                                                                        <span class="section">Add Product Size&nbsp; <input type="checkbox" @statusSize class="js-switch switchery-small" name="ChkSize" value="" id="ChkSize" /></span>
+                                                                        <section class="SectionSize">
+                                                                            <div class="item form-group">
+                                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                                                    Size<span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                                    <div class="col-sm-5 col-xs-12">
+                                                                                            @{
+                                                                                                try
+                                                                                                {
+                                                                                                    if (String.IsNullOrEmpty(tblProd.Size))
+                                                                                                    {
+                                                                                                        <input type="number" class="form-control" min="0"  name="SelSize" />
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        string WS = tblProd.Size.Split(' ')[0];
+                                                                                                    <input type="number" class="form-control" min="0" value="@WS" name="SelSize" />
+                                                                                                    }
+                                                                                                }
+                                                                                                catch { }
+                                                                                                }
+                                                                                    </div>
+
+                                                                                    <div class="col-sm-3 col-xs-12" >
+                                                                                        <select class="form-control" name="SelSizeM">
+                                                                                           @{
+                                                                                               try
+                                                                                               {
+                                                                                                   if (String.IsNullOrEmpty(tblProd.Size))
+                                                                                                   {
+                                                                                                    <option>Select</option>
+                                                                                                   }
+                                                                                                   else
+                                                                                                   {
+                                                                                                       string siz = tblProd.Size.Split(' ')[1];
+                                                                                                <option value="@siz" selected>@siz</option>}
+                                                                                                   } catch
+                                                                                                   {
+                                                                                                   }
+                                                                                            <option value="Mt">Meter</option>
+                                                                                            <option value="mm">MilliMeter</option>
+                                                                                            <option value="cm">Centimeter</option>
+                                                                                            <option value="ft">Foot</option>
+                                                                                            <option value="In">Inch</option>
+                                                                                        }
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+<!--End-->
+
+
+
+                                                    string statusHeight = "";
+                                                    if (!String.IsNullOrEmpty(tblProd.Height))
+                                                    {
+                                                        statusHeight = "checked";
+                                                    }
+                                                    <span class="section">Add Product Height&nbsp; <input type="checkbox" @statusHeight class="js-switch switchery-small" name="ChkHeight" value="" id="ChkHeight" /></span>
+                                                    <section class="SectionHeight">
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                                Height<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="col-sm-5 col-xs-12">@{
+
+                                                                    if (String.IsNullOrEmpty(tblProd.Height))
+                                                                    {
+                                                                            <input type="number" class="form-control" min="0" name="SelHeight" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        string he = tblProd.Height.Split(' ')[0];
+                                                                    <input type = "number" class="form-control" name="SelHeight" value="@he" />
+                                                                    }
+                                                                    }
+                                                                    
+                                                                </div>
+                                                                <div class="col-sm-3 col-xs-12" >
+                                                                    <select class="form-control" name="SelHeightM">
+                                                                        @{
+                                                                            string heigt;
+                                                                            try
+                                                                            {
+                                                                                if (String.IsNullOrEmpty(tblProd.Height))
+                                                                                {
+                                                                                    <option>select</option>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    heigt = tblProd.Height.Split(' ')[1];
+                                                                                   <option value="@heigt" selected>@heigt</option>
+                                                                                }
+                                                                            }
+                                                                            catch { }
+                                                                            <option value="Mt">Meter</option>
+                                                                            <option value="mm">MilliMeter</option>
+                                                                            <option value="cm">Centimeter</option>
+                                                                            <option value="ft">Foot</option>
+                                                                           <option value="In">Inch</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+
+
+
+                                                                            string statusWidth = "";
+                                                                            if (!String.IsNullOrEmpty(tblProd.Width))
+                                                                            {
+                                                                                statusWidth = "checked";
+                                                                            }
+                                <span class="section">Add Product Width&nbsp; <input type="checkbox" @statusWidth class="js-switch switchery-small" name="ChkWidth" value="" id="ChkWidth" /></span>
+                                <section class="SectionWidth">
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Width<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-sm-5 col-xs-12">@{
+                                                        try
+                                                        {
+                                                            if (String.IsNullOrEmpty(tblProd.Width))
+                                                            {
+                                                               <input type ="number" class="form-control" name="SelWidth"/>
+                                                    }
+                                                else{
+                                                string wid = tblProd.Width.Split(' ')[0];
+                                                <input type="number" class="form-control" name="SelWidth" value="@wid" />
+                                                }
+                                                }
+                                                catch { }
+                                                }
+                                            </div>
+                                            <div class="col-sm-3 col-xs-12">
+                                                <select class="form-control"  name="SelWidthM">
+                        @{
+                            try
+                            {
+                                if (String.IsNullOrEmpty(tblProd.Width))
+                                {
+                                    <option>select</option>
+                                }
+                                else
+                                {
+                                    string widt = tblProd.Width.Split(' ')[1];
+                                    <option value="@widt" selected>@widt</option>
+                                }
+
+                            }
+                            catch { }
+                                              <option value="Mt">Meter</option>
+                                              <option value="mm">MilliMeter</option>
+                                            <option value="cm">Centimeter</option>
+                                            <option value="ft">Foot</option>
+                                            <option value="In">Inch</option>
+
+                        }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            string statusorganic = "";
+                            if (!String.IsNullOrEmpty(tblProd.Organic))
+                            {
+                                statusorganic = "checked";
+                            }
+
+                                <span class="section">Organic Certificate&nbsp; <input type="checkbox" @statusorganic class="js-switch switchery-small" name="ChkOrganic" value="" id="ChkOrganic" /></span>
+                                <input type="hidden" name="Hideid" id="Hideid" value="@tblProd.Organic"/>
+                                <section class="Organic">
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Select Organic certificate<span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12" style="width:700px;margin-bottom:20px;padding:8px">
+                                            @{
+                                                List<string> newList = new List<string>();
+                                                if (tblProd.Organic != null)
+                                                {
+                                                    string[] Related = tblProd.Organic.Split(',');
+                                                    int Lengths = Related.Length;
+                                                    for (int i = 0; i < Lengths; i++)
+                                                    {
+                                                        int rid = Convert.ToInt32(Related[i]);
+
+                                                        foreach (TradeKerala2017.Models.tbl_Organic og in db.tbl_Organic.Where(p => p.Organic_Id == rid).ToList())
+                                                        {
+                                                        <label style="min-width:48%"><input type="checkbox" value="@og.Organic_Id" name="ch-@og.Organic_Id" id="ch-@og.Organic_Id" onclick="AddRelated('@og.Organic_Id')" checked />@og.Organic_name</label>
+                                                            newList.Add(og.Organic_name);
+                                                        }
+
+                                                    }
+                                                }
+                                                foreach (TradeKerala2017.Models.tbl_Organic tb in db.tbl_Organic.ToList())
+                                                {
+                                                    if (!newList.Contains(tb.Organic_name))
+                                                    {
+                                                    <label style="min-width:48%"><input type="checkbox" value="@tb.Organic_Id" name="ch-@tb.Organic_Id" id="ch-@tb.Organic_Id" onclick="AddRelated('@tb.Organic_Id')" />@tb.Organic_name</label>
+
+                                                        }
+                                                    }
+                                                }
+                                        </div>
+                                    </div>
+                                </section>
+
+
+
+                                    <span class="section">Product Specification</span>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Brand <span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="select2_single form-control col-md-7 col-xs-12" name="DDBrand" id="DDBrand" tabindex="-1" >
+
+                                                @{
+                                                    <option value="">Choose Data</option>
+                                                    foreach (TradeKerala2017.Models.tblBrand tbB in db.tblBrands.ToList())
+                                                    {
+                                                        try
+                                                        {
+                                                            int brid = Convert.ToInt32(tblProd.Brand);
+                                                            if (tbB.Brandid == brid)
+                                                            {
+                                                            <option data-thumbnail="@tbB.BrandLogo" selected value="@tbB.BrandName">@tbB.BrandName</option>
+                                                        }
+                                                        else
+                                                        {
+                                                        <option data-thumbnail="@tbB.BrandLogo" value="@tbB.BrandName">@tbB.BrandName</option>
+                                                            }
+                                                        }
+
+                                                        catch
+                                                        {
+                                                <option data-thumbnail="@tbB.BrandLogo" value="@tbB.BrandName">@tbB.BrandName</option>}
+                                                    }
+                                                }
+
+                                            </select>
+
+                                           
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Product Quantity<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <input id="txtQty" class="form-control col-md-7 col-xs-12"  name="txtQty" placeholder="e.g 1" required="required" type="number" value="@tblProd.Qty">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Product Old Price<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <input id="txtPrice" class="form-control col-md-7 col-xs-12" pattern="\d+(\.\d{2})?" data-validate-length-range="6" name="txtOldPrice" placeholder="e.g 100.00" required="required" type="text" value="@tblProd.ProdOldPrice">
+
+                                        </div>
+                                    </div>
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                    Product New Price<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                    <input id="txtPrice" class="form-control col-md-7 col-xs-12" pattern="\d+(\.\d{2})?" data-validate-length-range="6" name="txtNewPrice" placeholder="e.g 100.00" required="required" type="text" value="@tblProd.ProdNewPrice">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                    Old Dollar Price<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                    <input id="txtPrice" class="form-control col-md-7 col-xs-12" pattern="\d+(\.\d{2})?" data-validate-length-range="6" name="txtOldDollarPrice" placeholder="$ 100.00" required="required" type="text" value="@tblProd.Dollar_OldPrice">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                                    New Dollar Price<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                    <input id="txtPrice" class="form-control col-md-7 col-xs-12" pattern="\d+(\.\d{2})?" data-validate-length-range="6" name="txtNewDollarPrice" placeholder="$ 100.00" required="required" type="text" value="@tblProd.Dollar_NewPrice">
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Best sell product<span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @{
+                                                if (tblProd.Bestsell == true)
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkBest" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkBest" value="" />
+
+                                                }
+
+                                            }
+                                            
+
+                                        </div>
+                                    </div>
+                                    @*<div class="item form-group">
+
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Related To <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            <select class="select2_multiple form-control col-md-7 col-xs-12" multiple="multiple" name="RelatedProduct" id="RelatedProduct" tabindex="-1">
+                                                <option value="">Choose Data</option>
+                                                @{
+
+                                                    foreach (TradeKerala2017.Models.tblProduct tbD in db.tblProducts.ToList())
+                                                    {
+                                                        if (tblProd.IsRelatedTo == tbD.IsRelatedTo)
+                                                        {
+                                                            if (tbD.IsRelatedTo.Contains(','))
+                                                            {
+                                                                string[] array = db.tblProducts.Where(o => o.pid == tbD.pid).FirstOrDefault().IsRelatedTo.Split(',');
+                                                                foreach (string s in array)
+                                                                {
+                                                                    int id = Convert.ToInt32(s);
+                                                            <option value="@db.tblProducts.Where(o => o.pid == id).FirstOrDefault().pid" selected > @db.tblProducts.Where(o => o.pid == id).FirstOrDefault().ProdName </option>
+                                                                }
+                                                            }
+
+                                                            else
+                                                            {
+                                                                try
+                                                                {
+                                                                    int id = Convert.ToInt32(tbD.IsRelatedTo);
+                                                                    <option value="@db.tblProducts.Where(o => o.pid == id).FirstOrDefault().pid" selected>@db.tblProducts.Where(o => o.pid == id).FirstOrDefault().ProdName</option>
+
+                                                                }
+                                                                catch
+                                                                {
+
+                                                                }
+
+
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@tbD.pid">@tbD.ProdName</option>
+                                                        }
+
+                                                    }
+
+
+
+
+                                                }
+                                            </select>
+
+
+
+
+
+                                        </div>
+                                    </div>*@
+
+                                    @*<div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
+                                            Is Offer<span></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            @{
+                                                if (tblProd.Isoffer == true)
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkOffer" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="js-switch switchery-small" name="ChkOffer" value="" />
+
+                                                }
+
+                                            }
+                                           
+
+
+                                        </div>
+                                    </div>*@
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/Admin/AddProduct'">Cancel</button>
+                                            <button id="send" type="submit" class="btn btn-success">Submit</button><br />
+
+                                           
+                                        </div>
+                                    </div>
+
+
+                                                    }
+
+                
+
+
+
+                
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+
+
+<script src="~/js/switchery.min.js"></script>
+<script src="~/js/jquery-1.12.4.js"></script>
+
+
+
+
+
+
+<script>
+
+    $(function () {
+
+
+        $(".alert").hide();
+        var msg = $("#Hidmsg").val();
+        if (msg != "") {
+            $(".alert").fadeIn(2000);
+        }
+        else {
+            $(".alert").fadeOut(500);
+        }
+
+        if ($("#ChkWeight").is(":checked")) {
+            $(".SectionWeight").slideDown();
+        }
+        else {
+            $(".SectionWeight").slideUp();
+        }
+
+        /*Section Color*/
+        $(".SectionColor").hide();
+
+        $('#ChkColor').change(function () {
+            if ($(this).is(":checked")) {
+                $(".SectionColor").slideDown();
+            }
+            else {
+                $(".SectionColor").slideUp();
+            }
+
+        });
+
+
+
+        /*End*/
+
+        /*Section Weight*/
+        $(".SectionWeight").hide();
+
+        $('#ChkWeight').change(function () {
+            if ($(this).is(":checked")) {
+                $(".SectionWeight").slideDown();
+            }
+            else {
+                $(".SectionWeight").slideUp();
+            }
+
+        });
+
+
+
+        /*End*/
+
+        /*Section Size*/
+        $(".SectionSize").hide();
+
+        $('#ChkSize').change(function () {
+            if ($(this).is(":checked")) {
+                $(".SectionSize").slideDown();
+            }
+            else {
+                $(".SectionSize").slideUp();
+            }
+
+        });
+
+        $(".SectionHeight").hide();
+        $('#ChkHeight').change(function () {
+            if ($(this).is(":checked")) {
+                $(".SectionHeight").slideDown(); }
+            else {
+                $(".SectionHeight").slideUp();
+            }
+        });
+
+
+        $(".SectionWidth").hide();
+        $('#ChkWidth').change(function () {
+            if ($(this).is(":checked")) {
+                $(".SectionWidth").slideDown();
+            }
+            else {
+                $(".SectionWidth").slideUp();
+            }
+        });
+
+
+        $(".Organic").hide();
+
+        $('#ChkOrganic').change(function () {
+            if ($(this).is(":checked")) {
+                $(".Organic").slideDown();
+            }
+            else {
+                $(".Organic").slideUp();
+            }
+
+        });
+
+        /*End*/
+     
+        /*AutoComplete*/
+        var Products = "";
+
+
+
+        // initialize autocomplete with custom appendTo
+
+
+
+
+        /*End*/
+
+        $(".select2_multiple").select2({
+            maximumSelectionLength: 50,
+            placeholder: "Choose Recommend Items",
+            allowClear: true
+        });
+
+       
+
+
+        $("#Subcat1").change(function () {
+            if ($(this).val() == 0) {
+                $("#Subcat2").empty();
+                $("#Subcat3").empty();
+                $("#Subcat4").empty();
+                $("#Sub2").hide();
+                $("#Sub3").hide();
+                $("#Sub4").hide();
+            }
+
+        });
+        $("#Subcat2").change(function () {
+            if ($(this).val() == 0) {
+
+                $("#Subcat3").empty();
+                $("#Sub3").hide();
+                $("#Subcat4").empty();
+                $("#Sub4").hide();
+            }
+
+        });
+
+        $("#Subcat3").change(function () {
+
+            if ($(this).val() == 0) {
+
+                $("#Subcat4").empty();
+                $("#Sub4").hide();
+            }
+
+        });
+
+
+
+        $('#hover, #striped, #condensed').click(function () {
+            var classes = 'table';
+
+            if ($('#hover').prop('checked')) {
+                classes += ' table-hover';
+            }
+            if ($('#condensed').prop('checked')) {
+                classes += ' table-condensed';
+            }
+            $('#table-style').bootstrapTable('destroy')
+                .bootstrapTable({
+                    classes: classes,
+                    striped: $('#striped').prop('checked')
+                });
+        });
+    });
+
+
+    function rowStyle(row, index) {
+        var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+        if (index % 2 === 0 && index / 2 < classes.length) {
+            return {
+                classes: classes[index / 2]
+            };
+        }
+        return {};
+    }
+
+    function SubmitForm() {
+        var clr = confirm("Are you sure you want to submit the article?");
+        if (clr == true) {
+            var hta = document.getElementById("descr");
+            var content_html = document.getElementById("editor1").innerHTML;
+            hta.value = content_html;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function LoadSubCat(Parentname, ChildName, DivSub) {
+
+        var ParentId = $("#" + Parentname).val();
+        var Parent = $("#" + Parentname + " option:selected").text();
+
+        if (ParentId != 0 || ParentId != null || ParentId != "") {
+
+            //var HiddenVal = $("#HiddenParentId").val() + ParentId + "~";
+            $("#HiddenParentId").val(ParentId);
+            $("#HiddenCatName").val(Parent);
+            console.log("HiddenValue- " + $("#HiddenParentId").val() + "Text" + $("#HiddenCatName").val());
+            var options = {};
+
+            options.url = "/Admin/GetSubcategory";
+            options.type = "POST";
+            options.data = JSON.stringify({ ParentId: ParentId });
+            options.dataType = "json";
+            options.contentType = "application/json";
+            options.success = function (data) {
+
+                if (data.length > 0) {
+                    $("#" + ChildName).empty();
+
+                    $("#" + ChildName).append("<option value='0'>Select</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = data[i].split('-');
+
+                        $("#" + ChildName).append("<option value=" + opt[0] + ">" + opt[1] + "</option>");
+
+                    }
+                    $("#" + DivSub).show();
+
+
+                }
+                else {
+                    //$("#" + DivSub).hide();
+                }
+
+            };
+            options.error = function () { };
+            $.ajax(options);
+        }
+        else {
+            $("#" + ChildName).empty();
+            $("#" + DivSub).hide();
+        }
+    }
+</script>
+
+<!--Text Area-->
+<!-- bootstrap-wysiwyg -->
+<script>
+    $(document).ready(function () {
+
+
+        function initToolbarBootstrapBindings() {
+            var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                'Times New Roman', 'Verdana'
+            ],
+                fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+            $.each(fonts, function (idx, fontName) {
+                fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+            });
+            $('a[title]').tooltip({
+                container: 'body'
+            });
+            $('.dropdown-menu input').click(function () {
+                return false;
+            })
+                .change(function () {
+                    $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+                })
+                .keydown('esc', function () {
+                    this.value = '';
+                    $(this).change();
+                });
+
+            $('[data-role=magic-overlay]').each(function () {
+                var overlay = $(this),
+                    target = $(overlay.data('target'));
+                overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+            });
+
+            if ("onwebkitspeechchange" in document.createElement("input")) {
+                var editorOffset = $('#editor').offset();
+                $('.voiceBtn').css('position', 'absolute').offset({
+                    top: editorOffset.top,
+                    left: editorOffset.left + $('#editor').innerWidth() - 35
+
+                });
+            } else {
+                $('.voiceBtn').hide();
+            }
+
+            if ("onwebkitspeechchange" in document.createElement("input")) {
+                var editorOffset1 = $('#editor1').offset();
+                $('.voiceBtn').css('position', 'absolute').offset({
+                    top: editorOffset1.top,
+                    left: editorOffset1.left + $('#editor1').innerWidth() - 35
+
+                });
+            } else {
+                $('.voiceBtn').hide();
+            }
+
+        }
+
+        function showErrorAlert(reason, detail) {
+            var msg = '';
+            if (reason === 'unsupported-file-type') {
+                msg = "Unsupported format " + detail;
+            } else {
+                console.log("error uploading file", reason, detail);
+            }
+            $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+        }
+
+        initToolbarBootstrapBindings();
+
+        $('#editor').wysiwyg({
+            fileUploadError: showErrorAlert
+        });
+        $('#editor1').wysiwyg({
+            fileUploadError: showErrorAlert
+        });
+
+        window.prettyPrint;
+        prettyPrint();
+
+
+
+
+    });
+           /* i added the ?callback=? part to the url because it is a cross-site request and it seems that with callback jquery is treating the request differently, not throwing an error */
+
+</script>
+<!-- /bootstrap-wysiwyg -->
+<!--End-->
+<!-- /page content -->
+
+
